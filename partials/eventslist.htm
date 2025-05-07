@@ -1,0 +1,27 @@
+
+<!--<div class="events_list_container">-->
+    {% for record in records %}
+    {% set url = entry.url ?  entry.url : '/events/' ~ entry.slug %}
+<div class="col-md-4 col-xs-12 home-events-records">
+    <div class="row events-item">
+        <div class="col-md-12 col-xs-12 home-events-cover">
+            <a href="/events/{{record.slug}}">
+                <img src="{{ record.cover_image.path}}" alt="{{ record.title }}">
+            </a>
+        </div>
+        <div class="col-md-12 col-xs-12 events-content">
+            <p class="events-date">
+                {% if record.start|date("j") != record.end|date("j") %} {{record.start|date("j")}}-{{record.end|date("j")}}{% else %}{{record.start|date("j")}}{% endif %}
+                {{record.start|date("M")}}
+                {{record.start|date("Y")}}</p>
+            <a href="/events/{{record.slug}}">
+                <div class="events-title">{{ record.title|length > 95 ? record.title|slice(0, 95)|replace({"&nbsp;": " ", ".": ". "}) ~ '...' : record.title|replace({"&nbsp;": " ", ".": ". "})  }}</div></a>
+
+            <a href="/events/{{record.slug}}" class="read-more">
+                {{'Read more' |_}}
+            </a>
+        </div>
+    </div>
+</div>
+    {% endfor %}
+<!--</div>-->

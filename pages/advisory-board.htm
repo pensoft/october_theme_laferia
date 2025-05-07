@@ -1,0 +1,54 @@
+url = "/advisory-board"
+layout = "default"
+title = "Advisory Board"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[siteSearchInclude]
+==
+<?php
+use Pensoft\Cardprofiles\Models\Profiles as Profiles;
+
+function onStart(){
+
+$this['advisory_board'] = Profiles::where('category_id', 2)->get();
+
+}
+?>
+==
+{% component 'siteSearchInclude' %}
+
+<div class="container">
+<!--    <div class="row start-md around-xs partners_list_container">-->
+<!--        {% for profile in advisory_board %}-->
+<!--        <div class="col-md-4 col-xs-12 partner-item">-->
+<!--            <div class="contact_info">-->
+<!--                <div class="coordinator_image">-->
+<!--                    {% if profile.avatar %}-->
+
+<!--                    &lt;!&ndash;                            <img alt="{{ profile.names }}" src="{{profile.avatar.thumb(175,145,{'mode':'crop'})}}">&ndash;&gt;-->
+<!--                    <img alt="{{ profile.names }}" src="{{profile.avatar.thumb(305,190,{'mode':'crop'})}}">-->
+<!--                    {% else %}-->
+<!--                    <img alt="{{ profile.names }}" src="{{'CMS_icons_individuals.svg'|media}}" width="305" height="190" class="no-image">-->
+<!--                    {% endif %}-->
+<!--                </div>-->
+<!--                <div class="col-xs-12 member_info">-->
+<!--                    <h3>{{ profile.names }}</h3>-->
+
+<!--                    {% if profile.email %}-->
+<!--                    <p align="center"><a href="mailto:{{profile.email}}" class="email" target="_blank">-->
+<!--                        {{profile.email}}-->
+<!--                    </a></p>-->
+<!--                    {% endif %}-->
+<!--                    <div class="body_c">-->
+<!--                        {{ profile.content|raw }}-->
+<!--                    </div>-->
+<!--                    <a href="javascript:void(0);" onclick="toggleExpandReadMoreAdvisory(this)" class="read_full">Read More</a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        {% endfor %}-->
+<!--    </div>-->
+</div>

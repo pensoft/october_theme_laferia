@@ -1,0 +1,168 @@
+url = "/governance"
+layout = "default"
+title = "Governance"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+header_image = "Page-Blue-Title-Background.png"
+
+==
+<?php
+
+use Pensoft\Partners\Models\Partners;
+use Pensoft\Cardprofiles\Models\Profiles;
+use Rainlab\User\Models\User as Users;
+
+function onStart(){
+	$this['partners'] =  Partners::get();
+
+	$this['coordinators'] =  Profiles::where('category_id',  2)->get();
+
+    $this['insider_members'] = new class {
+        public function getProfiles($partnerId) {
+            return Users::where('is_visible', 1)->where('partner_id', $partnerId)->orderBy('name')->get();
+        }
+    };
+
+}
+?>
+==
+<div class="container-fluid coordinators_container">
+    <div class="green">
+        <div class="orange">
+            <div class="container">
+                <h1 class="display-1 hide_heading">Meet the Coordination Team</h1>
+                <div class="row start-md around-xs coordinators_list_container">
+                    {% for profile in coordinators %}
+                    <div class="col-md-3 col-xs-12 coordinators-item">
+                        <div class="coordinators_contact_info">
+                            <a href="javascript: void(0);" onclick="showCoordinatorInfo({{profile.id}});">
+                                <div class="coordinator_image">
+                                    {% if profile.avatar %}
+                                        <img alt="{{ profile.names }}" src="{{profile.avatar.thumb(216,265,{'mode':'crop'})}}">
+                                    {% else %}
+                                        <img alt="{{ profile.names }}" src="{{'CMS_icons_individuals.svg'|media}}" width="216" height="265" class="no-image">
+                                    {% endif %}
+                                    <span class="show_more_link"></span>
+                                </div>
+                            </a>
+                            <div class="col-xs-12 member_info">
+                                <h3>{{ profile.names }}</h3>
+                                {% if profile.position %}
+                                    <p align="center">{{profile.position}}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="coordinator_description coordinator_description_{{profile.id}}" style="display: none;">
+                        <a href="javascript: void(0);" onclick="showCoordinatorsList();" class="go-back-link">Back</a>
+                        <div class="content_wrapper">
+                            <div class="col-xs-12 member_info">
+                                <h3>{{ profile.names }}</h3>
+                                {% if profile.position %}
+                                <p>{{profile.position}}</p>
+                                {% endif %}
+                            </div>
+                            {{ profile.content|raw }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="container">
+    <div id="listView" class="accordion-insider-members-list">
+        {% for partner in partners %}
+        <div class="col-xs-12">
+            <div class="partner-item">
+                <div class="row middle-xs">
+                    <div class="col-xs-12 col-md-2 start-md center-xs partner_cover"><img src="{{partner.cover.thumb(156, auto, {mode: 'crop'})}}"></div>
+                    <div class="col-xs-12 col-md-7 start-md center-xs partner_title"></div>
+                    <div class="col-xs-12 col-md-3 end-md start-xs partner_link"><a href="{{partner.instituion_url}}" class="btn btn-primary" target="_blank">Visit website</a></div>
+
+                    <div class="col-xs-12 partner_detailed_info">
+                        {% if partner.content %}
+                        <div class="partner_description">
+                            <div class="accordion-border key_{{key}}"><!-- 1 --><!-- css 1 -->
+                                <div class="row middle-xs accordion-toggle">
+                                    <div class="col-xs start-xs">About</div>
+
+                                    <div class="col-xs-2 end-xs plusminus"><span class="plus"></span></div>
+                                </div>
+
+                                <div class="accordion-content" style="display: none;">
+                                    {{partner.content|raw}}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+
+                        {% if partner.add_description %}
+                        <div class="partner_description">
+                            <div class="accordion-border key_{{key}}"><!-- 1 --><!-- css 1 -->
+                                <div class="row middle-xs accordion-toggle">
+                                    <div class="col-xs start-xs">Role in LAFERIA</div>
+
+                                    <div class="col-xs-2 end-xs plusminus"><span class="plus"></span></div>
+                                </div>
+
+                                <div class="accordion-content" style="display: none;">
+                                    {{partner.add_description|raw}}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+
+
+                        {% if insider_members.getProfiles(partner.id).count > 0 %}
+                        <div class="partner_description">
+                            <div class="accordion-border">
+                                <div class="row middle-xs accordion-toggle">
+                                    <div class="col-xs start-xs">Project members</div>
+
+                                    <div class="col-xs-2 end-xs plusminus"><span class="plus"></span></div>
+                                </div>
+
+                                <div class="accordion-content" style="display: none;">
+                                    {% for profile in insider_members.getProfiles(partner.id) %}
+                                    <div class="contact_info row">
+                                        <div class="col-md-1 col-xs-12 coordinator_image">
+                                            {% if profile.avatar %}
+                                            <img alt="{{ profile.names }}" src="{{profile.avatar|crop_image}}">
+                                            {% else %}
+                                            <img alt="{{ profile.names }}" src="{{ 'avatar.svg'|media }}" width="90" height="134" class="no-image">
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-md-10 col-xs-12 coordinator_info">
+                                            <div class="mb-1">
+                                                <h3>{{ profile.name }} {{ profile.surname }}</h3>
+
+                                                {% if profile.position %} <div class="info">{{ profile.position }}</div>{% endif %}
+                                                {% if profile.department %} <div class="info">{{ profile.department }}</div>{% endif %}
+                                            </div>
+
+                                            <div class="body" style="display: none;">{{ profile.insider_description|raw }}</div>
+                                            <p class="read-more-bio" onclick="expandBiography(this);">Biography</p>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>

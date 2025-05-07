@@ -1,0 +1,108 @@
+url = "/media-center/project-materials"
+layout = "default"
+title = "Project materials"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+header_image = "Page-Green-Title-Background.png"
+
+[builderList mediaFlyersList]
+modelClass = "pensoft\Media\Models\Flyers"
+scope = "-"
+scopeValue = "{{ :scope }}"
+displayColumn = "name"
+noRecordsMessage = "No records found"
+detailsPage = "-"
+detailsUrlParameter = "id"
+pageNumber = "{{ :page }}"
+==
+<?php
+use Pensoft\Media\Models\Flyers;
+use System\Models\File;
+
+function onStart(){
+	$this['mediaFlyersList'] =  Flyers::get();
+	if(get('download')){
+		$file = File::find((int)get('download'));
+		$file_name = $file->getLocalPath();
+$recordName = get('file_name') ? get('file_name') : 'OBSGESSION_flyer';
+$ext= $file->getExtension();
+
+if (file_exists($file_name)) {
+header('Content-Description: File Transfer');
+header('Content-Type: application/octet-stream');
+header("Content-Type: application/force-download");
+header('Content-Disposition: attachment; filename='.$recordName .'.'. $ext);
+header('Content-Transfer-Encoding: binary');
+header('Expires: 0');
+header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+header('Pragma: public');
+header('Content-Length: ' . filesize($file_name));
+ob_clean();
+flush();
+readfile($file_name);
+exit();
+}
+return Redirect::to('/flyer');
+}
+
+}
+
+function onDownloadFile(){
+$file = File::find(post('id'));
+$pathToFile = $file->getLocalPath();
+$fileName = $file->file_name;
+$fileType = $file->content_type;
+$headers = [
+'HTTP/1.1 200 OK',
+'Pragma: public',
+'Content-Type: '.$fileType,
+'Content-Type: application/force-download'
+];
+
+return Response::download($pathToFile, $fileName, $headers);
+}
+?>
+==
+<div class="container">
+
+    <a href="/media-center" class="go-back-link">Back</a>
+
+        {% set records = mediaFlyersList %}
+        {% set displayColumn = mediaFlyersList.displayColumn %}
+        {% set noRecordsMessage = mediaFlyersList.noRecordsMessage %}
+        {% set detailsPage = mediaFlyersList.detailsPage %}
+        {% set detailsKeyColumn = mediaFlyersList.detailsKeyColumn %}
+        {% set detailsUrlParameter = mediaFlyersList.detailsUrlParameter %}
+
+        {% if records.count() %}
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <div class="row">
+                    {% for record in records %}
+                    <div class="col-md-4 col-xs-12 mb-4">
+
+                        <div class="row flyer-item">
+                            <div class="col-md-12 col-xs-12 flyer-cover">
+                                <img src="{{record.flyer_image.path}}" title="{{record.name}}">
+                            </div>
+                            <div class="col-md-12 col-xs-12 flyer-content">
+                                <div class="flyer-title">{{record.name}}</div>
+
+                                {{form_open({ request: 'onDownloadFile' }) }}
+                                <input type="hidden" value="{{record.file.id}}" name="id">
+                                <button type="submit" data-attach-loading class="btn btn-primary download">Download</button>
+                                {{ form_close() }}
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+</div>

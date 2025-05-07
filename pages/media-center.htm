@@ -1,0 +1,183 @@
+url = "/media-center"
+layout = "default"
+title = "Media center"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+header_image = "Page-Green-Title-Background.png"
+
+==
+<?php
+use Pensoft\Media\Models\MediaLogos;
+use Pensoft\Media\Models\Flyers;
+use Pensoft\Media\Models\Newsletters;
+use Pensoft\Media\Models\Presentations;
+use Pensoft\Media\Models\Pressreleases;
+use Pensoft\Media\Models\Videos;
+use Pensoft\Media\Models\Podcasts;
+use System\Models\File;
+
+function onStart(){
+	$this['logos'] =  MediaLogos::get();
+	$this['flyers'] =  Flyers::get();
+	$this['newsletters'] =  Newsletters::get();
+	$this['presentations'] =  Presentations::get();
+	$this['pressreleases'] =  Pressreleases::get();
+	$this['videos'] =  Videos::get();
+	$this['podcasts'] =  Podcasts::get();
+
+
+
+
+}
+
+function onDownloadFile(){
+    $file = File::find(post('id'));
+    $pathToFile = $file->getLocalPath();
+    $fileName = $file->file_name;
+    $fileType = $file->content_type;
+    $headers = [
+        'HTTP/1.1 200 OK',
+        'Pragma: public',
+        'Content-Type: '.$fileType,
+        'Content-Type: application/force-download'
+    ];
+
+    return Response::download($pathToFile, $fileName, $headers);
+}
+?>
+==
+<div class="container">
+    {% if logos.count() %}
+    <div class="row center-xs">
+        {% for record in logos %}
+        <div class="col-md-6 col-xs-12 mb-1">
+            <div class="logo-container {{record.name|slug}}">
+                <img src="{{record.logo_image.path}}" title="{{record.name}}">
+                <div class="name_label">{{record.name}}</div>
+            </div>
+
+            {% if record.name == 'Logo' %}
+                {% set className = 'btn btn-primary download' %}
+                {% set labelJPG = 'JPG' %}
+                {% set labelPNG = 'PNG' %}
+                {% set labelSVG = 'SVG' %}
+                {% set labelZIP = 'ZIP' %}
+                {% set labelPDF = 'PDF' %}
+            {% else %}
+                {% set className = 'btn btn-primary download' %}
+                {% set labelJPG = 'Download' %}
+                {% set labelPNG = 'Download' %}
+                {% set labelSVG = 'Download' %}
+                {% set labelZIP = 'Download' %}
+                {% set labelPDF = 'Download' %}
+
+            {% endif %}
+            <div class="links {{record.name|slug}}">
+                {% if record.file_jpg %}
+                <div class="form_container">
+                    {{form_open({ request: 'onDownloadFile' }) }}
+                    <input type="hidden" value="{{record.file_jpg.id}}" name="id">
+                    <button type="submit" data-attach-loading class="{{className}}">{{labelJPG}}</button>
+                    {{ form_close() }}
+                </div>
+                {% endif %}
+
+                {% if record.file_png %}
+                <div class="form_container">
+                    {{form_open({ request: 'onDownloadFile' }) }}
+                    <input type="hidden" value="{{record.file_png.id}}" name="id">
+                    <button type="submit" data-attach-loading class="{{className}}">{{labelPNG}}</button>
+                    {{ form_close() }}
+                </div>
+                {% endif %}
+
+                {% if record.file_eps %}
+                <div class="form_container">
+                    {{form_open({ request: 'onDownloadFile' }) }}
+                    <input type="hidden" value="{{record.file_eps.id}}" name="id">
+                    <button type="submit" data-attach-loading class="{{className}}">{{labelSVG}}</button>
+                    {{ form_close() }}
+                </div>
+                {% endif %}
+
+                {% if record.file_zip %}
+                <div class="form_container">
+                    {{form_open({ request: 'onDownloadFile' }) }}
+                    <input type="hidden" value="{{record.file_zip.id}}" name="id">
+                    <button type="submit" data-attach-loading class="{{className}}">{{labelZIP}}</button>
+                    {{ form_close() }}
+                </div>
+                {% endif %}
+
+                {% if record.file_pdf %}
+                <div class="form_container">
+                    <a href="{{record.file_pdf.path}}" target="_blank" class="{{className}}">{{labelPDF}}</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+
+        {% if newsletters.count() %}
+        <div class="col-md-6 col-xs-12 mb-1">
+            <a href="{{'newsletters'|page}}">
+                <div class="newsletter-container">
+                    <img src="{{'Newsletter.png'|media}}" title="Newsletters">
+                    <div class="name_label">Newsletters</div>
+                </div>
+            </a>
+        </div>
+        {% endif %}
+
+        {% if podcasts.count() %}
+        <div class="col-md-6 col-xs-12 mb-1">
+            <a href="{{'podcasts'|page}}">
+                <div class="podcasts-container">
+                    <img src="{{'Podcasts.png'|media}}" title="Podcasts">
+                    <div class="name_label">Podcasts</div>
+                </div>
+            </a>
+        </div>
+        {% endif %}
+
+
+        {% if flyers.count() %}
+        <div class="col-md-6 col-xs-12 mb-1">
+            <a href="/media-center/project-materials">
+                <div class="flyer-container">
+<!--                    <img src="{{'Logo.png'|media}}" title="Project materials">-->
+                    <div class="name_label">Project materials</div>
+                </div>
+            </a>
+        </div>
+        {% endif %}
+
+
+        {% if videos.count() %}
+        <div class="col-md-6 col-xs-12 mb-1">
+            <a href="{{'videos'|page}}">
+                <div class="videos-container">
+<!--                    <img src="{{'Logo.png'|media}}" title="Videos">-->
+                    <div class="name_label">Videos</div>
+                </div>
+            </a>
+        </div>
+        {% endif %}
+
+
+        {% if pressreleases.count() %}
+        <div class="col-md-6 col-xs-12 mb-1">
+            <a href="{{'press-releases'|page}}">
+                <div class="press-container">
+<!--                    <img src="{{'Logo.png'|media}}" title="Press releases">-->
+                    <div class="name_label">Press releases</div>
+                </div>
+            </a>
+        </div>
+        {% endif %}
+
+
+    </div>
+    {% endif %}
+</div>

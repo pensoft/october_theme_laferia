@@ -1,0 +1,88 @@
+
+    .contact_info {
+        display: flex;
+        align-items: center;
+        .coordinator_info{
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            height: 100%;
+
+            h3{
+                color: @primary-color;
+                font-family: "Sofia Sans Condensed";
+                font-size: 38px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 145%; /* 55.1px */
+                letter-spacing: -0.76px;
+            }
+            .card_title{
+                color: @primary-color;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 145%; /* 26.1px */
+                letter-spacing: -0.36px;
+
+                span{
+                    opacity: 0.65;
+                }
+
+                a{
+                    opacity: 1;
+                }
+            }
+
+            .biopolis_logo{
+                width: 147px;
+                height: 47px;
+                object-fit: contain;
+            }
+
+
+        }
+
+
+        .coordinator_image{
+            .coordinator-bg{
+                position: relative;
+                display: flex;
+                justify-content: center;
+            }
+            img{
+                object-fit: cover;
+                width: 603px;
+                max-width: 100%;
+                height: 520px;
+                border-radius: 8px;
+                z-index: 2;
+                display: inline;
+                position: relative;
+            }
+        }
+
+        .login_intro{
+            font-size: 22px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 145%; /* 31.9px */
+        }
+
+        .no-padding.btn-bold{
+            color: @link-color;
+        }
+        .btn-link{
+            color: @link-color;
+            float: left;
+            margin-top: 20px;
+        }
+
+        .breakpoint-large-down({
+            width: 100%;
+
+        });
+    }
+
+

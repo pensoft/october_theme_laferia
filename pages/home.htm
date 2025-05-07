@@ -1,0 +1,191 @@
+url = "/"
+layout = "default"
+title = "LAFERIA"
+is_hidden = 0
+meta_description = "homepage desc"
+seo_keywords = "keywords"
+robot_index = "index"
+robot_follow = "follow"
+
+[jumbotron intro]
+jumbotron = "laferia-project"
+title = 1
+background = "transperant"
+templates = "template3"
+description_limit = 0
+
+[jumbotron]
+jumbotron = "environmental-sciences"
+title = 1
+background = "transperant"
+templates = "template3"
+description_limit = 0
+
+[jumbotron jumbotron2]
+jumbotron = "social-sciences"
+title = 1
+background = "transperant"
+templates = "template3"
+description_limit = 0
+
+[jumbotron jumbotron3]
+jumbotron = "strategy-development"
+title = 1
+background = "transperant"
+templates = "template3"
+description_limit = 0
+==
+<?php
+use Pensoft\Calendar\Models\Entry;
+use Pensoft\Articles\Models\Article;
+use Pensoft\Partners\Models\Partners as Partner;
+use Carbon\Carbon;
+
+function onStart(){
+    $this['entries'] = Entry::where('end', '>', Carbon::now())->where('show_on_timeline', true)->where('is_internal', false)->orderBy('start', 'asc')->take(3)->get();
+    $this['highlights'] = Article::news()->where('published', 'true')->orderBy('published_at', 'desc')->take(3)->get()->map(function($item){
+        $item->content = str_limit(strip_tags($item->content), 90);
+            $item->href = $item->slug;
+            return $item;
+        });
+    $this['consortium_partners'] = Partner::where('type', 1)->get();
+}
+?>
+==
+<!-- latest from news -->
+<div class="container-fluid homepage_about_intro">
+    {% component 'intro' %}
+</div>
+
+
+<div class="container homepage_tabs_container">
+    <div class="homepage_intro_tabs">
+        <a class="" id="tab_1" href="#EnvironmentalSciences">Environmental Sciences</a>
+        <a class="" id="tab_2" href="#SocialSciences">Social Sciences</a>
+        <a class="" id="tab_3" href="#StrategyDevelopment">Strategy Development</a>
+    </div>
+
+    <div class="row middle-xs homepage_intro_tabs_green subtabs_container" id="EnvironmentalSciences">
+        <div class="col-md-8 col-xs-12">
+            {% component 'jumbotron' %}
+        </div>
+        <div class="col-md-4 col-xs-12 image_container">
+            <img src="{{'homepage-about1.svg'|media}}">
+            <a class="top_link" onclick="triggetTabClick(2);">Social Sciences</a>
+            <a class="bottom_link" onclick="triggetTabClick(3);">Strategy Development</a>
+        </div>
+    </div>
+
+    <div class="row middle-xs homepage_intro_tabs_blue subtabs_container" id="SocialSciences">
+        <div class="col-md-8 col-xs-12">
+            {% component 'jumbotron2' %}
+        </div>
+        <div class="col-md-4 col-xs-12 image_container">
+            <img src="{{'homepage-about2.svg'|media}}">
+            <a class="top_link" onclick="triggetTabClick(1);">Environmental Sciences</a>
+            <a class="bottom_link" onclick="triggetTabClick(3);">Strategy Development</a>
+        </div>
+    </div>
+
+    <div class="row middle-xs homepage_intro_tabs_orange subtabs_container" id="StrategyDevelopment">
+        <div class="col-md-8 col-xs-12">
+            {% component 'jumbotron3' %}
+        </div>
+        <div class="col-md-4 col-xs-12 image_container">
+            <img src="{{'homepage-about3.svg'|media}}">
+            <a class="top_link" onclick="triggetTabClick(2);">Social Sciences</a>
+            <a class="bottom_link" onclick="triggetTabClick(1);">Environmental Sciences</a>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- latest from news -->
+<!-- News -->
+{% if highlights.count %}
+    <div class="container highlights-news">
+        <div class="row">
+            <h1 class="display-1">Latest news</h1>
+            {% for highlight in highlights %}
+            <div class="col-md-4 col-xs-12 home-news-highlights">
+                <div class="row news-item">
+                    <div class="col-md-12 col-xs-12 home-news-cover">
+                        <a href="/news/{{highlight.slug}}">
+                            <img src="{{ highlight.cover.path}}" alt="{{ highlight.title }}">
+                        </a>
+                    </div>
+                    <div class="col-md-12 col-xs-12 news-content">
+                        <p class="news-date">{{ highlight.published_at|date('d M Y') }}</p>
+                        <a href="/news/{{highlight.slug}}">
+                            <div class="news-title">{{ highlight.title|length > 95 ? highlight.title|slice(0, 95)|replace({"&nbsp;": " ", ".": ". "}) ~ '...' : highlight.title|replace({"&nbsp;": " ", ".": ". "})  }}</div></a>
+
+                        <a href="/news/{{highlight.slug}}" class="read-more">
+                            {{'Read more' |_}}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+{% if entries.count %}
+<div class="container upcoming_events_container" data-aos="fade-up">
+    <h1 class="display-1">Events</h1>
+    <div class="row events_container">
+        {% for event in entries %}
+        <div class="col-md-4 col-xs-12">
+            <div class="entry_item">
+                {% if event.cover_image %}
+                <div class="home-events-cover">
+                    <a href="{{'events'|page}}/{{event.slug}}">
+                        <img src="{{ event.cover_image.path}}" alt="{{ event.title|raw }}">
+                    </a>
+                </div>
+                {% endif %}
+                <div class="date_container">
+                        {% if event.start|date("j") != event.end|date("j") %} {{event.start|date("j")}}-{{event.end|date("j")}}{% else %}{{event.start|date("j")}}{% endif %}
+                        {{event.start|date("M")}}
+                        {{event.start|date("Y")}}
+                </div>
+                <div class="place-container">{{event.place}}</div>
+                <h3>{{ event.title|raw }}</h3>
+                <a href="{{'events'|page}}/{{event.slug}}" class="read-more">Read more</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% if consortium_partners.count %}
+<div class="container-fluid">
+    <div class="row middle-xs between-xs">
+        <div class="col-xs-12 center-xs consortium_partners">
+            <h1 class="display-1">Our partners at a glance</h1>
+            <div id="slick">
+                {% for c in consortium_partners %}
+                <div class="slide">
+                    <div class="partner_logo"><a href="{{c.instituion_url}}" target="_blank">
+                        <img alt="{{ c.instituion }}" src="{{c.cover.thumb(auto,87,{'mode':'crop'})}}"></a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if this.theme.subscribe %}
+<div class="container-fluid subscriber">
+    <div class="container">
+        <h2>Stay connected</h2>
+        <p>Subscribe to our newsletter to stay updated on our progress and insights</p>
+        <div class="btn-container"><a href="{{this.theme.subscribe}}" target="_blank" class="btn btn-primary">Subscribe</a></div>
+    </div>
+</div>
+
+{% endif %}

@@ -1,0 +1,516 @@
+.media-center{
+    .col-md-6{
+        max-width: fit-content;
+        position: relative;
+        .breakpoint-large-down({
+            max-width: 100%;
+        });
+    }
+
+    .links{
+        position: absolute;
+        top: 33px;
+        left: 43px;
+        display: flex;
+
+
+        .breakpoint-large-down({
+            flex-direction: column;
+        });
+
+        .form_container{
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+
+
+        .btn-primary {
+            background-color: @link-color;
+            border-color: @link-color;
+            border-radius: 25px 25px 25px 25px;
+            -moz-border-radius: 25px 25px 25px 25px;
+            -webkit-border-radius: 25px 25px 25px 25px;
+            padding-left: 35px;
+            padding-right: 17px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 135%; /* 18.9px */
+            letter-spacing: -0.28px;
+            color: @header-text-color;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            &.download{
+                background: @link-color url("../../assets/images/download.svg") center no-repeat;
+                background-size: 16px;
+                background-position: 10px;
+                width: fit-content;
+                &:hover{
+                    background: @green-color url("../../assets/images/download.svg") center no-repeat;
+                    background-size: 16px;
+                    background-position: 10px;
+                }
+            }
+
+            &:hover{
+                background-color: @green-color;
+                border-color: @green-color;
+            }
+
+
+        }
+    }
+
+}
+
+.content_flyer,
+.content_press,
+.content_video,
+.content_newsletter,
+.content_logo{
+    display: flex;
+    .breakpoint-large-down({
+        justify-content: center;
+    });
+
+}
+
+.flyer-container,
+.press-container,
+.videos-container,
+.podcasts-container,
+.newsletter-container,
+.logo-container{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    position: relative;
+    border: none;
+    outline: none;
+    overflow: hidden;
+    padding: 0;
+    margin: 0 10px;
+    border-radius: 8px;
+    width: 480px;
+    max-width: 100%;
+    height: 340px;
+    max-width: 100%;
+    background: url("../../assets/images/media-bg.png") center no-repeat;
+    background-size: cover;
+
+
+
+
+    img{
+        width: 480px;
+        max-width: 100%;
+        height: 340px;
+        object-fit: cover;
+        max-width: 100%;
+        border-radius: 8px;
+        -webkit-transition: all 0.5s ease; /* Safari and Chrome */
+        -moz-transition: all 0.5s ease; /* Firefox */
+        -ms-transition: all 0.5s ease; /* IE 9 */
+        -o-transition: all 0.5s ease; /* Opera */
+        transition: all 0.5s ease;
+
+    }
+
+    &:hover img{
+        -webkit-transform:scale(1.2); /* Safari and Chrome */
+        -moz-transform:scale(1.2); /* Firefox */
+        -ms-transform:scale(1.2); /* IE 9 */
+        -o-transform:scale(1.2); /* Opera */
+        transform:scale(1.2);
+    }
+
+    .name_label{
+        position: absolute;
+        text-align: left;
+        bottom: 0px;
+        left: 0px;
+        color: rgba(8, 38, 58, 0.35);
+        font-family: "Sofia Sans Condensed";
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 125%; /* 40px */
+        //opacity: 0.35;
+        background: linear-gradient(180deg, rgba(217, 217, 217, 0.00) 0%, #D9D9D9 100%);
+        backdrop-filter: blur(10px);
+        width: calc(~'480px - 66px');
+        max-width: calc(~'100% - 66px');
+        padding: 15px 33px 15px 33px;
+        align-items: center;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+    }
+
+}
+
+
+
+
+.logo-container{
+    img{
+        width: 60%;
+        object-position: left;
+
+    }
+
+    &.brand-guidelines{
+        img{
+            width: 480px;
+            max-width: 100%;
+            height: 340px;
+            object-position: center;
+
+        }
+    }
+}
+
+.newsletter-container{
+    width: 480px;
+    height: 340px;
+    max-width: 100%;
+
+    img{
+        width: 480px;
+        max-width: 100%;
+        height: auto;
+        object-fit: contain;
+        object-position: top;
+        max-width: 100%;
+        border-radius: 8px;
+        -webkit-transition: all 0.5s ease; /* Safari and Chrome */
+        -moz-transition: all 0.5s ease; /* Firefox */
+        -ms-transition: all 0.5s ease; /* IE 9 */
+        -o-transition: all 0.5s ease; /* Opera */
+        transition: all 0.5s ease;
+
+    }
+
+    &:hover img{
+        -webkit-transform:translateY(-150px); /* Safari and Chrome */
+        -moz-transform:translateY(-150px); /* Firefox */
+        -ms-transform:translateY(-150px); /* IE 9 */
+        -o-transform:translateY(-150px); /* Opera */
+        transform:translateY(-150px);
+    }
+}
+
+.podcasts-container{
+    img{
+        width: 480px;
+        max-width: 100%;
+        height: 300px;
+        object-fit: contain;
+        max-width: 100%;
+        border-radius: 8px;
+        -webkit-transition: all 0.5s ease; /* Safari and Chrome */
+        -moz-transition: all 0.5s ease; /* Firefox */
+        -ms-transition: all 0.5s ease; /* IE 9 */
+        -o-transition: all 0.5s ease; /* Opera */
+        transition: all 0.5s ease;
+    }
+}
+
+.newsletters{
+    .newsletter-item{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 350px;
+        max-width: 100%;
+
+        .breakpoint-large-down({
+            margin-bottom: 40px;
+        });
+
+        .newsletter-title{
+            color: @primary-color;
+            font-family: "Sofia Sans Condensed";
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 135%; /* 27px */
+        }
+
+        .newsletter-date{
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 135%; /* 18.9px */
+            letter-spacing: -0.28px;
+            color: @date-text-color;
+            text-transform: uppercase;
+        }
+
+
+        .breakpoint-small-down({
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: left;
+            max-width: 95%;
+        });
+
+        .read-more{
+            color: @link-text-color;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 135%; /* 18.9px */
+            letter-spacing: -0.28px;
+            margin-top: 20px;
+            width: fit-content;
+            padding-right: 18px;
+            position: relative;
+            &:after{
+                content: '';
+                background: url("../../assets/images/chevron-left.svg") right center no-repeat;
+                background-size: 16px;
+                background-position: center;
+                color: @link-text-color;
+                width: 16px;
+                height: 9px;
+                display: inline-block;
+                transition: all 0.3s ease-in-out;
+            }
+            &:hover{
+                &:after{
+                    transform: rotate(90deg);
+                }
+            }
+        }
+    }
+
+    .newsletter-cover{
+        display: flex;
+        padding: 0!important;
+        a{
+            width: 350px;
+            overflow: hidden;
+            .breakpoint-large-down({
+                display: block;
+                width: 100%;
+            });
+        }
+
+        img {
+            width: 350px;
+            height: 255px;
+            object-fit: cover;
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+    }
+}
+
+.press-releases{
+    .category-tabs-container{
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        width: 100%;
+
+
+        a{
+            padding-bottom: 10px;
+            width: fit-content;
+            cursor: pointer;
+            font-size: 20px;
+            font-style: normal;
+            color: @heading-text-color;
+            text-transform: capitalize;
+            margin-right: 30px;
+            opacity: 0.65;
+            .breakpoint-small-down({
+                display: block;
+                margin-left: 0px;
+                margin-right: 0px;
+                width: 100%;
+                padding: 5px 0;
+            });
+
+            &:hover, &.active{
+                opacity: 1;
+                font-weight: 600;
+            }
+
+        }
+        .category-tabs{
+            .breakpoint-large-down({
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            });
+        }
+        .breakpoint-large-down({
+            margin-left: unset;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            text-align: center;
+        });
+    }
+
+
+    .press-relies-item{
+        max-width: 100%;
+        margin: 0 auto 30px auto;
+        padding: 30px!important;
+        position: relative;
+        background: @secondary-color;
+        border-radius: 8px;
+
+        .breakpoint-large-down({
+            width: auto;
+        });
+
+        .card-title{
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 120%;
+            letter-spacing: -0.02em;
+        }
+
+        .date{
+            color: #8C99A0;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 120%;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+        }
+
+        .btn.btn-primary{
+            margin-right: 10px;
+            .breakpoint-large-down({
+                margin-right: 0;
+                margin-bottom: 20px;
+            });
+        }
+    }
+}
+
+.flyer,
+.podcasts,
+.videos{
+    iframe{
+        width: 350px;
+        height: 255px;
+        max-width: 100%;
+        border-radius: 8px;
+    }
+
+    .flyer-title,
+    .card_title{
+        color: @primary-color;
+        font-family: "Sofia Sans Condensed";
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 135%; /* 27px */
+        width: 350px;
+        max-width: 100%;
+        margin: 10px 0;
+    }
+    .btn-primary {
+        background-color: @link-color;
+        border-color: @link-color;
+        border-radius: 25px 25px 25px 25px;
+        -moz-border-radius: 25px 25px 25px 25px;
+        -webkit-border-radius: 25px 25px 25px 25px;
+        padding-left: 35px;
+        padding-right: 17px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 135%; /* 18.9px */
+        letter-spacing: -0.28px;
+        color: @header-text-color;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        &.download{
+            background: @link-color url("../../assets/images/download.svg") center no-repeat;
+            background-size: 16px;
+            background-position: 10px;
+            width: fit-content;
+            &:hover{
+                background: @green-color url("../../assets/images/download.svg") center no-repeat;
+                background-size: 16px;
+                background-position: 10px;
+            }
+        }
+
+        &:hover{
+            background-color: @green-color;
+            border-color: @green-color;
+        }
+
+
+    }
+
+    .read-more{
+        color: @link-text-color;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 135%; /* 18.9px */
+        letter-spacing: -0.28px;
+        margin-top: 20px;
+        width: fit-content;
+        padding-right: 18px;
+        position: relative;
+        border: none;
+        background: none;
+        font-family: 'Work Sans';
+        &:after{
+            content: '';
+            background: url("../../assets/images/chevron-left.svg") right center no-repeat;
+            background-size: 16px;
+            background-position: center;
+            color: @link-text-color;
+            width: 16px;
+            height: 9px;
+            display: inline-block;
+            transition: all 0.3s ease-in-out;
+        }
+        &:hover{
+            &:after{
+                transform: rotate(90deg);
+            }
+        }
+    }
+
+    .flyer-cover{
+        display: flex;
+        padding: 0!important;
+        a{
+            width: 350px;
+            overflow: hidden;
+            .breakpoint-large-down({
+                display: block;
+                width: 100%;
+            });
+        }
+
+        img {
+            width: 350px;
+            height: 255px;
+            object-fit: cover;
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+    }
+}

@@ -1,0 +1,54 @@
+url = "/contact"
+layout = "default"
+title = "Contact"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+header_image = "Page-Blue-Title-Background.png"
+
+[siteSearchInclude]
+
+[jumbotron]
+jumbotron = "contact"
+background = "#ffffff"
+templates = "template2"
+description_limit = 0
+==
+<?php
+use Pensoft\Cardprofiles\Models\Profiles;
+
+function onStart(){
+	$this['profiles'] =  Profiles::where('category_id', 1)->get();
+}
+?>
+==
+{% component 'siteSearchInclude' %}
+
+<div class="container contact_container">
+	<div class="row contact_info">
+		{% for profile in profiles %}
+        <div class="col-md-7 col-xs-12 start-md center-xs coordinator_image">
+                {% if profile.avatar %}
+                <img src="{{profile.avatar.thumb(603, 520, {'mode' : 'crop' })}}" class="fr-fic fr-dii">
+                {% else %}
+                <img src="{{'CMS_icons_avatar.svg'|media}}" class="fr-fic fr-dii">
+                {% endif %}
+        </div>
+        <div class="col-md-5 col-xs-12 coordinator_info">
+                <div>
+                    <img src="{{'Biopolis.svg'|media}}" class="biopolis_logo">
+                    <h3>{{profile.names}}</h3>
+                </div>
+
+                <div class="card_title">
+                    {% if profile.position %}<span>{{profile.position}}</span>{% endif %}
+                    {% if profile.email %}
+                        <a href="mailto:{{profile.email}}" class="email" target="_blank">
+                            {{profile.email}}
+                        </a>
+                    {% endif %}
+                </div>
+		{% endfor %}
+	</div>
+
+</div>

@@ -1,0 +1,83 @@
+url = "/case-studies/:id?|[a-zA-Z\-0-9]"
+layout = "default"
+title = "Case Studies"
+header_image = "Page-Green-Title-Background.png"
+
+[siteSearchInclude]
+==
+<?php
+use Pensoft\CaseStudies\Models\Data;
+
+function urlencode($string){
+    return trim(urlencode($string));
+}
+function onStart(){
+    $this['case'] = Data::where('slug', $this->param('id'))->first();
+
+    $this['is_detail_page'] = $this['case'] ? true : false;
+
+    $this['records'] = Data::get();
+
+
+}
+?>
+==
+
+{% component 'siteSearchInclude' %}
+<div class="container">
+
+    {% if is_detail_page %}
+    <a href="/case-studies" class="go-back-link">Back</a>
+
+    <div class="single-case-studies-item">
+        <div class="row between-md around-xs">
+            <div class="col-md-7 col-xs-12">
+
+                <div class="col-xs-12">
+                    <h1>{{case.title}}</h1>
+                </div>
+                <div class="col-xs-12 case-studies-content">
+                    {{case.description|raw}}
+
+                </div>
+
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <div class="col-xs-12 case-studies-img-container">
+                    <img src="{{ case.image.thumb(413, auto, { mode: 'crop' }) }}" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% else %}
+
+    <div class="case-studies-list">
+
+        <div class="row">
+            {% for record in records %}
+            <div class="col-md-4 col-xs-12 home-case-studies-records">
+                <div class="case-studies-item">
+                    <div class="home-case-studies-image">
+                        <a href="/case-studies/{{record.slug}}">
+                            <img src="{{ record.image.path}}" alt="{{ record.title }}">
+                        </a>
+                    </div>
+                    <div class="case-studies-content">
+                        <a href="/case-studies/{{record.slug}}">
+                            <span class="case-studies-title">{{ record.title|length > 95 ? record.title|slice(0, 95)|replace({"&nbsp;": " ", ".": ". "}) ~ '...' : record.title|replace({"&nbsp;": " ", ".": ". "})  }}</span>
+
+                            <span class="read-more"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row container">
+            {{ records.render|raw }}
+        </div>
+    </div>
+
+    {% endif %}
+</div>
