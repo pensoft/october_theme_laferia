@@ -67,7 +67,7 @@ numberOfLevels = 2
     </nav>
 
 
-{% if this.theme.header_image and page_id != 'search' %}
+{% if this.theme.header_image %}
 <div class="header-image {{page_id}}">
         {% if page_id != 'home' %}
             {%if this.page.header_image %}
@@ -77,7 +77,7 @@ numberOfLevels = 2
             {%endif%}
         {%endif%}
         <div class="jumbotron" data-aos="fade-right">
-        {% if page_id != 'home' and page_id != 'search' %}
+        {% if page_id != 'home' %}
         <h1 class="underline white">
             {%if page_title%} {{page_title}} {%else%} {{site_name}} {%endif%}</h1>
         {%endif%}

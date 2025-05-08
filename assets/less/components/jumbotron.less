@@ -366,10 +366,39 @@
 }
 
 .background_bg{
-    background: url("../../assets/images/Background.png")  center right no-repeat;
     background-size: 47%;
     margin-bottom: 20px;
     position: relative;
+    z-index: 2;
+
+    &:before{
+        position: absolute;
+        width: 47%;
+        height: 100%;
+        content: '';
+        background: url("../../assets/images/Background.png") center no-repeat;
+        border-bottom-left-radius: 8px;
+        border-top-left-radius: 8px;
+        top: 0;
+        right: 0;
+        z-index: 1;
+
+        .breakpoint-large-down({
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 100px;
+            content: '';
+            background: url("../../assets/images/Background.png") center no-repeat;
+            border-bottom-left-radius: 8px;
+            border-top-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            border-top-right-radius: 8px;
+            top: 0;
+            right: 0;
+            z-index: 1;
+        });
+    }
 
 
     .breakpoint-large-down({
@@ -384,9 +413,13 @@
         right: 47px;
         align-items: center;
         justify-content: right;
+        z-index: 2;
 
-        .breakpoint-laptop-down({
-            bottom: 8rem;
+        .breakpoint-large-down({
+            bottom: unset;
+            right: unset;
+            top: 31px;
+            left: 10px;
         });
 
         .label{
@@ -410,6 +443,9 @@
                 background-clip: text;
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
+                .breakpoint-large-down({
+                    font-size: 12px;
+                });
             }
         }
     }
@@ -425,7 +461,7 @@
     .col-md-6.col-xs-12{
         display: flex;
         align-items: center;
-        min-height: 580px;
+
     }
     .container{
         //padding-right: 4%;
@@ -447,12 +483,42 @@
 }
 
 .vision_bg{
-    background: url("../../assets/images/Vision.png")  center left no-repeat;
-    background-size: 47%;
     margin-top: 20px;
     margin-bottom: 20px;
     font-size: 16px;
     position: relative;
+    z-index: 2;
+
+
+    &:before{
+        position: absolute;
+        width: 47%;
+        height: 100%;
+        content: '';
+        background: url("../../assets/images/Vision.png") center right no-repeat;
+        border-bottom-right-radius: 8px;
+        border-top-right-radius: 8px;
+        top: 0;
+        left: 0;
+        z-index: 1;
+
+        .breakpoint-large-down({
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 100px;
+            content: '';
+            background: url("../../assets/images/Vision.png") center no-repeat;
+            border-bottom-left-radius: 8px;
+            border-top-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            border-top-right-radius: 8px;
+            top: 0;
+            right: 0;
+            z-index: 1;
+        });
+    }
+
 
     .breakpoint-large-down({
         background: none;
@@ -466,9 +532,13 @@
         left: 47px;
         align-items: center;
         justify-content: right;
+        z-index: 2;
 
-        .breakpoint-laptop-down({
-            bottom: 8rem;
+        .breakpoint-large-down({
+            bottom: unset;
+            right: unset;
+            top: 31px;
+            left: 10px;
         });
 
         .label{
@@ -492,6 +562,9 @@
                 background-clip: text;
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
+                .breakpoint-large-down({
+                    font-size: 12px;
+                });
             }
         }
     }
@@ -507,7 +580,7 @@
     .col-md-6.col-xs-12{
         display: flex;
         align-items: center;
-        min-height: 580px;
+
     }
 
     .container{
@@ -528,15 +601,39 @@
 }
 
 .objective_bg{
-    background: url("../../assets/images/Objective.png") center right no-repeat;
     background-size: 47%;
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
     margin-bottom: 20px;
-    font-size: 16px;
     position: relative;
+    z-index: 2;
 
+    &:before{
+        position: absolute;
+        width: 47%;
+        height: 100%;
+        content: '';
+        background: url("../../assets/images/Objective.png") center left no-repeat;
+        border-bottom-left-radius: 8px;
+        border-top-left-radius: 8px;
+        top: 0;
+        right: 0;
+        z-index: 1;
+
+        .breakpoint-large-down({
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 100px;
+            content: '';
+            background: url("../../assets/images/Objective.png") center no-repeat;
+            border-bottom-left-radius: 8px;
+            border-top-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            border-top-right-radius: 8px;
+            top: 0;
+            right: 0;
+            z-index: 1;
+        });
+    }
 
 
     .breakpoint-large-down({
@@ -551,9 +648,13 @@
         right: 47px;
         align-items: center;
         justify-content: right;
+        z-index: 2;
 
-        .breakpoint-laptop-down({
-            bottom: 8rem;
+        .breakpoint-large-down({
+            bottom: unset;
+            right: unset;
+            top: 31px;
+            left: 10px;
         });
 
         .label{
@@ -577,6 +678,9 @@
                 background-clip: text;
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
+                .breakpoint-large-down({
+                    font-size: 12px;
+                });
             }
         }
     }
@@ -593,7 +697,7 @@
     .col-md-6.col-xs-12{
         display: flex;
         align-items: center;
-        min-height: 580px;
+
     }
 
     .container{

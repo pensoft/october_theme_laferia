@@ -57,7 +57,7 @@
     .navbar-brand {
         display: flex;
         flex-basis: 160px;
-        width: 160px;
+        min-width: 160px;
         height: 55px;
         .breakpoint-large-down({
             //flex-basis: 155px;
@@ -454,13 +454,11 @@
 
 .full-width .search {
     position: absolute;
-    top: 84px;
-    width: 97vw;
-    height: 116px;
-    left: 0;
-    right: 0;
+    top: 71px;
+    width: fit-content;
+    right: 149px;
     background: none;
-    z-index: 5;
+    z-index: 99999;
 
     .container{
         padding: 0;
@@ -503,8 +501,8 @@
     width: 29px;
     height: 29px;
     position: fixed;
-    top: 30px;
-    right: 150px;
+    top: 40px;
+    right: 200px;
     cursor: pointer;
     color: @dark-color;
     background: @white-color;
@@ -526,7 +524,7 @@
     border-right: 1px solid @border-color;
     background: white;
     padding: 0px 10px;
-    height: 55px;
+    height: 43px;
     border-top-right-radius: 17px;
     border-bottom-right-radius: 17px;
     display: flex !important;

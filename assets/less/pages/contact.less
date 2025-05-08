@@ -49,7 +49,10 @@
             .coordinator-bg{
                 position: relative;
                 display: flex;
-                justify-content: center;
+                justify-content: start;
+                .breakpoint-large-down({
+                    justify-content: center;
+                });
             }
             img{
                 object-fit: cover;

@@ -42,7 +42,25 @@
             margin: 0 0 .3rem 9px;
             white-space: nowrap;
         }
-        & > input, textarea, select {
+        & > input, textarea {
+            //display: block;
+            width: 100%;
+            font-size: 16px;
+            color: #f7f7f7;
+            box-sizing: border-box;
+            .line-height();
+            height: 47px;
+            line-height: 1em;
+            border-radius: 80px;
+            border: 1px solid @border-color;
+            display: inline-flex;
+            padding: 10px 30px 10px 20px;
+            align-items: center;
+            &:focus {
+                outline: none;
+            }
+        }
+        & > select {
             //display: block;
             width: 100%;
             font-size: 16px;
@@ -83,6 +101,7 @@
         background-color: white;
         border: 1px solid @link-color;
         cursor: pointer;
+        border-radius: 5px;
     }
 
     .field:hover input ~ .mark {
