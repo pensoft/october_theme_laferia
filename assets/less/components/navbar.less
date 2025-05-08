@@ -152,6 +152,7 @@
                 cursor: pointer;
                 text-align: center;
                 margin: 0 10px;
+                transition: all 0.3s ease-in-out;
                 &:not(.social) a{
                 }
 
@@ -186,8 +187,8 @@
                     }
 
                     .breakpoint-laptop-down({
-                        padding-left: 5px;
-                        padding-right: 5px;
+                        padding-left: 0px;
+                        padding-right: 0px;
                     });
 
                     .breakpoint-large-down({
@@ -208,9 +209,6 @@
     }
 
     .search-and-social-media{
-        //ul{
-        //    padding: 0 22px!important;
-        //}
         min-width: fit-content;
         display: flex;
         align-items: center;
@@ -342,11 +340,6 @@
                             pointer-events: none;
                             transition: transform 0.3s ease;
                             color: white!important;
-                            .breakpoint-laptop-down({
-                                right: 10px!important;
-                                background-size: 50px;
-                            });
-
                         }
 
 
@@ -422,19 +415,12 @@
                                         opacity: 0.6;
                                     }
                                 }
-                                //
-                                //&:hover{
-                                //    opacity: 0.6;
-                                //    background: none!important;
-                                //    color: @navbar-color!important;
-                                //}
                             }
                         }
                     }
 
 
                     &.active:after {
-                        //transform: rotate(180deg);
                         margin-top: -5px;
                         background: url('../../assets/images/arrow-down-menu-white.svg') no-repeat center center;
                         background-size: contain;
@@ -445,6 +431,20 @@
                         display: flex;
                         flex-direction: row;
                         flex-wrap: nowrap;
+                    }
+                }
+            }
+        }
+    });
+
+    .breakpoint-laptop-down({
+        .navbar-collapse {
+            .navbar-nav {
+                .nav-item {
+                    &.dropdown {
+                        &:after {
+                            right: 5px;
+                        }
                     }
                 }
             }
@@ -513,9 +513,6 @@
     font-weight: bold;
     text-align: center;
     line-height: 29px;
-    //.breakpoint-laptop-down({
-    //    right: 31px;
-    //});
     .breakpoint-huge-down({
         width: 39px;
         height: 39px;

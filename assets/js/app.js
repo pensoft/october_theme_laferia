@@ -539,13 +539,13 @@ function showCoordinatorInfo(id){
     $('.coordinators-item').hide();
     $('.hide_heading').hide();
     $('.coordinator_description').hide();
-    $('.coordinator_description_'+id).show("fade", {}, 100);
-    $('.coordinator_description_'+id).show("fade", {}, 100);
+    $('.coordinator_description_'+id).show("fade", {}, 350);
+    $('.coordinator_description_'+id).show("fade", {}, 350);
 }
 
 function showCoordinatorsList(){
-    $('.coordinators-item').show("fade", {}, 100);
-    $('.hide_heading').show("fade", {}, 100);
+    $('.coordinators-item').show("fade", {}, 350);
+    $('.hide_heading').show("fade", {}, 350);
     $('.coordinator_description').hide();
 }
 

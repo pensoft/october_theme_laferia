@@ -282,7 +282,7 @@
 
 
 .homepage_about_intro{
-    background: url("../../assets/images/The-Project-Background.png") center no-repeat;
+    background: url("../../assets/images/The-Project-Background.png") bottom right no-repeat;
     background-size: cover;
     font-size: 18px;
     font-style: normal;
@@ -369,18 +369,77 @@
     background: url("../../assets/images/Background.png")  center right no-repeat;
     background-size: 47%;
     margin-bottom: 20px;
+    position: relative;
+
 
     .breakpoint-large-down({
         background: none;
     });
+
+
+    .labels_container{
+        position: absolute;
+        display: flex;
+        bottom: 20px;
+        right: 47px;
+        align-items: center;
+        justify-content: right;
+
+        .breakpoint-laptop-down({
+            bottom: 8rem;
+        });
+
+        .label{
+            display: flex;
+            padding: 8px 15px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            border-radius: 70px;
+            background: linear-gradient(180deg, rgba(185, 185, 185, 0.00) 0%, rgba(185, 185, 185, 0.20) 100%);
+            backdrop-filter: blur(22.5px);
+            margin: 0 7px;
+
+            span{
+                text-align: center;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 125%; /* 17.5px */
+                background: linear-gradient(90deg, #F7F7F7 1.92%, #919191 40.77%);
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+    }
+
+
     h1.display-1{
         text-align: left;
     }
 
-    .container{
-        padding-right: 4%;
-        height: 100%;
+    p{
+        font-size: 16px;
+    }
+    .col-md-6.col-xs-12{
+        display: flex;
         align-items: center;
+        min-height: 580px;
+    }
+    .container{
+        //padding-right: 4%;
+        height: 100%;
+
+        align-items: center;
+        position: relative;
+
+
+
+        .breakpoint-laptop-down{
+            padding-left: 40px;
+        }
+
         .breakpoint-large-down({
             padding: 0;
         });
@@ -392,19 +451,76 @@
     background-size: 47%;
     margin-top: 20px;
     margin-bottom: 20px;
+    font-size: 16px;
+    position: relative;
 
     .breakpoint-large-down({
         background: none;
     });
 
+
+    .labels_container{
+        position: absolute;
+        display: flex;
+        bottom: 20px;
+        left: 47px;
+        align-items: center;
+        justify-content: right;
+
+        .breakpoint-laptop-down({
+            bottom: 8rem;
+        });
+
+        .label{
+            display: flex;
+            padding: 8px 15px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            border-radius: 70px;
+            background: linear-gradient(180deg, rgba(185, 185, 185, 0.00) 0%, rgba(185, 185, 185, 0.20) 100%);
+            backdrop-filter: blur(22.5px);
+            margin: 0 7px;
+
+            span{
+                text-align: center;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 125%; /* 17.5px */
+                background: linear-gradient(90deg, #F7F7F7 1.92%, #919191 40.77%);
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+    }
+
     h1.display-1{
         text-align: left;
+    }
+
+    p{
+        font-size: 16px;
+    }
+
+    .col-md-6.col-xs-12{
+        display: flex;
+        align-items: center;
+        min-height: 580px;
     }
 
     .container{
         padding-left: 4%;
         height: 100%;
+
         align-items: center;
+        position: relative;
+
+        .breakpoint-laptop-down{
+            padding-right: 40px;
+        }
+
         .breakpoint-large-down({
             padding: 0;
         });
@@ -414,21 +530,81 @@
 .objective_bg{
     background: url("../../assets/images/Objective.png") center right no-repeat;
     background-size: 47%;
-    min-height: 661px;
     display: flex;
     align-items: center;
     margin-top: 20px;
     margin-bottom: 20px;
+    font-size: 16px;
+    position: relative;
+
+
 
     .breakpoint-large-down({
         background: none;
     });
 
+
+    .labels_container{
+        position: absolute;
+        display: flex;
+        bottom: 20px;
+        right: 47px;
+        align-items: center;
+        justify-content: right;
+
+        .breakpoint-laptop-down({
+            bottom: 8rem;
+        });
+
+        .label{
+            display: flex;
+            padding: 8px 15px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            border-radius: 70px;
+            background: linear-gradient(180deg, rgba(185, 185, 185, 0.00) 0%, rgba(185, 185, 185, 0.20) 100%);
+            backdrop-filter: blur(22.5px);
+            margin: 0 7px;
+
+            span{
+                text-align: center;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 125%; /* 17.5px */
+                background: linear-gradient(90deg, #F7F7F7 1.92%, #919191 40.77%);
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+    }
+
+    p{
+        font-size: 16px;
+    }
+
     h1.display-1{
         text-align: left;
     }
 
+
+    .col-md-6.col-xs-12{
+        display: flex;
+        align-items: center;
+        min-height: 580px;
+    }
+
     .container{
+
+        position: relative;
+        height: 100%;
+
+        .breakpoint-laptop-down{
+            padding-left: 40px;
+        }
+
         .breakpoint-large-down({
             padding: 0;
         });
@@ -450,6 +626,8 @@
                 align-items: flex-start;
                 border-radius: 10px;
                 background: @secondary-color_blue;
+
+                transition: all 0.3s ease-in-out;
 
                 .breakpoint-large-down({
                     margin: 20px auto;

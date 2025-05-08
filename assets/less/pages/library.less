@@ -73,28 +73,29 @@
 
     .btn.btn-primary{
         font-size: 0;
-        padding: 0;
         width: 36px;
-        height: 36px;
         line-height: 36px;
         text-align: center;
         top: 26px;
         right: 26px;
         position: absolute;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 4px;
+        border-radius: 8px;
         background: @link-text-color;
         border: 1px solid @link-text-color;
+        display: flex;
+        height: 34px;
+        padding: 10px;
+        justify-content: center;
+        align-items: center;
+
         .p-download{
             background: url("../../assets/images/download.svg") center no-repeat;
-            background-size: 80%;
-            width: 29px;
-            height: 29px;
+            background-size: contain;
+            width: 14px;
+            height: 12px;
             &:hover{
                 background: #58B0C0 url("../../assets/images/download.svg") center no-repeat;
-                background-size: 80%;
+                background-size: contain;
             }
         }
 
@@ -281,6 +282,7 @@
         font-weight: 500;
         line-height: 135%; /* 21.6px */
         letter-spacing: -0.32px;
+        opacity: 0.65;
         .breakpoint-small-down({
             width: fit-content;
             text-align: center;
@@ -292,6 +294,7 @@
             border-bottom: 1px solid @primary-color !important;
             color: @primary-color;
             font-weight: 700;
+            opacity: 1;
         }
     }
 

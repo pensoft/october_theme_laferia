@@ -60,7 +60,7 @@ if($this['entry']['cover_image']){
 
 }
 $this['page_url'] = $this->pageUrl('');
-$this['all_entries'] = Entry::orderBy('start', 'asc')->paginate(20);
+//$this['all_entries'] = Entry::orderBy('start', 'asc')->paginate(20);
 $this['entries'] = Entry::where('end', '>=', Carbon::now())->orderBy('start', 'asc')->paginate(20);
 $this['past_entries'] = Entry::where('end', '<', Carbon::now())->orderBy('start', 'desc')->get();
 
@@ -82,14 +82,27 @@ $this['slug'] = $this->param('slug');
     <div class="container">
 
         <div class="row" id="all">
+            <h2>Upcoming Events</h2>
             <div class="events_list_container">
-                {% partial 'eventslist' records=all_entries %}
+                {% partial 'eventslist' records=entries %}
             </div>
-            {% if all_entries.count > 20 %}
+            {% if entries.count > 20 %}
             <div class="row container">
-                {{ all_entries.fragment('listView').render|raw }}
+                {{ entries.fragment('listView').render|raw }}
             </div>
             {% endif %}
+
+
+            <h2>Past Events</h2>
+            <div class="events_list_container">
+                {% partial 'eventslist' records=past_entries %}
+            </div>
+            {% if past_entries.count > 20 %}
+            <div class="row container">
+                {{ past_entries.fragment('listView').render|raw }}
+            </div>
+            {% endif %}
+
         </div>
 
 

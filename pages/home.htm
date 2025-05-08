@@ -42,7 +42,8 @@ use Pensoft\Partners\Models\Partners as Partner;
 use Carbon\Carbon;
 
 function onStart(){
-    $this['entries'] = Entry::where('end', '>', Carbon::now())->where('show_on_timeline', true)->where('is_internal', false)->orderBy('start', 'asc')->take(3)->get();
+    // $this['entries'] = Entry::where('end', '>', Carbon::now())->where('show_on_timeline', true)->where('is_internal', false)->orderBy('start', 'asc')->take(3)->get();
+    $this['entries'] = Entry::where('show_on_timeline', true)->where('is_internal', false)->orderBy('start', 'asc')->take(3)->get();
     $this['highlights'] = Article::news()->where('published', 'true')->orderBy('published_at', 'desc')->take(3)->get()->map(function($item){
         $item->content = str_limit(strip_tags($item->content), 90);
             $item->href = $item->slug;
@@ -105,7 +106,7 @@ function onStart(){
 <!-- News -->
 {% if highlights.count %}
     <div class="container highlights-news">
-        <div class="row">
+        <div class="row between-md around-xs">
             <h1 class="display-1">Latest news</h1>
             {% for highlight in highlights %}
             <div class="col-md-4 col-xs-12 home-news-highlights">
@@ -134,9 +135,9 @@ function onStart(){
 {% if entries.count %}
 <div class="container upcoming_events_container" data-aos="fade-up">
     <h1 class="display-1">Events</h1>
-    <div class="row events_container">
+    <div class="row between-md around-xs events_container">
         {% for event in entries %}
-        <div class="col-md-4 col-xs-12">
+        <div class="col-md-4 col-xs-12 homepage_events_container">
             <div class="entry_item">
                 {% if event.cover_image %}
                 <div class="home-events-cover">
@@ -145,12 +146,15 @@ function onStart(){
                     </a>
                 </div>
                 {% endif %}
-                <div class="date_container">
+                <div class="date_and_place_container">
+                    <div class="date_container">
                         {% if event.start|date("j") != event.end|date("j") %} {{event.start|date("j")}}-{{event.end|date("j")}}{% else %}{{event.start|date("j")}}{% endif %}
                         {{event.start|date("M")}}
                         {{event.start|date("Y")}}
+                    </div>
+                    <div class="place-container">{{event.place}}</div>
                 </div>
-                <div class="place-container">{{event.place}}</div>
+
                 <h3>{{ event.title|raw }}</h3>
                 <a href="{{'events'|page}}/{{event.slug}}" class="read-more">Read more</a>
             </div>
