@@ -20,7 +20,8 @@ function onStart(){
 
     $this['insider_members'] = new class {
         public function getProfiles($partnerId) {
-            return Users::where('is_visible', 1)->where('partner_id', $partnerId)->orderBy('name')->get();
+            //return Users::where('is_visible', 1)->where('partner_id', $partnerId)->orderBy('name')->get();
+            return Profiles::where('category_id', 3)->where('partner_id', $partnerId)->get();
         }
     };
 
@@ -142,13 +143,13 @@ function onStart(){
                                         </div>
                                         <div class="col-md-10 col-xs-12 coordinator_info">
                                             <div class="mb-1">
-                                                <h3>{{ profile.name }} {{ profile.surname }}</h3>
+                                                <h3>{{ profile.names }}</h3>
 
                                                 {% if profile.position %} <div class="info">{{ profile.position }}</div>{% endif %}
                                                 {% if profile.department %} <div class="info">{{ profile.department }}</div>{% endif %}
                                             </div>
 
-                                            <div class="body" style="display: none;">{{ profile.insider_description|raw }}</div>
+                                            <div class="body" style="display: none;">{{ profile.content|raw }}</div>
                                             <p class="read-more-bio" onclick="expandBiography(this);">Biography</p>
                                         </div>
                                     </div>
