@@ -131,7 +131,7 @@
             z-index: @zindex-dropdown;
             font-size: 16px;
             justify-content: space-between;
-            padding: 25px 0;
+            padding: 30px 0 20px 0;
 
             .breakpoint-large-down({
                 display: none;
@@ -358,12 +358,13 @@
                         }
 
                         .dropdown-menu {
-                            background: rgba(91, 91, 91, 0.20);
-                            backdrop-filter: blur(35px) !important;
+                            // background: rgba(91, 91, 91, 0.5);
+                            // backdrop-filter: blur(35px);
+                            background: #0b3f26 url(../../assets/images/footer-filter.svg) center no-repeat;
                             display: none;
                             position: absolute;
                             line-height: 1.3em;
-                            top: 80px;
+                            top: 75px;
                             padding: 20px 20px 1px 19px !important;
 
                             &:before{

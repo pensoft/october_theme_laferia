@@ -270,12 +270,12 @@ $(document).ready(function() {
         $('#slick').slick({
             autoplay: true,
             autoplaySpeed: 1000,
-            centerMode: true,
+            centerMode: false,
             centerPadding: '50px',
             slidesToShow: 5,
-            slidesToScroll: 1,
+            slidesToScroll: 2,
             focusOnSelect: false,
-            dots: false,
+            dots: true,
             infinite: true,
             responsive: [
                 {
@@ -283,7 +283,7 @@ $(document).ready(function() {
                     settings: {
                         arrows: false,
                         dots: true,
-                        centerMode: true,
+                        centerMode: false,
                         centerPadding: '2%',
                         slidesToShow: 1
                     }

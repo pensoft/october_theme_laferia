@@ -75,6 +75,56 @@
 
     }
 
+
+    
+    /* slick dots */
+    .slick-dots {
+        top: 100%;
+        li {
+            display: inline-block;
+            margin: 0;
+            button {
+                cursor: pointer;
+                border: 0;
+                background: transparent;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                padding: 0;
+                color: transparent;
+                font-size: 0;
+                line-height: 0;
+
+                &:hover, &:focus {
+                    outline: none;
+                    background-color: transparent;
+                    opacity: 1;
+                }
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    width: 10px;
+                    height: 10px;
+                    background-color: @link-color;
+                    border-radius: 50%;
+                    transform: translate(-50%, -50%);
+                    transition: background-color .25s ease;
+                }
+            }
+
+            &.slick-active button:before {
+                //background-color: @link-color;
+            }
+
+            &.slick-active button {
+                //box-shadow: 0 0 0 2px @link-color;
+            }
+        }
+    }
+
 }
 
 .about{
