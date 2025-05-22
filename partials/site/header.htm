@@ -76,16 +76,25 @@ numberOfLevels = 2
             <div class="header-image-bar" style="background-image: url('{{this.theme.header_image.getPath()}}'); background-position: left center;  {% if user %} margin-top: 75px  {% endif %}">
             {%endif%}
         {%endif%}
+            {% if page_id == 'home'%}
+            <div class="bg"></div>
+            {% endif %}
         <div class="jumbotron" data-aos="fade-right">
         {% if page_id != 'home' %}
-        <h1 class="underline white">
+            <h1 class="underline white">
             {%if page_title%} {{page_title}} {%else%} {{site_name}} {%endif%}</h1>
         {%endif%}
         {% if page_id == 'home' and tag_line%}
-        <div class="container">
-            <div class="intro">
-                <p>{{tag_line|raw}}</p>
+                <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-xs-12"></div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="intro">
+                        <p>{{tag_line|raw}}</p>
+                    </div>
+                </div>
             </div>
+
         </div>
         {% endif %}
     </div>

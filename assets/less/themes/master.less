@@ -391,8 +391,25 @@ ul.pagination{
 
 
     &.home {
-        background: url("../../assets/images/Hero-Image-Tree.png") center no-repeat;
-        background-size: cover;
+        background: #E5F2E3;
+        //background: #E5F2E3 url("../../assets/images/hero-image-new.png") left center no-repeat;
+        //background-size: 50vw 100vh;
+        //height: 100%;
+        position: relative;
+        .bg{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: #E5F2E3 url("../../assets/images/hero-image-new.png") left center no-repeat;
+            background-size: cover;
+            .breakpoint-large-down({
+                background: #E5F2E3;
+                width: 100%;
+            });
+        }
+
 
         h1 {
             &.underline {
@@ -400,22 +417,33 @@ ul.pagination{
             }
         }
 
+        .jumbotron {
+            .container{
+                padding: 0;
+            }
+        }
+
         .intro{
             display: flex;
             align-items: center;
             height: 100vh;
-            width: 790px;
-            max-width: 100% !important;
+            width: 100%;
             justify-content: space-around;
-            color: @header-text-color;
-            text-align: center;
+            color: @dark-color;
             font-family: "Sofia Sans Condensed";
-            font-size: 48px;
             font-style: normal;
-            font-weight: 700;
-            line-height: 1em;
             text-transform: capitalize;
             margin: 0 auto;
+            padding-left: 60px;
+
+            font-size: 54px;
+            font-weight: 600;
+            line-height: 115%; /* 62.1px */
+
+            background: url("../../assets/images/hero-green.svg") no-repeat;
+            background-position: right bottom -42px;
+            background-size: 100%;
+
             .breakpoint-large-down({
                 width: auto;
                 max-width: 100%;

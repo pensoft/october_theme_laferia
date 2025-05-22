@@ -360,7 +360,7 @@
                         .dropdown-menu {
                             // background: rgba(91, 91, 91, 0.5);
                             // backdrop-filter: blur(35px);
-                            background: #0b3f26 url(../../assets/images/footer-filter.svg) center no-repeat;
+                            background: @dark-color;
                             display: none;
                             position: absolute;
                             line-height: 1.3em;
@@ -451,6 +451,12 @@
             }
         }
     });
+}
+
+.home{
+    .navbar{
+        background: @dark-color;
+    }
 }
 
 .full-width .search {
