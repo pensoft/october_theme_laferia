@@ -500,3 +500,119 @@ ul.partners_logos_list li{
     }
 }
 
+.governance_graphic{
+
+    .blue_tree_heading {
+        color: #19547C;
+        text-align: center;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 115%; /* 36.8px */
+        margin-bottom: 40px;
+        margin-top: 100px;
+    }
+    .green_tree_heading {
+        color: #4FAD42;
+        text-align: center;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 115%; /* 36.8px */
+        margin-bottom: 40px;
+        margin-top: 50px;
+    }
+    .green_tree{
+        background: url("../../assets/images/Green-tree.svg") top center no-repeat;
+        background-size: 880px;
+        padding-top: 45px;
+        margin-bottom: 45px;
+        .row{
+            width: 100%;
+            margin: 0 auto;
+
+            .col-md{
+                width: fit-content;
+            }
+        }
+    }
+
+    .blue_tree {
+        background: url("../../assets/images/Blue-tree.svg") top center no-repeat;
+        background-size: 750px;
+        padding-top: 45px;
+        margin-bottom: 45px;
+        .row{
+            width: 85%;
+            margin: 0 auto;
+        }
+    }
+
+    .blue_tree, .green_tree{
+        .tree-item{
+            width: 170px;
+            height: 267px;
+            border-radius: 8px;
+            border: 10px solid #F7F7F7;
+            background: #F7F7F7;
+            box-shadow: 0px 7px 20px 0px rgba(8, 37, 56, 0.10);
+            margin: 0 auto 20px auto;
+            display: flex;
+            flex-direction: column;
+
+            img.avatar{
+                width: 170px;
+                height: 145px;
+                object-fit: cover;
+                border-radius: 10px;
+            }
+            img.logo{
+                width: 170px;
+                height: 29px;
+                object-fit: none;
+            }
+
+            .row_labels{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin: 20px auto;
+
+                .label_name{
+                    border-radius: 15px;
+                    background: #DAE2E7;
+                    display: flex;
+                    width: 113px;
+                    padding: 3px 8px;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 10px;
+                    text-align: center;
+                    font-size: 10px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 145%; /* 14.5px */
+                    letter-spacing: -0.2px;
+                }
+
+                .label_wp{
+                    border-radius: 15px;
+                    background: #DAE2E7;
+                    display: flex;
+                    padding: 3px 8px;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 10px;
+                    text-align: center;
+                    font-size: 10px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 145%; /* 14.5px */
+                    letter-spacing: -0.2px;
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+}
+

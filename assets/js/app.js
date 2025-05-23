@@ -63,7 +63,7 @@ $(document).ready(function() {
     }
 
 
-    $('body').on('click', '.work_packages .accordion-toggle, .mission .accordion-toggle, .accordion-insider-members-list .accordion-toggle', function () {
+    $('body').on('click', '.work_packages .accordion-toggle, .mission .accordion-toggle, .accordion-insider-members-list .accordion-toggle, .governance_graphic_expand .accordion-toggle', function () {
         if ($(this).next(".accordion-content").is(':visible')) {
             $(this).next(".accordion-content").slideUp(300);
             $(this).children().find(".plusminus").text('+');
@@ -217,8 +217,8 @@ $(document).ready(function() {
             autoplay: false,
             // autoplaySpeed: 2000,
             draggable: true,
-            // pauseOnHover: true,
-            centerMode: false,
+            pauseOnHover: true,
+            centerMode: true,
             variableWidth: true,
             infinite: true,
             slidesToShow: 2,

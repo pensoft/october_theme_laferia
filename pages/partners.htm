@@ -6,9 +6,13 @@ robot_index = "index"
 robot_follow = "follow"
 header_image = "Page-Blue-Title-Background.png"
 
+[jumbotron graphic]
+jumbotron = "view-full-governance-structure"
+background = "transperant"
+templates = "template3"
+description_limit = 0
 ==
 <?php
-
 use Pensoft\Partners\Models\Partners;
 use Pensoft\Cardprofiles\Models\Profiles;
 use Rainlab\User\Models\User as Users;
@@ -74,6 +78,13 @@ function onStart(){
     </div>
 
 </div>
+
+
+<div class="container governance_graphic">
+{% component 'graphic' %}
+
+</div>
+
 
 
 <div class="container">

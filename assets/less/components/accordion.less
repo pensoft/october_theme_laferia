@@ -450,3 +450,64 @@
         }
     });
 }
+
+.governance_graphic_expand{
+    .accordion-toggle{
+        border-radius: 60px;
+        background: #489C3C;
+        display: flex;
+        padding: 8px 15px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        color: #EBEFD2;
+        width: fit-content;
+        margin: 0 auto;
+        cursor: pointer;
+
+
+
+        div:first-of-type, div:nth-of-type(2){
+            font-family: "Work Sans";
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 135%; /* 18.9px */
+            letter-spacing: -0.28px;
+        }
+
+    }
+
+
+
+    .plusminus{
+
+        display: flex;
+        justify-content: end;
+        .plus, .minus{
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            color: #EBEFD2;
+            font-size: 20px;
+            font-weight: 100;
+            line-height: 0px;
+
+        }
+
+        .minus{
+            opacity: 1;
+        }
+
+        .plus::before{
+            content: '\002B';
+        }
+        .minus::before{
+            content: '\002B';
+            transform: rotate(45deg);
+            //content: '\2212';
+        }
+    }
+
+}
