@@ -63,7 +63,7 @@ $(document).ready(function() {
     }
 
 
-    $('body').on('click', '.work_packages .accordion-toggle, .mission .accordion-toggle, .accordion-insider-members-list .accordion-toggle, .governance_graphic_expand .accordion-toggle', function () {
+    $('body').on('click', '.work_packages .accordion-toggle, .mission .accordion-toggle, .accordion-insider-members-list .accordion-toggle, .governance_graphic_expand .accordion-toggle, .getinvolved_form_accordion .accordion-toggle', function () {
         if ($(this).next(".accordion-content").is(':visible')) {
             $(this).next(".accordion-content").slideUp(300);
             $(this).children().find(".plusminus").text('+');
