@@ -1,0 +1,128 @@
+<div class="ui form get_involved_form">
+    <input name="profile" type="hidden" value="1">
+    <div class="row between-md around-xs">
+        <div class="col-md-6 col-xs-12 field">
+            <label for="name">Name <span class="red">*</span> </label>
+            <input name="name" type="text" class="" id="name" value="" placeholder="First and Last names">
+        </div>
+
+        <div class="col-md-6 col-xs-12 field">
+            <label for="email">Email address <span class="red">*</span></label>
+            <input name="email" type="text" class="" id="email" value="" placeholder="Email address">
+        </div>
+
+        <div class="col-md-6 col-xs-12 field">
+            <label for="affiliation">Organisation <span class="red">*</span> </label>
+            <input name="affiliation" type="text" class="" id="affiliation" value="" placeholder="Name of institute a representative of">
+        </div>
+
+        <div class="col-md-6 col-xs-12 field">
+            <label for="country">Country <span class="red">*</span></label>
+            <select id="country" name="country">
+                <option value="">-- Choose --</option>
+                {% for country in countries %}
+                <option value="{{ country.id }}">{{ country.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-12 col-xs-12 field">
+            <label for="group">Which of these groups do you belong to? <span class="red">*</span></label>
+            <div class="row" id="group">
+                <div class="col-md-12 col-xs-12 getinvolved_form_accordion">
+                    <div class="accordion-border"><!-- 1 --><!-- css 1 -->
+                        <div class="row middle-xs accordion-toggle">
+                            <div class="col-xs-11">Select group</div>
+                            <div class="col-xs-1 end-xs plusminus"><span class="plus"></span></div>
+                        </div>
+
+                        <div class="accordion-content field" style="display: none;">
+                            {% for item in groups %}
+                            <label><input name="group[]" type="checkbox" value="{{ item.id }}">{{ item.name }}</label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-12 col-xs-12 field">
+            <label>Are you/is your organisation already involved in any activities related to the reintroduction of LF? <span class="red">*</span></label>
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <input type="radio" id="yes" name="is_involved" value="1">
+                    <label for="yes">YES</label>
+                    <input type="radio" id="no" name="is_involved" value="0" checked>
+                    <label for="no">NO</label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-12 col-xs-12 field">
+            <label for="category">In which categories of LF management/reintroduction is your organisation active? <span class="red">*</span></label>
+            <div class="row" id="category">
+                <div class="col-md-12 col-xs-12 getinvolved_form_accordion">
+                    <div class="accordion-border"><!-- 1 --><!-- css 1 -->
+                        <div class="row middle-xs accordion-toggle">
+                            <div class="col-xs-11">Select category</div>
+                            <div class="col-xs-1 end-xs plusminus"><span class="plus"></span></div>
+                        </div>
+
+                        <div class="accordion-content field" style="display: none;">
+                            {% for item in categories %}
+                            <label><input name="category[]" type="checkbox" value="{{ item.id }}">{{ item.name }}</label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-12 col-xs-12 field">
+            <label for="message">Are there any good practices for LF reintroduction you would like to share, and if yes, what are they?</label>
+            <input name="message" type="text" class="" id="message" value="">
+        </div>
+
+
+
+        <div class="col-md-12 col-xs-12 field">
+            <label for="interest">Interest in {{themeName}} <span class="red">*</span></label>
+            <div class="row" id="interest">
+                <div class="col-md-12 col-xs-12 getinvolved_form_accordion">
+                    <div class="accordion-border"><!-- 1 --><!-- css 1 -->
+                        <div class="row middle-xs accordion-toggle">
+                            <div class="col-xs-11">Select interest</div>
+                            <div class="col-xs-1 end-xs plusminus"><span class="plus"></span></div>
+                        </div>
+
+                        <div class="accordion-content field" style="display: none;">
+                            {% for item in interests %}
+                            <label><input name="interest[]" type="checkbox" value="{{ item.id }}">{{ item.name }}</label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 col-xs-12 field">
+            <label><input name="project_events" type="checkbox" value="1">I consent to receive invitations and information about {{themeName}} events.</label>
+            <label><input name="external_events" type="checkbox" value="1">I consent to receive invitations and information about relevant events from external projects.</label>
+            <!--                <label><input name="agree" type="checkbox" value="1">I agree with the {{themeName}} <a href="{{ 'privacy-policy' | page }}">Privacy Policy</a>.</label>-->
+            <p class="privacy_policy_text_field">* Please read our <a href="{{ 'privacy-policy' | page }}">Privacy Policy</a> to learn how we will use and protect your personal data.</p>
+
+        </div>
+
+        <div class="col-md-12 col-xs-12 field">
+            <div class="g-recaptcha" id="recaptcha" data-sitekey="{{__SELF__.property('recaptcha_key')}}"></div>
+        </div>
+
+        <div class="col-md-12 col-xs-12 mt-1 text-center">
+            <button type="submit" class="btn btn-primary" style="min-width: 100px;">Register</button>
+        </div>
+        <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+    </div>
+</div>
