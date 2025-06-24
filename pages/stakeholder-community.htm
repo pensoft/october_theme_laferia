@@ -1,6 +1,6 @@
-title = "Stakeholder Community"
-layout = "default"
 url = "/stakeholder-community"
+layout = "default"
+title = "Stakeholder Community"
 
 [siteSearchInclude]
 
@@ -9,12 +9,101 @@ jumbotron = "stakeholder-community"
 background = "transperant"
 templates = "template3"
 description_limit = 0
+
+[records_list]
 ==
+<?php
+function onStart(){
+    use Pensoft\Survey\Models\Data;
+    use RainLab\Location\Models\Country;
+    use Pensoft\Survey\Models\Group;
+    use Pensoft\Survey\Models\Category;
+    use Pensoft\Survey\Models\Interest;
+    use Carbon\Carbon;
+
+    $this['records'] = Data::get();
+    $this['groups'] = Group::get();
+    $this['categories'] = Category::get();
+    $this['interests'] = Interest::get();
+
+   // $this['country'] = new class {
+   //     public function getCountry($countryId) {
+   //         return Country::where('id', $countryId)->get();
+   //     }
+   // };
+}
+?>
+==
+
+
+
 {% component 'siteSearchInclude' %}
 
 <div class="container stakeholder">
     {% component 'jumbotron' %}
-
     {% partial 'map' %}
-</div>
 
+    <h1 class="display-1 mt-4">{{records.count()}} Members in total joined the network</h1>
+
+    <div class="record-search mb-2">
+        <div class="row">
+            <div class="col-xs-12 search-field-container">
+                <div class="search-field">
+                    <select multiple id="searchInput" name="searchTerms">
+                        <option value="">{{'Search' |_}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 filter-fields-container">
+                <div class="row between-md around-xs">
+                    <div class="col-md-9 col-xs-12 start-md center-xs">
+                        <div class="sort-field sort-dropdown">
+                            <select id="sortCountry" name="sortCountry">
+                                <option value="0">{{'All countries' |_}}</option>
+                                {% for country in available_countries %}
+                                <option value="{{country.id}}">{{country.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="sort-field sort-dropdown">
+                            <select id="sortGroup" name="sortGroup">
+                                <option value="0">{{'All groups' |_}}</option>
+                                {% for group in groups %}
+                                <option value="{{group.id}}">{{group.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="sort-field sort-dropdown">
+                            <select id="sortCategory" name="sortCategory">
+                                <option value="0">{{'All categories' |_}}</option>
+                                {% for category in categories %}
+                                <option value="{{category.id}}">{{category.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+<!--                        <div class="sort-field sort-dropdown" style="width: 320px;">-->
+<!--                            <select id="sortInterest" name="sortInterest">-->
+<!--                                <option value="0">{{'All interests' |_}}</option>-->
+<!--                                {% for interest in interests %}-->
+<!--                                <option value="{{interest.id}}">{{interest.name}}</option>-->
+<!--                                {% endfor %}-->
+<!--                            </select>-->
+<!--                        </div>-->
+                    </div>
+                    <div class="col-md-3 col-xs-12 end-md center-xs">
+                        <div class="clear-filter">
+                            <a id="clearFilter" href="javascript:void(0);">{{'Clear filters' |_}}</a>
+                        </div>
+                        <div class="apply-filter">
+                            <a id="applyFilter" class="btn btn-primary">{{'Apply filter' |_}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="recordsContainer">
+        {% partial 'stakeholder_records' %}
+    </div>
+</div>

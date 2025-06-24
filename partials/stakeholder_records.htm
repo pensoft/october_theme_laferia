@@ -1,0 +1,44 @@
+<table class="regions_info">
+    <tbody>
+    <tr>
+        <th>N</th>
+        <th>Name</th>
+        <th>Institute</th>
+        <th>Country</th>
+        <th>Groups</th>
+        <th>Categories of LAFERIA management/reintroduction</th>
+<!--        <th>Interest in LAFERIA</th>-->
+    </tr>
+    {% for k, record in records %}
+    <tr>
+        <td>{{k+1}}</td>
+        <td>{{record.name}}</td>
+        <td>{{record.affiliation}}</td>
+        <td>
+            {% set break = false %}
+            {% for country in available_countries if not break %}
+                {% if country.id == record.country_id %}
+                    {{country.name}}
+                {% endif %}
+            {% endfor %}</td>
+        <td>
+            {% for g in record.group %}
+                {{ g.name }};
+            {% endfor %}
+        </td>
+        <td>
+            {% for c in record.category %}
+                {{ c.name }};
+            {% endfor %}
+        </td>
+<!--        <td>-->
+<!--            {% for i in record.interest %}-->
+<!--                {{ i.name }};-->
+<!--            {% endfor %}-->
+<!--        </td>-->
+
+    </tr>
+    {% endfor %}
+
+    </tbody></table>
+
