@@ -478,9 +478,9 @@ $(document).ready(function() {
         '</div>').insertAfter($('.card.internal:nth-child(6)'));
 
     $('<div class="col-xs-12 col-sm-3 card internal no-border" style="margin-bottom: 15px">\n' +
-        '<a class="folder-background" style="display:flex; background: url(/storage/app/media/arcticons_globeone.svg) center center no-repeat; background-size: 100px; height: 200px" href="/internal-repository/living-documents" title="Living documents"></a>\n' +
-        '<h3 class="card-header"><a href="/internal-repository/living-documents" title="Living documents">Working documents (live)</a></h3>\n' +
-        '</div>').insertAfter($('.card.internal:nth-child(7)'));
+        '<a class="folder-background" style="display:flex; background: url(/storage/app/media/arcticons_globeone.svg) center center no-repeat; background-size: 100px; height: 200px" href="/internal-repository/sharepoint" title="Sharepoint"></a>\n' +
+        '<h3 class="card-header"><a href="/internal-repository/sharepoint" title="Sharepoint">Sharepoint</a></h3>\n' +
+        '</div>').insertAfter($('.card.internal:nth-child(3)'));
 
 
 
