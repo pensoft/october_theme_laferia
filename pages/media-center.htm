@@ -48,11 +48,11 @@ function onDownloadFile(){
 ==
 <div class="container">
     {% if logos.count() %}
-    <div class="row center-xs">
+    <div class="row">
         {% for record in logos %}
         <div class="col-md-6 col-xs-12 mb-1">
             <div class="logo-container {{record.name|slug}}">
-                <img src="{{record.logo_image.path}}" title="{{record.name}}">
+                <img src="{{record.logo_image.path}}" alt="{{record.name}}" title="{{record.name}}" aria-label="{{record.name}}">
                 <div class="name_label">{{record.name}}</div>
             </div>
 
@@ -120,9 +120,9 @@ function onDownloadFile(){
 
         {% if newsletters.count() %}
         <div class="col-md-6 col-xs-12 mb-1">
-            <a href="{{'newsletters'|page}}">
+            <a href="{{'newsletters'|page}}" alt="Newsletters" title="Newsletters">
                 <div class="newsletter-container">
-                    <img src="{{'Newsletter.png'|media}}" title="Newsletters">
+                    <img src="{{'Newsletter.png'|media}}" alt="Newsletters" title="Newsletters" aria-label="Newsletters">
                     <div class="name_label">Newsletters</div>
                 </div>
             </a>
@@ -131,9 +131,9 @@ function onDownloadFile(){
 
         {% if podcasts.count() %}
         <div class="col-md-6 col-xs-12 mb-1">
-            <a href="{{'podcasts'|page}}">
+            <a href="{{'podcasts'|page}}" alt="Podcasts" title="Podcasts">
                 <div class="podcasts-container">
-                    <img src="{{'Podcasts.png'|media}}" title="Podcasts">
+                    <img src="{{'Podcasts.png'|media}}" alt="Podcasts" title="Podcasts" aria-label="Podcasts">
                     <div class="name_label">Podcasts</div>
                 </div>
             </a>
@@ -143,9 +143,9 @@ function onDownloadFile(){
 
         {% if flyers.count() %}
         <div class="col-md-6 col-xs-12 mb-1">
-            <a href="/media-center/project-materials">
+            <a href="/media-center/project-materials" alt="Project materials" title="Project materials">
                 <div class="flyer-container">
-                    <img src="{{'Project Materials.png'|media}}" title="Project materials" style="margin-top: 47px;">
+                    <img src="{{'Project Materials.png'|media}}" alt="Project materials" title="Project materials" aria-label="Project materials" style="margin-top: 47px;">
                     <div class="name_label">Project materials</div>
                 </div>
             </a>
@@ -155,9 +155,9 @@ function onDownloadFile(){
 
         {% if videos.count() %}
         <div class="col-md-6 col-xs-12 mb-1">
-            <a href="{{'videos'|page}}">
+            <a href="{{'videos'|page}}"alt="Videos" title="Videos">
                 <div class="videos-container">
-                    <img src="{{'videoss.png'|media}}" title="Videos">
+                    <img src="{{'videoss.png'|media}}"  alt="Videos" title="Videos" aria-label="Videos">
                     <div class="name_label">Videos</div>
                 </div>
             </a>
@@ -167,9 +167,9 @@ function onDownloadFile(){
 
         {% if pressreleases.count() %}
         <div class="col-md-6 col-xs-12 mb-1">
-            <a href="{{'press-releases'|page}}">
+            <a href="{{'press-releases'|page}}" alt="Press releases" title="Press releases">
                 <div class="press-container">
-<!--                    <img src="{{'Logo.png'|media}}" title="Press releases">-->
+                    <img src="{{'Press_releases.png'|media}}" alt="Press releases" title="Press releases" aria-label="Press releases" >
                     <div class="name_label">Press releases</div>
                 </div>
             </a>
