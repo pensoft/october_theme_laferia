@@ -50,19 +50,11 @@ numberOfLevels = 2
 {% endif %}
 
 <nav class="navbar fixed" id="headernavbar" aria-label="Main navigation" {% if user %}style="margin-top: 75px"{% endif %}>
-    <a
-        id="menuToggle"
-        class="mobile-menu-toggle"
-        aria-expanded="false"
-        aria-controls="mobileMenu"
-        aria-label="Toggle navigation menu">
-        <span class="sr-only">Menu</span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-    </a>
-
-    <div id="mobileMenu" class="mobile-menu" hidden>
+    <div id="menuToggle" aria-label="Toggle navigation menu">
+        <input type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
         {% component 'menu' %}
     </div>
 
