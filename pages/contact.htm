@@ -31,7 +31,7 @@ function onStart(){
         <div class="row contact_info">
             {% for profile in profiles %}
             <article class="col-xs-12">
-                <div class="row">
+                <div class="row middle-xs">
                     <div class="col-md-7 col-xs-12 start-md center-xs coordinator_image">
                         {% if profile.avatar %}
                         <img src="{{profile.avatar.thumb(603, 520, {'mode' : 'crop' })}}"
