@@ -83,7 +83,9 @@ numberOfLevels = 2
                 <a class="search-btn"
                         aria-label="Open search"
                         aria-expanded="false"
-                        aria-controls="search">
+                        aria-controls="search"
+                   onclick="showSearchForm();"
+                >
                     <span class="sr-only">Search</span>
                 </a>
             </li>
@@ -92,7 +94,7 @@ numberOfLevels = 2
 
     <div id="search" class="search" role="search" hidden>
         <div class="container">
-            <a class="close-search" aria-label="Close search">
+            <a class="close-search" aria-label="Close search" onclick="hideSearchForm();">
                 <span aria-hidden="true">&#10006;</span>
             </a>
             <form class="input-group align-items-start" action="{{url('search')}}" method="get">
