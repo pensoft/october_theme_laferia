@@ -39,71 +39,88 @@ function onStart(){
 
 {% component 'siteSearchInclude' %}
 
-<div class="container stakeholder">
-    {% component 'jumbotron' %}
-    {% partial 'map' %}
+<section aria-labelledby="stakeholder-heading">
+    <div class="container stakeholder">
+        <h1 id="stakeholder-heading" class="sr-only">Stakeholder Network</h1>
 
-    <h1 class="display-1 mt-4">{{records.count()}} Members in total joined the network</h1>
+        {% component 'jumbotron' %}
+        {% partial 'map' %}
 
-    <div class="record-search mb-2">
-        <div class="row">
-            <div class="col-xs-12 search-field-container">
-                <div class="search-field">
-                    <select multiple id="searchInput" name="searchTerms">
-                        <option value="">{{'Search' |_}}</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-xs-12 filter-fields-container">
-                <div class="row between-md around-xs">
-                    <div class="col-md-9 col-xs-12 start-md center-xs">
-                        <div class="sort-field sort-dropdown">
-                            <select id="sortCountry" name="sortCountry">
-                                <option value="0">{{'All countries' |_}}</option>
-                                {% for country in available_countries %}
-                                <option value="{{country.id}}">{{country.name}}</option>
-                                {% endfor %}
+        <h2 class="mt-4">{{records.count()}} Members in total joined the network</h2>
+
+        <div class="record-search mb-2">
+            <form role="search" aria-label="Filter stakeholders">
+                <div class="row">
+                    <div class="col-xs-12 search-field-container">
+                        <div class="search-field">
+                            <label for="searchInput" class="sr-only">Search members</label>
+                            <select multiple id="searchInput" name="searchTerms" aria-label="Search members">
+                                <option value="">{{'Search' |_}}</option>
                             </select>
-                        </div>
-                        <div class="sort-field sort-dropdown">
-                            <select id="sortGroup" name="sortGroup">
-                                <option value="0">{{'All groups' |_}}</option>
-                                {% for group in groups %}
-                                <option value="{{group.id}}">{{group.name}}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="sort-field sort-dropdown">
-                            <select id="sortCategory" name="sortCategory">
-                                <option value="0">{{'All categories' |_}}</option>
-                                {% for category in categories %}
-                                <option value="{{category.id}}">{{category.name}}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-<!--                        <div class="sort-field sort-dropdown" style="width: 320px;">-->
-<!--                            <select id="sortInterest" name="sortInterest">-->
-<!--                                <option value="0">{{'All interests' |_}}</option>-->
-<!--                                {% for interest in interests %}-->
-<!--                                <option value="{{interest.id}}">{{interest.name}}</option>-->
-<!--                                {% endfor %}-->
-<!--                            </select>-->
-<!--                        </div>-->
-                    </div>
-                    <div class="col-md-3 col-xs-12 end-md center-xs">
-                        <div class="clear-filter">
-                            <a id="clearFilter" href="javascript:void(0);">{{'Clear filters' |_}}</a>
-                        </div>
-                        <div class="apply-filter">
-                            <a id="applyFilter" class="btn btn-primary">{{'Apply filter' |_}}</a>
                         </div>
                     </div>
+                    <div class="col-xs-12 filter-fields-container">
+                        <div class="row between-md around-xs">
+                            <div class="col-md-9 col-xs-12 start-md center-xs">
+                                <div class="sort-field sort-dropdown">
+                                    <label for="sortCountry" class="sr-only">Filter by country</label>
+                                    <select id="sortCountry" name="sortCountry" aria-label="Filter by country">
+                                        <option value="0">{{'All countries' |_}}</option>
+                                        {% for country in available_countries %}
+                                        <option value="{{country.id}}">{{country.name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="sort-field sort-dropdown">
+                                    <label for="sortGroup" class="sr-only">Filter by group</label>
+                                    <select id="sortGroup" name="sortGroup" aria-label="Filter by group">
+                                        <option value="0">{{'All groups' |_}}</option>
+                                        {% for group in groups %}
+                                        <option value="{{group.id}}">{{group.name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="sort-field sort-dropdown">
+                                    <label for="sortCategory" class="sr-only">Filter by category</label>
+                                    <select id="sortCategory" name="sortCategory" aria-label="Filter by category">
+                                        <option value="0">{{'All categories' |_}}</option>
+                                        {% for category in categories %}
+                                        <option value="{{category.id}}">{{category.name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-12 end-md center-xs">
+                                <div class="clear-filter">
+                                    <a id="clearFilter"
+                                       href="javascript:void(0);"
+                                       role="button"
+                                       aria-label="Clear all filters">
+                                        {{'Clear filters' |_}}
+                                    </a>
+                                </div>
+                                <div class="apply-filter">
+                                    <a id="applyFilter"
+                                       class="btn btn-primary"
+                                       href="javascript:void(0);"
+                                       role="button"
+                                       aria-label="Apply selected filters">
+                                        {{'Apply filter' |_}}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </form>
+        </div>
+
+        <div class="row"
+             id="recordsContainer"
+             role="region"
+             aria-live="polite"
+             aria-label="Stakeholder results">
+            {% partial 'stakeholder_records' %}
         </div>
     </div>
-
-    <div class="row" id="recordsContainer">
-        {% partial 'stakeholder_records' %}
-    </div>
-</div>
+</section>

@@ -74,7 +74,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, .title, .head, .page_headi
     font-family: "Sofia Sans Condensed";
 }
 
-h1.display-1{
+h1.display-1, h2{
     //text-align: center;
     font-size: 32px;
     color: @heading-text-color;
@@ -594,6 +594,20 @@ ul.pagination{
             padding-right: 0!important;
         });
 
+        .divider{
+            opacity: 0.65;
+            color: rgba(251, 253, 255, 0.18);
+            /* Display/3/Regular */
+            font-size: 22px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 22px;
+            margin: 2px 10px 0 10px;
+            .breakpoint-large-down({
+                display: none;
+            });
+        }
+
         .powered-by {
             display: flex;
             white-space: nowrap;
@@ -617,19 +631,7 @@ ul.pagination{
                 width: 100px;
             }
 
-            .divider{
-                opacity: 0.65;
-                color: rgba(251, 253, 255, 0.18);
-                /* Display/3/Regular */
-                font-size: 22px;
-                font-style: normal;
-                font-weight: 400;
-                line-height: 22px;
-                margin: 2px 10px 0 10px;
-                .breakpoint-large-down({
-                    display: none;
-                });
-            }
+
 
             .breakpoint-large-down ({
                 margin: 20px auto;
@@ -904,6 +906,7 @@ footer .align-items-center{
             font-weight: 700;
             line-height: 135%; /* 43.2px */
             width: 100%;
+            text-align: left;
         }
         p{
             color: rgba(11, 63, 38, 0.45);
@@ -921,4 +924,18 @@ footer .align-items-center{
           width: 100%;
         }
     }
+}
+
+
+/* Screen reader only text - visually hidden but accessible to screen readers */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
 }

@@ -24,31 +24,49 @@ function onStart(){
 ==
 {% component 'siteSearchInclude' %}
 
-<div class="container contact_container">
-	<div class="row contact_info">
-		{% for profile in profiles %}
-        <div class="col-md-7 col-xs-12 start-md center-xs coordinator_image">
-                {% if profile.avatar %}
-                <img src="{{profile.avatar.thumb(603, 520, {'mode' : 'crop' })}}" class="fr-fic fr-dii">
-                {% else %}
-                <img src="{{'CMS_icons_avatar.svg'|media}}" class="fr-fic fr-dii">
-                {% endif %}
+<section aria-labelledby="contact-heading">
+    <div class="container contact_container">
+        <h1 id="contact-heading" class="sr-only">Contact Information</h1>
+
+        <div class="row contact_info">
+            {% for profile in profiles %}
+            <article class="col-xs-12">
+                <div class="row">
+                    <div class="col-md-7 col-xs-12 start-md center-xs coordinator_image">
+                        {% if profile.avatar %}
+                        <img src="{{profile.avatar.thumb(603, 520, {'mode' : 'crop' })}}"
+                             class="fr-fic fr-dii"
+                             alt="{{profile.names}}">
+                        {% else %}
+                        <img src="{{'CMS_icons_avatar.svg'|media}}"
+                             class="fr-fic fr-dii"
+                             alt="Default avatar">
+                        {% endif %}
+                    </div>
+                    <div class="col-md-5 col-xs-12 coordinator_info">
+                        <div>
+                            <img src="{{'Biopolis.svg'|media}}"
+                                 class="biopolis_logo"
+                                 alt="Biopolis logo">
+                            <h2>{{profile.names}}</h2>
+                        </div>
+
+                        <div class="card_title">
+                            {% if profile.position %}
+                            <p>{{profile.position}}</p>
+                            {% endif %}
+                            {% if profile.email %}
+                            <a href="mailto:{{profile.email}}"
+                               class="email"
+                               aria-label="Email {{profile.names}}">
+                                {{profile.email}}
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
         </div>
-        <div class="col-md-5 col-xs-12 coordinator_info">
-                <div>
-                    <img src="{{'Biopolis.svg'|media}}" class="biopolis_logo">
-                    <h3>{{profile.names}}</h3>
-                </div>
-
-                <div class="card_title">
-                    {% if profile.position %}<span>{{profile.position}}</span>{% endif %}
-                    {% if profile.email %}
-                        <a href="mailto:{{profile.email}}" class="email" target="_blank">
-                            {{profile.email}}
-                        </a>
-                    {% endif %}
-                </div>
-		{% endfor %}
-	</div>
-
-</div>
+    </div>
+</section>

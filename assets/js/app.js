@@ -411,6 +411,10 @@ $(document).ready(function() {
         $content = $($active[0].hash);
         $active.addClass('active');
 
+        if($(this).parent().hasClass('homepage_intro_tabs')){
+            $active.addClass('active');
+        }
+
 
 
         // Hide the remaining content

@@ -70,118 +70,173 @@ $this['slug'] = $this->param('slug');
 ==
 
 {% if not slug %}
-<div class="container">
-    <div class="events_tabs">
-        <a class="" href="#all">All events</a>
-        <a class="" href="#upcoming">Upcoming events</a>
-        <a class="" href="#past">Past events</a>
-    </div>
-</div>
-<!--tabs content	-->
-<div class="container-fluid">
+
+<section aria-labelledby="events-heading">
+    <h1 id="events-heading" class="sr-only">Events</h1>
+
     <div class="container">
-
-        <div class="row" id="all">
-            <h2>Upcoming Events</h2>
-            <div class="events_list_container">
-                {% partial 'eventslist' records=entries %}
-            </div>
-            {% if entries.count > 20 %}
-            <div class="row container">
-                {{ entries.fragment('listView').render|raw }}
-            </div>
-            {% endif %}
-
-
-            <h2>Past Events</h2>
-            <div class="events_list_container">
-                {% partial 'eventslist' records=past_entries %}
-            </div>
-            {% if past_entries.count > 20 %}
-            <div class="row container">
-                {{ past_entries.fragment('listView').render|raw }}
-            </div>
-            {% endif %}
-
-        </div>
-
-
-
-
-        <div class="row" id="upcoming">
-            <div class="events_list_container">
-                {% partial 'eventslist' records=entries %}
-            </div>
-            {% if entries.count > 20 %}
-            <div class="row container">
-                {{ entries.fragment('listView').render|raw }}
-            </div>
-            {% endif %}
-        </div>
-
-
-
-
-        <div class="row" id="past">
-            <div class="events_list_container">
-                {% partial 'eventslist' records=past_entries %}
-            </div>
-            {% if past_entries.count > 20 %}
-            <div class="row container">
-                {{ past_entries.fragment('listView').render|raw }}
-            </div>
-            {% endif %}
-        </div>
-
+        <nav aria-label="Event filters" class="events_tabs" role="tablist">
+            <a href="#all"
+               id="tab-all"
+               role="tab"
+               aria-controls="all"
+               aria-selected="true"
+               class="active">
+                All events
+            </a>
+            <a href="#upcoming"
+               id="tab-upcoming"
+               role="tab"
+               aria-controls="upcoming"
+               aria-selected="false">
+                Upcoming events
+            </a>
+            <a href="#past"
+               id="tab-past"
+               role="tab"
+               aria-controls="past"
+               aria-selected="false">
+                Past events
+            </a>
+        </nav>
     </div>
 
-</div>
+    <div class="container-fluid">
+        <div class="container">
 
+            <div class="row"
+                 id="all"
+                 role="tabpanel"
+                 aria-labelledby="tab-all">
+                <div class="col-xs-12">
+                    <h2>Upcoming Events</h2>
+                    <div class="events_list_container">
+                        {% partial 'eventslist' records=entries %}
+                    </div>
+                    {% if entries.count > 20 %}
+                    <nav aria-label="Upcoming events pagination" class="row container">
+                        {{ entries.fragment('listView').render|raw }}
+                    </nav>
+                    {% endif %}
+
+                    <h2>Past Events</h2>
+                    <div class="events_list_container">
+                        {% partial 'eventslist' records=past_entries %}
+                    </div>
+                    {% if past_entries.count > 20 %}
+                    <nav aria-label="Past events pagination" class="row container">
+                        {{ past_entries.fragment('listView').render|raw }}
+                    </nav>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row"
+                 id="upcoming"
+                 role="tabpanel"
+                 aria-labelledby="tab-upcoming"
+                 hidden>
+                <div class="col-xs-12">
+                    <h2 class="sr-only">Upcoming Events</h2>
+                    <div class="events_list_container">
+                        {% partial 'eventslist' records=entries %}
+                    </div>
+                    {% if entries.count > 20 %}
+                    <nav aria-label="Upcoming events pagination" class="row container">
+                        {{ entries.fragment('listView').render|raw }}
+                    </nav>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row"
+                 id="past"
+                 role="tabpanel"
+                 aria-labelledby="tab-past"
+                 hidden>
+                <div class="col-xs-12">
+                    <h2 class="sr-only">Past Events</h2>
+                    <div class="events_list_container">
+                        {% partial 'eventslist' records=past_entries %}
+                    </div>
+                    {% if past_entries.count > 20 %}
+                    <nav aria-label="Past events pagination" class="row container">
+                        {{ past_entries.fragment('listView').render|raw }}
+                    </nav>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
 
 {% else %}
 
-    {% if entry %}
-        <div class="row single-entry-item">
-            <a href="/events" class="go-back-link">Back</a>
-            <div class="col-xs-12">
-                {% if entry.cover_image %}
-                <img src="{{ entry.cover_image|crop_image|resize(743, auto, { mode: 'crop' }) }}" />
-                {% endif %}
-            </div>
-            <div class="col-xs-12">
-                <div class="row">
-                    <div class="col-xs-2">
-                        <div class="text-published">
-                            {% if entry.start|date("j") != entry.end|date("j") %} {{entry.start|date("j")}}-{{entry.end|date("j")}}{% else %}{{entry.start|date("j")}}{% endif %}
-                            {{entry.start|date("M")}}
-                            {{entry.start|date("Y")}}
-                        </div>
-                    </div>
-                    <div class="col-xs-2">
-                        <div class="text-published">{{entry.place}}</div>
-                    </div>
+{% if entry %}
+<article aria-labelledby="event-title">
+    <nav aria-label="Breadcrumb">
+        <a href="/events" class="go-back-link" aria-label="Back to events">
+            Back
+        </a>
+    </nav>
+
+    <div class="row single-entry-item">
+        <div class="col-xs-12">
+            {% if entry.cover_image %}
+            <img src="{{ entry.cover_image|crop_image|resize(743, auto, { mode: 'crop' }) }}"
+                 alt="{{entry.title|striptags}}" />
+            {% endif %}
+        </div>
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-2">
+                    <time class="text-published" datetime="{{entry.start|date('Y-m-d')}}">
+                        {% if entry.start|date("j") != entry.end|date("j") %}
+                        {{entry.start|date("j")}}-{{entry.end|date("j")}}
+                        {% else %}
+                        {{entry.start|date("j")}}
+                        {% endif %}
+                        {{entry.start|date("M")}}
+                        {{entry.start|date("Y")}}
+                    </time>
                 </div>
-            </div>
-            <div class="col-xs-12 entry-title">
-                <h1 class="single-entry-title">{{entry.title}}</h1>
-            </div>
-
-            <div class="col-xs-12">
-                <div class="content">
-                    {{entry.description|raw}}
+                <div class="col-xs-2">
+                    <p class="text-published">{{entry.place}}</p>
                 </div>
-
-
-                <div class="row middle-xs">
-                    <div class="col-xs col-md start-md center-xs share_container">
-                        <span class="share_label">Share</span>
-                        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{page_url}}" target="_blank" class="pr p-linkedin normal"></a>
-                        <a href="https://bsky.app/intent/compose?text={{page_url}}" class="pr p-bluesky small"  target="_blank"></a>
-                    </div>
-                </div>
-
             </div>
         </div>
-    {% endif %}
+        <div class="col-xs-12 entry-title">
+            <h1 id="event-title" class="single-entry-title">{{entry.title}}</h1>
+        </div>
+
+        <div class="col-xs-12">
+            <div class="content">
+                {{entry.description|raw}}
+            </div>
+
+            <div class="row middle-xs">
+                <div class="col-xs col-md start-md center-xs share_container">
+                    <span class="share_label">Share</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{page_url}}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="pr p-linkedin normal"
+                       aria-label="Share on LinkedIn (opens in new window)">
+                        <span class="sr-only">LinkedIn</span>
+                    </a>
+                    <a href="https://bsky.app/intent/compose?text={{page_url}}"
+                       class="pr p-bluesky small"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="Share on Bluesky (opens in new window)">
+                        <span class="sr-only">Bluesky</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+{% endif %}
 
 {% endif %}

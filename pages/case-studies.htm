@@ -27,57 +27,74 @@ function onStart(){
 <div class="container">
 
     {% if is_detail_page %}
-    <a href="/case-studies" class="go-back-link">Back</a>
 
-    <div class="single-case-studies-item">
-        <div class="row between-md around-xs">
-            <div class="col-md-7 col-xs-12">
+    <article aria-labelledby="case-study-title">
+        <nav aria-label="Breadcrumb">
+            <a href="/case-studies" class="go-back-link" aria-label="Back to case studies">
+                Back
+            </a>
+        </nav>
 
-                <div class="col-xs-12">
-                    <h1>{{case.title}}</h1>
+        <div class="single-case-studies-item">
+            <div class="row between-md around-xs">
+                <div class="col-md-7 col-xs-12">
+                    <div class="col-xs-12">
+                        <h1 id="case-study-title">{{case.title}}</h1>
+                    </div>
+                    <div class="col-xs-12 case-studies-content">
+                        {{case.description|raw}}
+                    </div>
                 </div>
-                <div class="col-xs-12 case-studies-content">
-                    {{case.description|raw}}
-
-                </div>
-
-            </div>
-            <div class="col-md-4 col-xs-12">
-                <div class="col-xs-12 case-studies-img-container">
-                    <img src="{{ case.image.thumb(413, auto, { mode: 'crop' }) }}" />
-                </div>
+                <aside class="col-md-4 col-xs-12">
+                    <div class="col-xs-12 case-studies-img-container">
+                        <img src="{{ case.image.thumb(413, auto, { mode: 'crop' }) }}"
+                             alt="{{case.title|striptags}}" />
+                    </div>
+                </aside>
             </div>
         </div>
-    </div>
+    </article>
 
     {% else %}
 
-    <div class="case-studies-list">
+    <section aria-labelledby="case-studies-heading">
+        <h1 id="case-studies-heading" class="sr-only">Case Studies</h1>
 
-        <div class="row">
-            {% for record in records %}
-            <div class="col-md-4 col-xs-12 home-case-studies-records">
-                <div class="case-studies-item">
-                    <div class="home-case-studies-image">
-                        <a href="/case-studies/{{record.slug}}">
-                            <img src="{{ record.image.path}}" alt="{{ record.title }}">
-                        </a>
+        <div class="case-studies-list">
+            <div class="row">
+                {% for record in records %}
+                <article class="col-md-4 col-xs-12 home-case-studies-records">
+                    <div class="case-studies-item">
+                        <div class="home-case-studies-image">
+                            <a href="/case-studies/{{record.slug}}"
+                               aria-label="Read case study: {{record.title|striptags}}">
+                                <img src="{{ record.image.path}}"
+                                     alt="{{record.title|striptags}}">
+                            </a>
+                        </div>
+                        <div class="case-studies-content">
+                            <span class="case-studies-title">
+                                <a href="/case-studies/{{record.slug}}">
+                                    {{ record.title|length > 95 ? record.title|slice(0, 95)|replace({"&nbsp;": " ", ".": ". "}) ~ '...' : record.title|replace({"&nbsp;": " ", ".": ". "}) }}
+                                </a>
+                            </span>
+                            <a href="/case-studies/{{record.slug}}"
+                               class="read-more-link"
+                               aria-label="Read more about {{record.title|striptags}}">
+                                <span class="read-more-arrow" aria-hidden="true"></span>
+                                <span class="sr-only">Read more</span>
+                            </a>
+                        </div>
                     </div>
-                    <div class="case-studies-content">
-                        <a href="/case-studies/{{record.slug}}">
-                            <span class="case-studies-title">{{ record.title|length > 95 ? record.title|slice(0, 95)|replace({"&nbsp;": " ", ".": ". "}) ~ '...' : record.title|replace({"&nbsp;": " ", ".": ". "})  }}</span>
-
-                            <span class="read-more-arrow"></span>
-                        </a>
-                    </div>
-                </div>
+                </article>
+                {% endfor %}
             </div>
-            {% endfor %}
+
+            <nav aria-label="Case studies pagination" class="row container">
+                {{ records.render|raw }}
+            </nav>
         </div>
-        <div class="row container">
-            {{ records.render|raw }}
-        </div>
-    </div>
+    </section>
 
     {% endif %}
 </div>

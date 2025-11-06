@@ -74,44 +74,77 @@ return Response::download($pathToFile, $fileName, $headers);
 
 {% set records = mediaVideosList %}
 
-<div class="container">
+<section aria-labelledby="videos-heading">
+    <div class="container">
+        <h1 id="videos-heading" class="sr-only">Videos</h1>
 
-    <a href="/media-center" class="go-back-link">Back</a>
+        <nav aria-label="Breadcrumb">
+            <a href="/media-center" class="go-back-link" aria-label="Back to media center">
+                Back
+            </a>
+        </nav>
 
-    {% if records.count() %}
-    <div class="row">
-        <div class="col-md-12 col-xs-12">
-            <div class="row">
-                {% for record in records %}
-                <div class="col-md-4 col-xs-12">
+        {% if records.count() %}
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <div class="row">
+                    {% for record in records %}
+                    <article class="col-md-4 col-xs-12">
 
+                        {% if record.youtube_url %}
+                        <iframe
+                            src="{{record.youtube_url}}"
+                            width="100%"
+                            height="267"
+                            title="{{record.name|striptags}} - YouTube video"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                            loading="lazy">
+                        </iframe>
+                        {% endif %}
 
+                        {% if record.vimeo_url %}
+                        <iframe
+                            src="{{record.vimeo_url}}"
+                            width="100%"
+                            height="267"
+                            title="{{record.name|striptags}} - Vimeo video"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                            loading="lazy">
+                        </iframe>
+                        {% endif %}
 
-                    {% if record.youtube_url %}
-                    <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{record.youtube_url}}" width="100%" height="267"></iframe>
-                    {% endif %}
+                        <h2 class="card_title">
+                            {{ record.name|length > 65 ? record.name|striptags|slice(0, 65)|replace({"&nbsp;": " ", ".": ". "}) ~ '...' : record.name|striptags|replace({"&nbsp;": " ", ".": ". "}) }}
+                        </h2>
 
-                    {% if record.vimeo_url %}
-                    <iframe width="100%" height="267" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            src="{{record.vimeo_url}}">
-                    </iframe>
-
-                    {% endif %}
-                    <p class="card_title">{{ record.name|length > 65 ? record.name|striptags|slice(0, 65)|replace({"&nbsp;": " ", ".": ". "}) ~ '...' : record.name|striptags|replace({"&nbsp;": " ", ".": ". "})  }}</p>
-                    {% if record.file %}
-                    <div class="links">
-                            <!--<video controls="" width="100%" height="267"><source src="{{record.file.path}}" type="video/mp4"></video>-->
-                            <a class="btn btn-primary download" href="{{ ''| page }}?{{queries}}&download={{record.file.id}}&file_name={{record.name|replace({' ': '_'})}}">Download</a>
+                        {% if record.file %}
+                        <div class="links">
+                            <a class="btn btn-primary download"
+                               href="{{ ''| page }}?{{queries}}&download={{record.file.id}}&file_name={{record.name|replace({' ': '_'})}}"
+                               aria-label="Download {{record.name|striptags}} video"
+                               download>
+                                Download
+                            </a>
                         </div>
-                    </div>
-                    {% endif %}
-                </div>
+                        {% endif %}
+                    </article>
 
-                {% else %}
-                {{ noRecordsMessage }}
-                {% endfor %}
+                    {% else %}
+                    <div class="col-xs-12">
+                        <p>{{ noRecordsMessage ?: 'No videos available at this time.' }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
+        {% else %}
+        <div class="row">
+            <div class="col-xs-12">
+                <p>No videos available at this time.</p>
+            </div>
+        </div>
+        {% endif %}
     </div>
-    {% endif %}
-</div>
+</section>

@@ -46,137 +46,169 @@ function onDownloadFile(){
 }
 ?>
 ==
-<div class="container">
-    {% if logos.count() %}
-    <div class="row">
-        {% for record in logos %}
-        <div class="col-md-6 col-xs-12 mb-1">
-            <div class="logo-container {{record.name|slug}}">
-                <img src="{{record.logo_image.path}}" alt="{{record.name}}" title="{{record.name}}" aria-label="{{record.name}}">
-                <div class="name_label">{{record.name}}</div>
-            </div>
+<section aria-labelledby="media-center-heading">
+    <div class="container">
+        <h1 id="media-center-heading" class="sr-only">Media Center</h1>
 
-            {% if record.name == 'Logo' %}
+        {% if logos.count() %}
+        <div class="row">
+            {% for record in logos %}
+            <article class="col-md-6 col-xs-12 mb-1">
+                <div class="logo-container {{record.name|slug}}">
+                    <img src="{{record.logo_image.path}}" alt="{{record.name}}">
+                    <h2 class="name_label">{{record.name}}</h2>
+                </div>
+
+                {% if record.name == 'Logo' %}
                 {% set className = 'btn btn-primary download' %}
                 {% set labelJPG = 'JPG' %}
                 {% set labelPNG = 'PNG' %}
                 {% set labelSVG = 'SVG' %}
                 {% set labelZIP = 'ZIP' %}
                 {% set labelPDF = 'PDF' %}
-            {% else %}
+                {% else %}
                 {% set className = 'btn btn-primary download' %}
                 {% set labelJPG = 'Download' %}
                 {% set labelPNG = 'Download' %}
                 {% set labelSVG = 'Download' %}
                 {% set labelZIP = 'Download' %}
                 {% set labelPDF = 'Download' %}
+                {% endif %}
 
+                <div class="links {{record.name|slug}}">
+                    {% if record.file_jpg %}
+                    <div class="form_container">
+                        {{form_open({ request: 'onDownloadFile' }) }}
+                        <input type="hidden" value="{{record.file_jpg.id}}" name="id">
+                        <button type="submit"
+                                data-attach-loading
+                                class="{{className}}"
+                                aria-label="Download {{record.name}} as JPG">
+                            {{labelJPG}}
+                        </button>
+                        {{ form_close() }}
+                    </div>
+                    {% endif %}
+
+                    {% if record.file_png %}
+                    <div class="form_container">
+                        {{form_open({ request: 'onDownloadFile' }) }}
+                        <input type="hidden" value="{{record.file_png.id}}" name="id">
+                        <button type="submit"
+                                data-attach-loading
+                                class="{{className}}"
+                                aria-label="Download {{record.name}} as PNG">
+                            {{labelPNG}}
+                        </button>
+                        {{ form_close() }}
+                    </div>
+                    {% endif %}
+
+                    {% if record.file_eps %}
+                    <div class="form_container">
+                        {{form_open({ request: 'onDownloadFile' }) }}
+                        <input type="hidden" value="{{record.file_eps.id}}" name="id">
+                        <button type="submit"
+                                data-attach-loading
+                                class="{{className}}"
+                                aria-label="Download {{record.name}} as SVG">
+                            {{labelSVG}}
+                        </button>
+                        {{ form_close() }}
+                    </div>
+                    {% endif %}
+
+                    {% if record.file_zip %}
+                    <div class="form_container">
+                        {{form_open({ request: 'onDownloadFile' }) }}
+                        <input type="hidden" value="{{record.file_zip.id}}" name="id">
+                        <button type="submit"
+                                data-attach-loading
+                                class="{{className}}"
+                                aria-label="Download {{record.name}} as ZIP">
+                            {{labelZIP}}
+                        </button>
+                        {{ form_close() }}
+                    </div>
+                    {% endif %}
+
+                    {% if record.file_pdf %}
+                    <div class="form_container">
+                        <a href="{{record.file_pdf.path}}"
+                           download
+                           class="{{className}}"
+                           aria-label="Download {{record.name}} as PDF">
+                            {{labelPDF}}
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </article>
+            {% endfor %}
+
+            {% if newsletters.count() %}
+            <article class="col-md-6 col-xs-12 mb-1">
+                <a href="{{'newsletters'|page}}"
+                   aria-label="View newsletters">
+                    <div class="newsletter-container">
+                        <img src="{{'Newsletter.png'|media}}" alt="Newsletters">
+                        <h2 class="name_label">Newsletters</h2>
+                    </div>
+                </a>
+            </article>
             {% endif %}
-            <div class="links {{record.name|slug}}">
-                {% if record.file_jpg %}
-                <div class="form_container">
-                    {{form_open({ request: 'onDownloadFile' }) }}
-                    <input type="hidden" value="{{record.file_jpg.id}}" name="id">
-                    <button type="submit" data-attach-loading class="{{className}}">{{labelJPG}}</button>
-                    {{ form_close() }}
-                </div>
-                {% endif %}
 
-                {% if record.file_png %}
-                <div class="form_container">
-                    {{form_open({ request: 'onDownloadFile' }) }}
-                    <input type="hidden" value="{{record.file_png.id}}" name="id">
-                    <button type="submit" data-attach-loading class="{{className}}">{{labelPNG}}</button>
-                    {{ form_close() }}
-                </div>
-                {% endif %}
+            {% if podcasts.count() %}
+            <article class="col-md-6 col-xs-12 mb-1">
+                <a href="{{'podcasts'|page}}"
+                   aria-label="Listen to podcasts">
+                    <div class="podcasts-container">
+                        <img src="{{'Podcasts.png'|media}}" alt="Podcasts">
+                        <h2 class="name_label">Podcasts</h2>
+                    </div>
+                </a>
+            </article>
+            {% endif %}
 
-                {% if record.file_eps %}
-                <div class="form_container">
-                    {{form_open({ request: 'onDownloadFile' }) }}
-                    <input type="hidden" value="{{record.file_eps.id}}" name="id">
-                    <button type="submit" data-attach-loading class="{{className}}">{{labelSVG}}</button>
-                    {{ form_close() }}
-                </div>
-                {% endif %}
+            {% if flyers.count() %}
+            <article class="col-md-6 col-xs-12 mb-1">
+                <a href="/media-center/project-materials"
+                   aria-label="View project materials">
+                    <div class="flyer-container">
+                        <img src="{{'Project Materials.png'|media}}"
+                             alt="Project materials"
+                             class="project-materials-img">
+                        <h2 class="name_label">Project materials</h2>
+                    </div>
+                </a>
+            </article>
+            {% endif %}
 
-                {% if record.file_zip %}
-                <div class="form_container">
-                    {{form_open({ request: 'onDownloadFile' }) }}
-                    <input type="hidden" value="{{record.file_zip.id}}" name="id">
-                    <button type="submit" data-attach-loading class="{{className}}">{{labelZIP}}</button>
-                    {{ form_close() }}
-                </div>
-                {% endif %}
+            {% if videos.count() %}
+            <article class="col-md-6 col-xs-12 mb-1">
+                <a href="{{'videos'|page}}"
+                   aria-label="Watch videos">
+                    <div class="videos-container">
+                        <img src="{{'videoss.png'|media}}" alt="Videos">
+                        <h2 class="name_label">Videos</h2>
+                    </div>
+                </a>
+            </article>
+            {% endif %}
 
-                {% if record.file_pdf %}
-                <div class="form_container">
-                    <a href="{{record.file_pdf.path}}" target="_blank" class="{{className}}">{{labelPDF}}</a>
-                </div>
-                {% endif %}
-            </div>
-        </div>
-        {% endfor %}
+            {% if pressreleases.count() %}
+            <article class="col-md-6 col-xs-12 mb-1">
+                <a href="{{'press-releases'|page}}"
+                   aria-label="Read press releases">
+                    <div class="press-container">
+                        <img src="{{'Press_releases.png'|media}}" alt="Press releases">
+                        <h2 class="name_label">Press releases</h2>
+                    </div>
+                </a>
+            </article>
+            {% endif %}
 
-        {% if newsletters.count() %}
-        <div class="col-md-6 col-xs-12 mb-1">
-            <a href="{{'newsletters'|page}}" alt="Newsletters" title="Newsletters">
-                <div class="newsletter-container">
-                    <img src="{{'Newsletter.png'|media}}" alt="Newsletters" title="Newsletters" aria-label="Newsletters">
-                    <div class="name_label">Newsletters</div>
-                </div>
-            </a>
         </div>
         {% endif %}
-
-        {% if podcasts.count() %}
-        <div class="col-md-6 col-xs-12 mb-1">
-            <a href="{{'podcasts'|page}}" alt="Podcasts" title="Podcasts">
-                <div class="podcasts-container">
-                    <img src="{{'Podcasts.png'|media}}" alt="Podcasts" title="Podcasts" aria-label="Podcasts">
-                    <div class="name_label">Podcasts</div>
-                </div>
-            </a>
-        </div>
-        {% endif %}
-
-
-        {% if flyers.count() %}
-        <div class="col-md-6 col-xs-12 mb-1">
-            <a href="/media-center/project-materials" alt="Project materials" title="Project materials">
-                <div class="flyer-container">
-                    <img src="{{'Project Materials.png'|media}}" alt="Project materials" title="Project materials" aria-label="Project materials" style="margin-top: 47px;">
-                    <div class="name_label">Project materials</div>
-                </div>
-            </a>
-        </div>
-        {% endif %}
-
-
-        {% if videos.count() %}
-        <div class="col-md-6 col-xs-12 mb-1">
-            <a href="{{'videos'|page}}"alt="Videos" title="Videos">
-                <div class="videos-container">
-                    <img src="{{'videoss.png'|media}}"  alt="Videos" title="Videos" aria-label="Videos">
-                    <div class="name_label">Videos</div>
-                </div>
-            </a>
-        </div>
-        {% endif %}
-
-
-        {% if pressreleases.count() %}
-        <div class="col-md-6 col-xs-12 mb-1">
-            <a href="{{'press-releases'|page}}" alt="Press releases" title="Press releases">
-                <div class="press-container">
-                    <img src="{{'Press_releases.png'|media}}" alt="Press releases" title="Press releases" aria-label="Press releases" >
-                    <div class="name_label">Press releases</div>
-                </div>
-            </a>
-        </div>
-        {% endif %}
-
-
     </div>
-    {% endif %}
-</div>
+</section>
