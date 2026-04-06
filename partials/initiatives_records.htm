@@ -1,0 +1,57 @@
+<div class="col-xs-12 initiatives-results-count">
+    <p>{{ 'Showing' |_ }} {{ records.count() }} {{ 'of' |_ }} {{ totalCount }} {{ 'initiatives' |_ }}</p>
+</div>
+
+{% for record in records %}
+<div class="col-md-4 col-xs-12">
+    <a href="/project-initiatives/{{ record.slug }}" class="initiative-card" aria-label="View initiative: {{ record.title|striptags }}">
+        <div class="initiative-card-body">
+            <h3 class="initiative-card-title">{{ record.title }}</h3>
+            <p class="initiative-card-description">
+                {{ record.description|striptags|slice(0, 200) }}{% if record.description|striptags|length > 200 %}&hellip;{% endif %}
+            </p>
+        </div>
+        <div class="initiative-card-tags">
+            {% for type in record.types %}
+            <span class="initiative-tag">{{ type.title }}</span>
+            {% endfor %}
+        </div>
+    </a>
+</div>
+{% else %}
+<div class="col-xs-12">
+    <p class="no-results">{{ 'No initiatives found.' |_ }}</p>
+</div>
+{% endfor %}
+
+{% if records.lastPage > 1 %}
+<div class="col-xs-12">
+    <nav class="initiatives-pagination" aria-label="Pagination">
+        <ul>
+            {% if records.currentPage > 1 %}
+            <li>
+                <a href="javascript:void(0);" data-page="{{ records.currentPage - 1 }}" class="pagination-link" aria-label="Previous page">&laquo;</a>
+            </li>
+            {% endif %}
+
+            {% for i in 1..records.lastPage %}
+            <li>
+                <a href="javascript:void(0);"
+                   data-page="{{ i }}"
+                   class="pagination-link {% if i == records.currentPage %}active{% endif %}"
+                   aria-label="Page {{ i }}"
+                   {% if i == records.currentPage %}aria-current="page"{% endif %}>
+                    {{ i }}
+                </a>
+            </li>
+            {% endfor %}
+
+            {% if records.currentPage < records.lastPage %}
+            <li>
+                <a href="javascript:void(0);" data-page="{{ records.currentPage + 1 }}" class="pagination-link" aria-label="Next page">&raquo;</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endif %}

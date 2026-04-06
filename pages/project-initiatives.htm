@@ -1,0 +1,250 @@
+title = "Project initiatives"
+layout = "default"
+url = "/project-initiatives/:slug?|[a-zA-Z\-0-9]"
+
+[siteSearchInclude]
+
+[initiativesList]
+==
+{% component 'siteSearchInclude' %}
+
+{% if is_detail_page %}
+
+<section aria-labelledby="initiative-detail-heading">
+    <div class="container initiative-detail">
+        <nav aria-label="Breadcrumb">
+            <a href="/project-initiatives" class="go-back-link" aria-label="Back to initiatives">
+                &larr; {{ 'Back to initiatives' |_ }}
+            </a>
+        </nav>
+
+        <article class="initiative-single">
+            <div class="row">
+                <div class="col-md-8 col-xs-12">
+                    <h1 id="initiative-detail-heading">{{ initiative.title }}</h1>
+
+                    {% if initiative.description %}
+                    <div class="initiative-description">
+                        {{ initiative.description|raw }}
+                    </div>
+                    {% endif %}
+                </div>
+                <aside class="col-md-4 col-xs-12">
+                    {% if initiative.image %}
+                    <div class="initiative-image">
+                        <img src="{{ initiative.image.path }}" alt="{{ initiative.title|striptags }}">
+                    </div>
+                    {% endif %}
+                </aside>
+            </div>
+
+            <div class="initiative-meta">
+                <div class="row">
+                    {% if initiative.countries.count %}
+                    <div class="col-md-4 col-xs-6">
+                        <div class="meta-item">
+                            <h4>{{ 'Country' |_ }}</h4>
+                            <p>{% for country in initiative.countries %}{{ country.name }}{% if not loop.last %}, {% endif %}{% endfor %}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if initiative.regions.count %}
+                    <div class="col-md-4 col-xs-6">
+                        <div class="meta-item">
+                            <h4>{{ 'Region' |_ }}</h4>
+                            <p>{% for region in initiative.regions %}{{ region.title }}{% if not loop.last %}, {% endif %}{% endfor %}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if initiative.types.count %}
+                    <div class="col-md-4 col-xs-6">
+                        <div class="meta-item">
+                            <h4>{{ 'Type' |_ }}</h4>
+                            <p>{% for type in initiative.types %}{{ type.title }}{% if not loop.last %}, {% endif %}{% endfor %}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if initiative.approaches.count %}
+                    <div class="col-md-4 col-xs-6">
+                        <div class="meta-item">
+                            <h4>{{ 'Approach' |_ }}</h4>
+                            <p>{% for approach in initiative.approaches %}{{ approach.title }}{% if not loop.last %}, {% endif %}{% endfor %}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if initiative.landscapes.count %}
+                    <div class="col-md-4 col-xs-6">
+                        <div class="meta-item">
+                            <h4>{{ 'Landscape' |_ }}</h4>
+                            <p>{% for landscape in initiative.landscapes %}{{ landscape.title }}{% if not loop.last %}, {% endif %}{% endfor %}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if initiative.fundings.count %}
+                    <div class="col-md-4 col-xs-6">
+                        <div class="meta-item">
+                            <h4>{{ 'Funding' |_ }}</h4>
+                            <p>{% for funding in initiative.fundings %}{{ funding.title }}{% if not loop.last %}, {% endif %}{% endfor %}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if initiative.institution %}
+                    <div class="col-md-4 col-xs-6">
+                        <div class="meta-item">
+                            <h4>{{ 'Institution' |_ }}</h4>
+                            <p>{{ initiative.institution }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if initiative.website %}
+                    <div class="col-md-4 col-xs-6">
+                        <div class="meta-item">
+                            <h4>{{ 'Website' |_ }}</h4>
+                            <p><a href="{{ initiative.website }}" target="_blank" rel="noopener">{{ initiative.website }}</a></p>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if initiative.links %}
+            <div class="initiative-links">
+                <h4>{{ 'Links' |_ }}</h4>
+                <ul>
+                    {% for link in initiative.links %}
+                    <li>
+                        {% if link.link_url starts with 'http' %}
+                            <a href="{{ link.link_url }}" target="_blank" rel="noopener">{{ link.link_url }}</a>
+                        {% else %}
+                            {{ link.link_url }}
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </article>
+    </div>
+</section>
+
+{% else %}
+
+<section aria-labelledby="initiative-heading">
+    <div class="container initiative stakeholder-community">
+        <h1 id="initiative-heading" class="sr-only">Project Initiatives</h1>
+        <div class="record-search mb-2">
+            <form role="search" aria-label="Filter initiatives">
+                <div class="row">
+                    <div class="col-xs-12 search-field-container">
+                        <div class="search-field">
+                            <label for="searchInput" class="sr-only">Search initiatives</label>
+                            <select multiple id="searchInput" name="searchTerms" aria-label="Search initiatives">
+                                <option value="">{{'Search' |_}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-xs-12 start-md center-xs filter-fields-container">
+                        <div class="row between-md around-xs">
+                            <div class="col-md-12 col-xs-12 start-md center-xs">
+                                <div class="sort-field sort-dropdown">
+                                    <label for="sortCountry" class="sr-only">Filter by country</label>
+                                    <select id="sortCountry" name="sortCountry" aria-label="Filter by country">
+                                        <option value="0">{{'All countries' |_}}</option>
+                                        {% for country in available_countries %}
+                                        <option value="{{country.id}}">{{country.name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="sort-field sort-dropdown">
+                                    <label for="sortRegion" class="sr-only">Filter by region</label>
+                                    <select id="sortRegion" name="sortRegion" aria-label="Filter by region">
+                                        <option value="0">{{'All regions' |_}}</option>
+                                        {% for region in regions %}
+                                        <option value="{{region.id}}">{{region.title}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="sort-field sort-dropdown">
+                                    <label for="sortType" class="sr-only">Filter by type</label>
+                                    <select id="sortType" name="sortType" aria-label="Filter by type">
+                                        <option value="0">{{'All types' |_}}</option>
+                                        {% for type in types %}
+                                        <option value="{{type.id}}">{{type.title}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row between-md around-xs">
+                            <div class="col-md-12 col-xs-12 start-md center-xs">
+                                <div class="sort-field sort-dropdown">
+                                    <label for="sortLandscape" class="sr-only">Filter by landscape</label>
+                                    <select id="sortLandscape" name="sortLandscape" aria-label="Filter by landscape">
+                                        <option value="0">{{'All landscapes' |_}}</option>
+                                        {% for landscape in landscapes %}
+                                        <option value="{{landscape.id}}">{{landscape.title}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="sort-field sort-dropdown">
+                                    <label for="sortFunding" class="sr-only">Filter by funding</label>
+                                    <select id="sortFunding" name="sortFunding" aria-label="Filter by funding">
+                                        <option value="0">{{'All fundings' |_}}</option>
+                                        {% for funding in fundings %}
+                                        <option value="{{funding.id}}">{{funding.title}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="sort-field sort-dropdown">
+                                    <label for="sortApproach" class="sr-only">Filter by approach</label>
+                                    <select id="sortApproach" name="sortApproach" aria-label="Filter by approach">
+                                        <option value="0">{{'All approaches' |_}}</option>
+                                        {% for approach in approaches %}
+                                        <option value="{{approach.id}}">{{approach.title}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-12 end-md center-xs filter_buttons_container">
+                        <div class="clear-filter">
+                            <a id="clearFilter"
+                               href="javascript:void(0);"
+                               role="button"
+                               aria-label="Clear all filters">
+                                {{'Clear filters' |_}}
+                            </a>
+                        </div>
+                        <div class="apply-filter">
+                            <a id="applyFilter"
+                               class="btn btn-primary"
+                               href="javascript:void(0);"
+                               role="button"
+                               aria-label="Apply selected filters">
+                                {{'Apply filter' |_}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="row"
+             id="recordsContainer"
+             role="region"
+             aria-live="polite"
+             aria-label="initiative results">
+            {% partial 'initiatives_records' %}
+        </div>
+    </div>
+</section>
+
+{% endif %}
