@@ -4,6 +4,15 @@
     padding-top: 20px;
     padding-bottom: 60px;
 
+    .breakpoint-large-down({
+        padding-left: 20px;
+        padding-right: 20px;
+    });
+
+    .container{
+        padding: 0;
+    }
+
     .initiative-form-nav {
         display: flex;
         align-items: center;
@@ -58,6 +67,9 @@
         display: flex;
         flex-direction: column;
         gap: 35px;
+        .breakpoint-large-down({
+            max-width: calc(~'100% - 70px');
+        });
     }
 
     .initiative-form-section-title {
