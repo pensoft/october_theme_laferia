@@ -1,14 +1,36 @@
-<div class="col-xs-12 initiatives-results-count">
-    <p>{{ 'Showing' |_ }} {{ records.count() }} {{ 'of' |_ }} {{ totalCount }} {{ 'initiatives' |_ }}</p>
-</div>
+<!--<div class="col-xs-12 initiatives-results-count">-->
+<!--    <p>{{ 'Showing' |_ }} {{ records.count() }} {{ 'of' |_ }} {{ totalCount }} {{ 'initiatives' |_ }}</p>-->
+<!--</div>-->
 
 {% for record in records %}
-<div class="col-md-4 col-xs-12">
+<div class="col-md-4 col-xs-12 initiative-card-wrapper" {% if loop.index > 3 %}style="display:none;"{% endif %}>
     <a href="/project-initiatives/{{ record.slug }}" class="initiative-card" aria-label="View initiative: {{ record.title|striptags }}">
+        <span class="initiative-card-arrow">
+            <img src="{{ 'assets/images/arrow-up-icon.svg'|theme }}" alt="" aria-hidden="true">
+        </span>
+        <div class="initiative-card-hero">
+            {% if record.image %}
+            <img src="{{ record.image.path }}" alt="" class="initiative-card-hero-img">
+            {% endif %}
+            <div class="initiative-card-hero-overlay"></div>
+            <div class="initiative-card-hero-text">
+                <h3 class="initiative-card-title">{{ record.title }}</h3>
+                {% if record.countries.count %}
+                <p class="initiative-card-country">{% for country in record.countries %}{{ country.name }}{% if not loop.last %}, {% endif %}{% endfor %}</p>
+                {% endif %}
+            </div>
+        </div>
         <div class="initiative-card-body">
-            <h3 class="initiative-card-title">{{ record.title }}</h3>
+            {% if record.landscapes.count %}
+            <div class="initiative-card-landscape-row">
+                <span class="initiative-card-landscape-label">{{ 'Landscape Feature' |_ }}</span>
+                {% for landscape in record.landscapes %}
+                <span class="initiative-card-landscape-type">{{ landscape.title }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
             <p class="initiative-card-description">
-                {{ record.description|striptags|slice(0, 200) }}{% if record.description|striptags|length > 200 %}&hellip;{% endif %}
+                {{ record.description|striptags|slice(0, 85) }}{% if record.description|striptags|length > 85 %}&hellip;{% endif %}
             </p>
         </div>
         <div class="initiative-card-tags">
@@ -24,34 +46,10 @@
 </div>
 {% endfor %}
 
-{% if records.lastPage > 1 %}
-<div class="col-xs-12">
-    <nav class="initiatives-pagination" aria-label="Pagination">
-        <ul>
-            {% if records.currentPage > 1 %}
-            <li>
-                <a href="javascript:void(0);" data-page="{{ records.currentPage - 1 }}" class="pagination-link" aria-label="Previous page">&laquo;</a>
-            </li>
-            {% endif %}
-
-            {% for i in 1..records.lastPage %}
-            <li>
-                <a href="javascript:void(0);"
-                   data-page="{{ i }}"
-                   class="pagination-link {% if i == records.currentPage %}active{% endif %}"
-                   aria-label="Page {{ i }}"
-                   {% if i == records.currentPage %}aria-current="page"{% endif %}>
-                    {{ i }}
-                </a>
-            </li>
-            {% endfor %}
-
-            {% if records.currentPage < records.lastPage %}
-            <li>
-                <a href="javascript:void(0);" data-page="{{ records.currentPage + 1 }}" class="pagination-link" aria-label="Next page">&raquo;</a>
-            </li>
-            {% endif %}
-        </ul>
-    </nav>
+{% if records|length > 3 %}
+<div class="col-xs-12 see-more-container">
+    <a href="javascript:void(0);" id="seeMoreBtn" class="btn btn-primary" role="button">
+        {{ 'See more' |_ }} +
+    </a>
 </div>
 {% endif %}

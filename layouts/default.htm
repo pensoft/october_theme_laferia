@@ -54,6 +54,12 @@ update_selector = "#gdpr-reload"
     <script src="{{ 'assets/js/filter-initiatives.js'|theme }}"></script>
     {% endif %}
 
+    {% if this.page.id == 'add-initiative' %}
+    <link rel="stylesheet" href="{{ 'assets/css/selectize.default.min.css'|theme }}">
+    <script src="{{ 'assets/js/selectize.min.js'|theme }}"></script>
+    <script src="{{ 'assets/js/initiative-form.js'|theme }}"></script>
+    {% endif %}
+
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

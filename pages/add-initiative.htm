@@ -1,0 +1,154 @@
+url = "/add-initiative"
+layout = "default"
+title = "Add Initiative"
+
+[initiativeForm]
+
+[session]
+security = "user"
+redirect = "login"
+==
+{% component 'session' %}
+
+<section class="add-initiative-page">
+    <div class="container">
+        <nav class="initiative-form-nav">
+            <a href="/project-initiatives" class="prev-project-link">
+                &lsaquo; {{ 'All Initiatives' |_ }}
+            </a>
+<!--            <span class="initiative-form-nav-current">{{ 'Add project' |_ }}</span>-->
+        </nav>
+
+<!--        <div class="initiative-form-intro">-->
+<!--            <p>{{ 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida facilisis ligula, tempor iaculis nisi finibus hendrerit. Etiam blandit scelerisque ex, ac dictum sapien porttitor posuere. Vestibulum cursus lorem sed ipsum sodales, id maximus turpis suscipit. Proin orci mauris, fermentum eget venenatis in, tempus in eros. Fusce sed ex non eros consectetur congue. Etiam turpis risus, pellentesque sit amet.' |_ }}</p>-->
+<!--        </div>-->
+
+        <p class="initiative-form-required">{{ '*Required' |_ }}</p>
+
+        <form
+            data-request="initiativeForm::onSubmit"
+            data-request-flash
+            class="initiative-form"
+            enctype="multipart/form-data"
+        >
+            <h2 class="initiative-form-section-title">{{ 'Project information' |_ }}</h2>
+
+            <div class="initiative-form-group">
+                <label for="formTitle"><span class="initiative-form-required">*</span> {{ 'Please, fill in the name or give a short description of the initiative' |_ }}</label>
+                <input type="text" id="formTitle" name="title" class="initiative-form-input" placeholder="{{ 'Add text' |_ }}" required>
+            </div>
+
+            <div class="initiative-form-group">
+                <div class="checkbox-dropdown">
+                    <div class="checkbox-dropdown-header">
+                        <span class="checkbox-dropdown-label">{{ 'Choose a country' |_ }}</span>
+                        <img src="{{ 'assets/images/chevron-down.svg'|theme }}" alt="" class="checkbox-dropdown-arrow">
+                    </div>
+                    <div class="checkbox-dropdown-body">
+                        {% for country in countries %}
+                        <label class="checkbox-dropdown-option">
+                            <input type="checkbox" name="countries[]" value="{{ country.id }}">
+                            <span class="checkbox-custom"></span>
+                            <span class="checkbox-label-text">{{ country.name }}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="initiative-form-group">
+                <div class="checkbox-dropdown">
+                    <div class="checkbox-dropdown-header">
+                        <span class="checkbox-dropdown-label">{{ 'European region' |_ }}</span>
+                        <img src="{{ 'assets/images/chevron-down.svg'|theme }}" alt="" class="checkbox-dropdown-arrow">
+                    </div>
+                    <div class="checkbox-dropdown-body">
+                        {% for region in regions %}
+                        <label class="checkbox-dropdown-option">
+                            <input type="checkbox" name="regions[]" value="{{ region.id }}">
+                            <span class="checkbox-custom"></span>
+                            <span class="checkbox-label-text">{{ region.title }}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="initiative-form-group">
+                <div class="checkbox-dropdown">
+                    <div class="checkbox-dropdown-header">
+                        <span class="checkbox-dropdown-label">{{ 'What type of agricultural area is the initiative connected to?' |_ }}</span>
+                        <img src="{{ 'assets/images/chevron-down.svg'|theme }}" alt="" class="checkbox-dropdown-arrow">
+                    </div>
+                    <div class="checkbox-dropdown-body">
+                        {% for type in types %}
+                        <label class="checkbox-dropdown-option">
+                            <input type="checkbox" name="types[]" value="{{ type.id }}">
+                            <span class="checkbox-custom"></span>
+                            <span class="checkbox-label-text">{{ type.title }}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="initiative-form-group">
+                <div class="checkbox-dropdown">
+                    <div class="checkbox-dropdown-header">
+                        <span class="checkbox-dropdown-label">{{ 'Landscape features involved' |_ }}</span>
+                        <img src="{{ 'assets/images/chevron-down.svg'|theme }}" alt="" class="checkbox-dropdown-arrow">
+                    </div>
+                    <div class="checkbox-dropdown-body">
+                        {% for landscape in landscapes %}
+                        <label class="checkbox-dropdown-option">
+                            <input type="checkbox" name="landscapes[]" value="{{ landscape.id }}">
+                            <span class="checkbox-custom"></span>
+                            <span class="checkbox-label-text">{{ landscape.title }}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="initiative-form-group">
+                <div class="checkbox-dropdown">
+                    <div class="checkbox-dropdown-header">
+                        <span class="checkbox-dropdown-label">{{ 'Type of funding' |_ }}</span>
+                        <img src="{{ 'assets/images/chevron-down.svg'|theme }}" alt="" class="checkbox-dropdown-arrow">
+                    </div>
+                    <div class="checkbox-dropdown-body">
+                        {% for funding in fundings %}
+                        <label class="checkbox-dropdown-option">
+                            <input type="checkbox" name="fundings[]" value="{{ funding.id }}">
+                            <span class="checkbox-custom"></span>
+                            <span class="checkbox-label-text">{{ funding.title }}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="initiative-form-group">
+                <div class="checkbox-dropdown">
+                    <div class="checkbox-dropdown-header">
+                        <span class="checkbox-dropdown-label">{{ 'Approach of initiative' |_ }}</span>
+                        <img src="{{ 'assets/images/chevron-down.svg'|theme }}" alt="" class="checkbox-dropdown-arrow">
+                    </div>
+                    <div class="checkbox-dropdown-body">
+                        {% for approach in approaches %}
+                        <label class="checkbox-dropdown-option">
+                            <input type="checkbox" name="approaches[]" value="{{ approach.id }}">
+                            <span class="checkbox-custom"></span>
+                            <span class="checkbox-label-text">{{ approach.title }}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="initiative-form-actions">
+                <button type="submit" class="btn btn-primary">{{ 'Submit initiative' |_ }}</button>
+            </div>
+        </form>
+    </div>
+</section>

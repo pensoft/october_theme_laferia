@@ -1,4 +1,6 @@
-var currentPage = 1;
+var VISIBLE_STEP = 3;
+var visibleCount = VISIBLE_STEP;
+var allExpanded = false;
 
 $(document).ready(function() {
     var search_i = $('#searchInput').selectize({
@@ -17,20 +19,17 @@ $(document).ready(function() {
         loadThrottle: 300,
         noResultsText: 'No results found',
         onChange: function (value) {
-            currentPage = 1;
             updateInitiativesList();
         }
     });
 
     var select = $('#sortCountry, #sortRegion, #sortType, #sortLandscape, #sortFunding, #sortApproach').selectize({
         onChange: function(value) {
-            currentPage = 1;
             updateInitiativesList();
         }
     });
 
     $('#applyFilter').on('click', function() {
-        currentPage = 1;
         updateInitiativesList();
     });
 
@@ -42,16 +41,35 @@ $(document).ready(function() {
             select[i].selectize.setValue(0);
         }
 
-        currentPage = 1;
         updateInitiativesList();
     });
 
-    // Pagination click handler
-    $(document).on('click', '.pagination-link', function(e) {
+    // See more / See less click handler
+    $(document).on('click', '#seeMoreBtn', function(e) {
         e.preventDefault();
-        currentPage = $(this).data('page');
-        updateInitiativesList();
-        $('html, body').animate({ scrollTop: $('#recordsContainer').offset().top - 20 }, 300);
+        var cards = $('#recordsContainer .initiative-card-wrapper');
+        var totalCards = cards.length;
+
+        if (allExpanded) {
+            // Collapse back to first 3
+            cards.slice(VISIBLE_STEP).slideUp(400, function() {
+                visibleCount = VISIBLE_STEP;
+            });
+            visibleCount = VISIBLE_STEP;
+            allExpanded = false;
+            $(this).html('See more +');
+            $('html, body').animate({ scrollTop: $('#recordsContainer').offset().top - 20 }, 400);
+        } else {
+            // Show next 3
+            var prevVisible = visibleCount;
+            visibleCount = Math.min(visibleCount + VISIBLE_STEP, totalCards);
+            cards.slice(prevVisible, visibleCount).slideDown(400);
+
+            if (visibleCount >= totalCards) {
+                allExpanded = true;
+                $(this).html('See less &minus;');
+            }
+        }
     });
 
     var urlParams = window.location.search.substring(1).split('&');
@@ -77,6 +95,10 @@ function updateInitiativesList() {
     var sortApproach = $('#sortApproach').val();
     var searchTerm = $('#searchInput').val();
 
+    // Reset visible count on new search/filter
+    visibleCount = VISIBLE_STEP;
+    allExpanded = false;
+
     $.request('initiativesList::onSearchRecords', {
         data: {
             searchTerms: searchTerm,
@@ -85,8 +107,7 @@ function updateInitiativesList() {
             sortType: sortType,
             sortApproach: sortApproach,
             sortLandscape: sortLandscape,
-            sortFunding: sortFunding,
-            page: currentPage
+            sortFunding: sortFunding
         },
         update: { 'initiatives_records': '#recordsContainer' }
     });

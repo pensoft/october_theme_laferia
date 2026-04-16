@@ -1,0 +1,313 @@
+/* Add Initiative - Form Page */
+
+.add-initiative-page {
+    padding-top: 20px;
+    padding-bottom: 60px;
+
+    .initiative-form-nav {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 25px;
+
+        .prev-project-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: #68C3D4;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .initiative-form-nav-current {
+            font-family: 'Work Sans', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            color: @heading-text-color;
+        }
+    }
+
+    .initiative-form-intro {
+        margin-bottom: 20px;
+
+        p {
+            font-family: 'Work Sans', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 165%;
+            color: #082538;
+        }
+    }
+
+    .initiative-form-required {
+        font-family: 'Work Sans', sans-serif;
+        font-weight: 500;
+        font-size: 14px;
+        color: #E8734A;
+        margin-bottom: 30px;
+    }
+
+    .initiative-form {
+        background: #ffffff;
+        width: 1140px;
+        max-width: 100%;
+        border-radius: 8px;
+        padding: 35px;
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+    }
+
+    .initiative-form-section-title {
+        font-family: 'Sofia Sans Condensed', sans-serif;
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 135%;
+        color: #082538;
+        margin-bottom: 0;
+        text-align: left;
+    }
+
+    .initiative-form-group {
+        margin-bottom: 0;
+
+        label {
+            display: block;
+            font-family: 'Work Sans', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 155%;
+            color: #082538;
+            margin-bottom: 8px;
+        }
+    }
+
+    .initiative-form-input,
+    .initiative-form-textarea {
+        width: calc(~'100% - 40px');
+        background: #ECF2EB;
+        border: none;
+        border-radius: 8px;
+        padding: 16px 20px;
+        font-family: 'Work Sans', sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 155%;
+        color: #082538;
+        outline: none;
+        transition: box-shadow 0.2s ease;
+
+        &::placeholder {
+            color: rgba(8, 37, 56, 0.4);
+        }
+
+        &:focus {
+            box-shadow: 0 0 0 2px rgba(79, 173, 66, 0.3);
+        }
+    }
+
+    .initiative-form-textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+
+    .initiative-form-select {
+        width: 100%;
+    }
+
+    .initiative-form-file {
+        width: 100%;
+        background: #ECF2EB;
+        border: none;
+        border-radius: 8px;
+        padding: 16px 20px;
+        font-family: 'Work Sans', sans-serif;
+        font-size: 14px;
+        color: #082538;
+        cursor: pointer;
+    }
+
+    .initiative-form-actions {
+        margin-top: 30px;
+
+        .btn-primary {
+            padding: 12px 32px;
+            font-family: 'Work Sans', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            border-radius: 8px;
+        }
+    }
+
+    // Selectize overrides for form dropdowns
+    .initiative-form-group {
+        .selectize-control {
+            width: 100%;
+        }
+
+        .selectize-input {
+            background: #ECF2EB !important;
+            border: none !important;
+            border-radius: 8px !important;
+            padding: 14px 40px 14px 20px !important;
+            font-family: 'Work Sans', sans-serif !important;
+            font-weight: 500 !important;
+            font-size: 14px !important;
+            line-height: 155% !important;
+            color: #082538 !important;
+            box-shadow: none !important;
+            min-height: 50px;
+
+            &.focus {
+                box-shadow: 0 0 0 2px rgba(79, 173, 66, 0.3) !important;
+            }
+        }
+
+        .selectize-control.single .selectize-input::after {
+            content: '' !important;
+            display: block !important;
+            position: absolute !important;
+            right: 16px !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            width: 12px !important;
+            height: 7px !important;
+            background: url('../../assets/images/chevron-down.svg') no-repeat center !important;
+            background-size: contain !important;
+            border: none !important;
+            margin: 0 !important;
+        }
+
+        .selectize-dropdown {
+            background: #ECF2EB !important;
+            border: none !important;
+            border-radius: 0 0 8px 8px !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+        }
+
+        .selectize-dropdown-content {
+            .option {
+                padding: 12px 20px;
+                font-family: 'Work Sans', sans-serif;
+                font-size: 14px;
+                color: rgba(8, 37, 56, 0.5);
+
+                &.active,
+                &.selected {
+                    background: rgba(79, 173, 66, 0.1) !important;
+                    color: #082538 !important;
+                    font-weight: 600;
+                }
+            }
+        }
+
+        .item[data-value=""] {
+            color: #082538;
+            font-weight: 500;
+        }
+    }
+
+    // Checkbox dropdown panels
+    .checkbox-dropdown {
+        border-radius: 8px;
+        overflow: hidden;
+
+        .checkbox-dropdown-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #ECF2EB;
+            padding: 14px 20px;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 8px;
+            transition: border-radius 0.2s ease;
+        }
+
+        &.open .checkbox-dropdown-header {
+            border-radius: 8px 8px 0 0;
+        }
+
+        .checkbox-dropdown-label {
+            font-family: 'Work Sans', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 155%;
+            color: #082538;
+        }
+
+        .checkbox-dropdown-arrow {
+            width: 12px;
+            height: 7px;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        &.open .checkbox-dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .checkbox-dropdown-body {
+            display: none;
+            background: #ECF2EB;
+            padding: 8px 20px 16px;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .checkbox-dropdown-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            cursor: pointer;
+            margin-bottom: 0;
+            font-family: 'Work Sans', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            color: rgba(8, 37, 56, 0.5);
+            transition: color 0.15s ease;
+
+            &:hover {
+                color: #082538;
+            }
+
+            input[type="checkbox"] {
+                display: none;
+            }
+
+            .checkbox-custom {
+                width: 20px;
+                height: 20px;
+                border: 2px solid rgba(8, 37, 56, 0.25);
+                border-radius: 4px;
+                flex-shrink: 0;
+                position: relative;
+                transition: background 0.15s ease, border-color 0.15s ease;
+            }
+
+            input[type="checkbox"]:checked ~ .checkbox-custom {
+                background: #4FAD42;
+                border-color: #4FAD42;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    left: 5px;
+                    top: 1px;
+                    width: 6px;
+                    height: 11px;
+                    border: solid white;
+                    border-width: 0 2px 2px 0;
+                    transform: rotate(45deg);
+                }
+            }
+
+            input[type="checkbox"]:checked ~ .checkbox-label-text {
+                color: #082538;
+                font-weight: 600;
+            }
+        }
+    }
+}
