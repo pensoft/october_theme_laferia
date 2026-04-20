@@ -3,6 +3,7 @@ layout = "default"
 title = "Add Initiative"
 
 [initiativeForm]
+recipientEmail = "kkaleva@pensoft.net"
 ==
 
 <section class="add-initiative-page">
@@ -11,44 +12,48 @@ title = "Add Initiative"
             <a href="/project-initiatives" class="prev-project-link">
                 &lsaquo; {{ 'All Initiatives' |_ }}
             </a>
-<!--            <span class="initiative-form-nav-current">{{ 'Add project' |_ }}</span>-->
         </nav>
 
-<!--        <div class="initiative-form-intro">-->
-<!--            <p>{{ 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida facilisis ligula, tempor iaculis nisi finibus hendrerit. Etiam blandit scelerisque ex, ac dictum sapien porttitor posuere. Vestibulum cursus lorem sed ipsum sodales, id maximus turpis suscipit. Proin orci mauris, fermentum eget venenatis in, tempus in eros. Fusce sed ex non eros consectetur congue. Etiam turpis risus, pellentesque sit amet.' |_ }}</p>-->
-<!--        </div>-->
+        {% flash %}
+            <div class="initiative-flash initiative-flash-{{ type }}">
+                {{ message }}
+            </div>
+        {% endflash %}
 
         <p class="initiative-form-required">{{ '*Required' |_ }}</p>
+        <div id="initiative-form-flash"></div>
 
         <form
-            data-request="initiativeForm::onSubmit"
-            data-request-flash
+            id="initiativeForm"
             class="initiative-form"
             enctype="multipart/form-data"
         >
+            <h2 class="initiative-form-section-title">{{ 'Contact information' |_ }}</h2>
+
+            <div class="initiative-form-group">
+                <label for="formName"><span class="initiative-form-required">*</span> {{ 'Full name' |_ }}</label>
+                <input type="text" id="formName" name="submitter_name" class="initiative-form-input" placeholder="{{ 'Your full name' |_ }}">
+            </div>
+
+            <div class="initiative-form-group">
+                <label for="formEmail"><span class="initiative-form-required">*</span> {{ 'Email' |_ }}</label>
+                <input type="email" id="formEmail" name="submitter_email" class="initiative-form-input" placeholder="{{ 'Your email address' |_ }}">
+            </div>
+
             <h2 class="initiative-form-section-title">{{ 'Project information' |_ }}</h2>
 
             <div class="initiative-form-group">
                 <label for="formTitle"><span class="initiative-form-required">*</span> {{ 'Please, fill in the name or give a short description of the initiative' |_ }}</label>
-                <input type="text" id="formTitle" name="title" class="initiative-form-input" placeholder="{{ 'Add text' |_ }}" required>
+                <input type="text" id="formTitle" name="title" class="initiative-form-input" placeholder="{{ 'Add text' |_ }}">
             </div>
 
             <div class="initiative-form-group">
-                <div class="checkbox-dropdown">
-                    <div class="checkbox-dropdown-header">
-                        <span class="checkbox-dropdown-label">{{ 'Choose a country' |_ }}</span>
-                        <img src="{{ 'assets/images/chevron-down.svg'|theme }}" alt="" class="checkbox-dropdown-arrow">
-                    </div>
-                    <div class="checkbox-dropdown-body">
-                        {% for country in countries %}
-                        <label class="checkbox-dropdown-option">
-                            <input type="checkbox" name="countries[]" value="{{ country.id }}">
-                            <span class="checkbox-custom"></span>
-                            <span class="checkbox-label-text">{{ country.name }}</span>
-                        </label>
-                        {% endfor %}
-                    </div>
-                </div>
+                <select id="formCountry" name="countries[]" class="initiative-form-select">
+                    <option value="">{{ 'Choose a country' |_ }}</option>
+                    {% for country in countries %}
+                    <option value="{{ country.id }}">{{ country.name }}</option>
+                    {% endfor %}
+                </select>
             </div>
 
             <div class="initiative-form-group">
@@ -141,8 +146,12 @@ title = "Add Initiative"
                 </div>
             </div>
 
+            <div class="initiative-form-group initiative-recaptcha">
+                <div class="g-recaptcha" data-sitekey="{{ recaptchaSiteKey }}"></div>
+            </div>
+
             <div class="initiative-form-actions">
-                <button type="submit" class="btn btn-primary">{{ 'Submit initiative' |_ }}</button>
+                <button type="button" id="submitInitiativeBtn" class="btn btn-primary">{{ 'Submit initiative' |_ }}</button>
             </div>
         </form>
     </div>

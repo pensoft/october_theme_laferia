@@ -38,13 +38,23 @@
         right: 0;
         width: 45px;
         height: 45px;
+        border-radius: 3px;
+        background: #4FAD42;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         z-index: 2;
+        transition: background-color 0.25s ease;
 
         img {
             width: 45px;
             height: 45px;
             display: block;
         }
+    }
+
+    &:hover .initiative-card-arrow {
+        background: #45973A;
     }
 
     .initiative-card-hero {
@@ -309,12 +319,16 @@
         .sort-field {
             &.sort-dropdown {
                 width: 260px;
+
+                > select {
+                    display: none !important;
+                }
             }
 
             .selectize-input {
                 border-radius: 25px !important;
                 padding: 10px 36px 10px 20px !important;
-                background: #ECF2EB !important;
+                background: #F7F7F7 !important;
                 font-family: "Work Sans", sans-serif !important;
                 font-weight: 500 !important;
                 font-size: 12px !important;
@@ -324,7 +338,11 @@
                 color: #313144 !important;
                 max-width: 260px;
                 height: 43px;
-                //max-height: 43px;
+                transition: background-color 0.25s ease !important;
+
+                &:hover {
+                    background: #ECF2EB !important;
+                }
             }
 
             .item[data-value="0"] {
@@ -332,7 +350,20 @@
             }
 
             .selectize-control.single .selectize-input {
-                background-color: #ECF2EB !important;
+                background-color: #F7F7F7 !important;
+
+                &:hover {
+                    background-color: #ECF2EB !important;
+                }
+
+                input[type="text"] {
+                    position: absolute !important;
+                    opacity: 0 !important;
+                    width: 0 !important;
+                    height: 0 !important;
+                    padding: 0 !important;
+                    margin: 0 !important;
+                }
             }
 
             .selectize-control.single .selectize-input::after {
@@ -351,21 +382,46 @@
             }
 
             .selectize-dropdown {
-                border-radius: 12px !important;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+                background: #F7F7F7 !important;
+                border: none !important;
+                border-radius: 0 0 12px 12px !important;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+                opacity: 0;
+                transform: translateY(-5px);
+                animation: dropdownSlideIn 0.25s ease forwards;
             }
 
             .dropdown-active {
-                border-bottom-left-radius: 12px !important;
-                border-bottom-right-radius: 12px !important;
+                border-bottom-left-radius: 0 !important;
+                border-bottom-right-radius: 0 !important;
             }
 
             .selectize-dropdown-content {
-                border-top-left-radius: 12px !important;
-                border-top-right-radius: 12px !important;
-                border-bottom-left-radius: 12px !important;
-                border-bottom-right-radius: 12px !important;
+                background: #F7F7F7 !important;
+                border-radius: 0 0 12px 12px !important;
                 text-align: left;
+
+                .option {
+                    padding: 10px 20px;
+                    font-family: 'Work Sans', sans-serif;
+                    font-weight: 500;
+                    font-size: 12px;
+                    line-height: 18px;
+                    letter-spacing: 0.01em;
+                    color: #313144;
+                    transition: background-color 0.15s ease;
+
+                    &.active,
+                    &.selected {
+                        background: #ECF2EB !important;
+                        color: #313144 !important;
+                        font-weight: 600;
+                    }
+
+                    &:hover {
+                        background: #ECF2EB !important;
+                    }
+                }
             }
         }
 
@@ -395,8 +451,11 @@
             line-height: 18px;
             color: #313144;
 
+            &.has-items {
+                padding-left: 40px !important;
+            }
 
-        .highlight {
+            .highlight {
                 background-color: @button-background-color !important;
                 color: @white-color !important;
             }
@@ -406,6 +465,17 @@
             padding-left: 25px!important;
             min-width: fit-content;
         }
+    }
+}
+
+@keyframes dropdownSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 

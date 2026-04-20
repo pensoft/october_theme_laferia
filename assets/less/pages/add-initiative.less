@@ -13,6 +13,40 @@
         padding: 0;
     }
 
+    .initiative-flash {
+        padding: 16px 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-family: 'Work Sans', sans-serif;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 155%;
+
+        &.initiative-flash-success {
+            background: rgba(79, 173, 66, 0.12);
+            color: #2d7a25;
+            border: 1px solid rgba(79, 173, 66, 0.3);
+        }
+
+        &.initiative-flash-error {
+            background: rgba(232, 115, 74, 0.12);
+            color: #c44b1a;
+            border: 1px solid rgba(232, 115, 74, 0.3);
+        }
+
+        &.initiative-flash-warning {
+            background: rgba(255, 193, 7, 0.12);
+            color: #856404;
+            border: 1px solid rgba(255, 193, 7, 0.3);
+        }
+
+        &.initiative-flash-info {
+            background: rgba(104, 195, 212, 0.12);
+            color: #1a6d7d;
+            border: 1px solid rgba(104, 195, 212, 0.3);
+        }
+    }
+
     .initiative-form-nav {
         display: flex;
         align-items: center;
@@ -99,7 +133,7 @@
     .initiative-form-input,
     .initiative-form-textarea {
         width: calc(~'100% - 40px');
-        background: #ECF2EB;
+        background: #F7F7F7;
         border: none;
         border-radius: 8px;
         padding: 16px 20px;
@@ -109,14 +143,25 @@
         line-height: 155%;
         color: #082538;
         outline: none;
-        transition: box-shadow 0.2s ease;
+        //transition: box-shadow 0.2s ease;
 
         &::placeholder {
             color: rgba(8, 37, 56, 0.4);
         }
 
         &:focus {
-            box-shadow: 0 0 0 2px rgba(79, 173, 66, 0.3);
+            //box-shadow: 0 0 0 2px rgba(79, 173, 66, 0.3);
+        }
+
+        &.input-error {
+            box-shadow: 0 0 0 2px rgba(232, 115, 74, 0.6);
+        }
+    }
+
+    .initiative-recaptcha {
+        &.input-error .g-recaptcha > div {
+            border: 2px solid rgba(232, 115, 74, 0.6);
+            border-radius: 4px;
         }
     }
 
@@ -131,7 +176,7 @@
 
     .initiative-form-file {
         width: 100%;
-        background: #ECF2EB;
+        background: #F7F7F7;
         border: none;
         border-radius: 8px;
         padding: 16px 20px;
@@ -160,7 +205,7 @@
         }
 
         .selectize-input {
-            background: #ECF2EB !important;
+            background: #F7F7F7 !important;
             border: none !important;
             border-radius: 8px !important;
             padding: 14px 40px 14px 20px !important;
@@ -173,7 +218,7 @@
             min-height: 50px;
 
             &.focus {
-                box-shadow: 0 0 0 2px rgba(79, 173, 66, 0.3) !important;
+                //box-shadow: 0 0 0 2px rgba(79, 173, 66, 0.3) !important;
             }
         }
 
@@ -193,10 +238,10 @@
         }
 
         .selectize-dropdown {
-            background: #ECF2EB !important;
+            background: #F7F7F7 !important;
             border: none !important;
             border-radius: 0 0 8px 8px !important;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+            //box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
         }
 
         .selectize-dropdown-content {
@@ -208,7 +253,7 @@
 
                 &.active,
                 &.selected {
-                    background: rgba(79, 173, 66, 0.1) !important;
+                    background: #ECF2EB !important;
                     color: #082538 !important;
                     font-weight: 600;
                 }
@@ -230,7 +275,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #ECF2EB;
+            background: #F7F7F7;
             padding: 14px 20px;
             cursor: pointer;
             user-select: none;
@@ -263,8 +308,7 @@
 
         .checkbox-dropdown-body {
             display: none;
-            background: #ECF2EB;
-            padding: 8px 20px 16px;
+            background: #F7F7F7;
             border-radius: 0 0 8px 8px;
         }
 
@@ -272,7 +316,6 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 10px 0;
             cursor: pointer;
             margin-bottom: 0;
             font-family: 'Work Sans', sans-serif;
@@ -280,9 +323,12 @@
             font-size: 14px;
             color: rgba(8, 37, 56, 0.5);
             transition: color 0.15s ease;
+            padding: 8px 20px 8px;
 
             &:hover {
                 color: #082538;
+                background: #ECF2EB;
+                font-weight: 600;
             }
 
             input[type="checkbox"] {
