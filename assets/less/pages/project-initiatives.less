@@ -334,11 +334,17 @@
                 font-size: 12px !important;
                 line-height: 18px !important;
                 letter-spacing: 0.01em !important;
-                vertical-align: middle;
                 color: #313144 !important;
                 max-width: 260px;
-                height: 43px;
+                min-height: 43px;
                 transition: background-color 0.25s ease !important;
+
+                > .item {
+                    display: flex !important;
+                    align-items: center !important;
+                    height: 100%;
+                    white-space: normal !important;
+                }
 
                 &:hover {
                     background: #ECF2EB !important;
@@ -356,13 +362,15 @@
                     background-color: #ECF2EB !important;
                 }
 
-                input[type="text"] {
+                input {
                     position: absolute !important;
                     opacity: 0 !important;
                     width: 0 !important;
                     height: 0 !important;
                     padding: 0 !important;
                     margin: 0 !important;
+                    overflow: hidden !important;
+                    border: none !important;
                 }
             }
 
@@ -451,11 +459,8 @@
             line-height: 18px;
             color: #313144;
 
-            &.has-items {
-                padding-left: 40px !important;
-            }
 
-            .highlight {
+        .highlight {
                 background-color: @button-background-color !important;
                 color: @white-color !important;
             }
