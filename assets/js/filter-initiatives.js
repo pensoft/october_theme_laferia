@@ -24,6 +24,16 @@ $(document).ready(function() {
     });
 
     var select = $('#sortCountry, #sortRegion, #sortType, #sortLandscape, #sortFunding, #sortApproach').selectize({
+        onDropdownOpen: function() {
+            var currentId = this.$input.attr('id');
+            // Close all other filter dropdowns
+            for (var i = 0; i < select.length; i++) {
+                var s = select[i].selectize;
+                if (s.$input.attr('id') !== currentId) {
+                    s.close();
+                }
+            }
+        },
         onChange: function(value) {
             updateInitiativesList();
         }

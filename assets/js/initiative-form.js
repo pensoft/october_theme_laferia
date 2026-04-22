@@ -1,4 +1,19 @@
 $(document).ready(function() {
+    // Initialize CKEditor on description field
+    if (typeof CKEDITOR !== 'undefined' && document.getElementById('formDescription')) {
+        CKEDITOR.replace('formDescription', {
+            toolbar: [
+                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline'] },
+                { name: 'paragraph', items: ['NumberedList', 'BulletedList'] },
+                { name: 'links', items: ['Link', 'Unlink'] },
+                { name: 'tools', items: ['RemoveFormat'] }
+            ],
+            height: 200,
+            removePlugins: 'elementspath',
+            resize_enabled: true
+        });
+    }
+
     // Selectize for country dropdown (single select)
     $('.initiative-form-select').each(function() {
         $(this).selectize({
@@ -35,6 +50,12 @@ $(document).ready(function() {
     // Submit button click - validate first, then send AJAX
     $(document).on('click', '#submitInitiativeBtn', function(e) {
         e.preventDefault();
+
+        // Sync CKEditor content to textarea before validation/submit
+        if (typeof CKEDITOR !== 'undefined' && CKEDITOR.instances.formDescription) {
+            CKEDITOR.instances.formDescription.updateElement();
+        }
+
         var form = document.getElementById('initiativeForm');
         if (!validateInitiativeForm(form)) {
             return;
