@@ -4,8 +4,13 @@ title = "Add Initiative"
 
 [initiativeForm]
 recipientEmail = "kkaleva@pensoft.net"
-==
 
+[jumbotron intro]
+jumbotron = "add-initiative-intro"
+background = "transperant"
+templates = "template3"
+description_limit = 0
+==
 <section class="add-initiative-page">
     <div class="container">
         <nav class="initiative-form-nav">
@@ -13,6 +18,9 @@ recipientEmail = "kkaleva@pensoft.net"
                 &lsaquo; {{ 'All Initiatives' |_ }}
             </a>
         </nav>
+
+
+        {% component 'intro' %}
 
         {% flash %}
             <div class="initiative-flash initiative-flash-{{ type }}">
