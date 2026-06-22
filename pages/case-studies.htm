@@ -12,13 +12,23 @@ function urlencode($string){
     return trim(urlencode($string));
 }
 function onStart(){
-    $this['case'] = Data::where('slug', $this->param('id'))->first();
+    $case = Data::where('slug', $this->param('id'))->first();
 
-    $this['is_detail_page'] = $this['case'] ? true : false;
+    $this['case'] = $case;
+
+    $this['is_detail_page'] = $case ? true : false;
 
     $this['records'] = Data::get();
 
-
+    if ($case) {
+        $this['related_news'] = \Pensoft\Articles\Models\Article::news()
+            ->where('published', 1)
+            ->whereHas('casestudies', function ($q) use ($case) {
+                $q->where('pensoft_casestudies_data.id', $case->id);
+            })
+            ->descPublished()
+            ->paginate(9);
+    }
 }
 ?>
 ==
@@ -54,6 +64,48 @@ function onStart(){
             </div>
         </div>
     </article>
+
+    {% if related_news and related_news|length %}
+    <section aria-labelledby="related-news-heading" class="related-news">
+        <h2 id="related-news-heading">Related news</h2>
+        <div class="news-list">
+            <div class="row">
+                {% for record in related_news %}
+                <article class="col-md-4 col-xs-12 home-news-records">
+                    <div class="row news-item">
+                        <div class="col-md-12 col-xs-12 home-news-cover">
+                            <a href="/news/{{record.slug}}"
+                               aria-label="Read article: {{record.title|striptags}}">
+                                <img src="{{ record.cover.path}}"
+                                     alt="{{record.title|striptags}}">
+                            </a>
+                        </div>
+                        <div class="col-md-12 col-xs-12 news-content">
+                            <time class="news-date" datetime="{{record.published_at|date('Y-m-d')}}">
+                                {{ record.published_at|date('d M Y') }}
+                            </time>
+                            <h3 class="news-title">
+                                <a href="/news/{{record.slug}}">
+                                    {{ record.title|length > 95 ? record.title|slice(0, 95)|replace({"&nbsp;": " ", ".": ". "}) ~ '...' : record.title|replace({"&nbsp;": " ", ".": ". "}) }}
+                                </a>
+                            </h3>
+                            <a href="/news/{{record.slug}}"
+                               class="read-more"
+                               aria-label="Read more about {{record.title|striptags}}">
+                                {{'Read more' |_}}
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+
+            <nav aria-label="Related news pagination" class="row container">
+                {{ related_news.render|raw }}
+            </nav>
+        </div>
+    </section>
+    {% endif %}
 
     {% else %}
 
