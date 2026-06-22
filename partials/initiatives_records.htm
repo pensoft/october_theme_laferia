@@ -14,7 +14,7 @@
             {% endif %}
             <div class="initiative-card-hero-overlay"></div>
             <div class="initiative-card-hero-text">
-                <h3 class="initiative-card-title">{{ record.title }} - {{ record.is_active }}</h3>
+                <h3 class="initiative-card-title">{{ record.title }}</h3>
                 {% if record.countries.count %}
                 <p class="initiative-card-country">{% for country in record.countries %}{{ country.name }}{% if not loop.last %}, {% endif %}{% endfor %}</p>
                 {% endif %}
