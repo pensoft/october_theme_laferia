@@ -197,12 +197,12 @@ $this['related'] = $related;
     </article>
 
     {% if related_case_study_news and related_case_study_news|length %}
-    <section aria-labelledby="related-news-heading" class="related-news">
+    <section aria-labelledby="related-news-heading" class="related-news single-news-item">
         <h2 id="related-news-heading">More news on this case study</h2>
         <div class="news-list">
             <div class="row">
                 {% for record in related_case_study_news %}
-                <article class="col-md-4 col-xs-12 home-news-records">
+                <article class="col-md-6 col-xs-12 home-news-records">
                     <div class="row news-item">
                         <div class="col-md-12 col-xs-12 home-news-cover">
                             <a href="/news/{{record.slug}}"
