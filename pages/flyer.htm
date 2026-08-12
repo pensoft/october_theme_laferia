@@ -95,15 +95,14 @@ return Response::download($pathToFile, $fileName, $headers);
                             <div class="col-md-12 col-xs-12 flyer-content">
                                 <h2 class="flyer-title">{{record.name}}</h2>
 
-                                {{form_open({ request: 'onDownloadFile' }) }}
-                                <input type="hidden" value="{{record.file.id}}" name="id">
-                                <button type="submit"
-                                        data-attach-loading
-                                        class="btn btn-primary download"
-                                        aria-label="Download {{record.name}}">
+                                {% if record.file %}
+                                <a href="{{record.file.path}}"
+                                   download="{{record.file.file_name}}"
+                                   class="btn btn-primary download"
+                                   aria-label="Download {{record.name}}">
                                     Download
-                                </button>
-                                {{ form_close() }}
+                                </a>
+                                {% endif %}
                             </div>
                         </div>
                     </article>

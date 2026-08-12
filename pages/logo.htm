@@ -112,43 +112,31 @@ return Response::download($pathToFile, $fileName, $headers);
                     <div class="links {{record.name|slug}}">
                         {% if record.file_jpg %}
                         <div class="form_container">
-                            {{form_open({ request: 'onDownloadFile' }) }}
-                            <input type="hidden" value="{{record.file_jpg.id}}" name="id">
-                            <button type="submit" data-attach-loading class="{{className}}">{{labelJPG}}</button>
-                            {{ form_close() }}
+                            <a href="{{record.file_jpg.path}}" download="{{record.file_jpg.file_name}}" class="{{className}}">{{labelJPG}}</a>
                         </div>
                         {% endif %}
 
                         {% if record.file_png %}
                         <div class="form_container">
-                            {{form_open({ request: 'onDownloadFile' }) }}
-                            <input type="hidden" value="{{record.file_png.id}}" name="id">
-                            <button type="submit" data-attach-loading class="{{className}}">{{labelPNG}}</button>
-                            {{ form_close() }}
+                            <a href="{{record.file_png.path}}" download="{{record.file_png.file_name}}" class="{{className}}">{{labelPNG}}</a>
                         </div>
                         {% endif %}
 
                         {% if record.file_eps %}
                         <div class="form_container">
-                            {{form_open({ request: 'onDownloadFile' }) }}
-                            <input type="hidden" value="{{record.file_eps.id}}" name="id">
-                            <button type="submit" data-attach-loading class="{{className}}">{{labelSVG}}</button>
-                            {{ form_close() }}
+                            <a href="{{record.file_eps.path}}" download="{{record.file_eps.file_name}}" class="{{className}}">{{labelSVG}}</a>
                         </div>
                         {% endif %}
 
                         {% if record.file_zip %}
                         <div class="form_container">
-                            {{form_open({ request: 'onDownloadFile' }) }}
-                            <input type="hidden" value="{{record.file_zip.id}}" name="id">
-                            <button type="submit" data-attach-loading class="{{className}}">{{labelZIP}}</button>
-                            {{ form_close() }}
+                            <a href="{{record.file_zip.path}}" download="{{record.file_zip.file_name}}" class="{{className}}">{{labelZIP}}</a>
                         </div>
                         {% endif %}
 
                         {% if record.file_pdf %}
                         <div class="form_container">
-                            <a href="{{record.file_pdf.path}}" target="_blank" class="{{className}}">{{labelPDF}}</a>
+                            <a href="{{record.file_pdf.path}}" download="{{record.file_pdf.file_name}}" class="{{className}}">{{labelPDF}}</a>
                         </div>
                         {% endif %}
                     </div>
