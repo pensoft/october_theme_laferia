@@ -111,7 +111,7 @@ return Response::download($pathToFile, $fileName, $headers);
                                 {% endif %}
 
                                 {% if record.file %}
-                                <a href="{{record.file.path}}"
+                                <a href="/downloads/{{record.file.file_name|url_encode}}?id={{record.file.id}}"
                                    download="{{record.file.file_name}}"
                                    class="read-more"
                                    aria-label="Download {{record.name}} newsletter">

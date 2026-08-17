@@ -122,7 +122,7 @@ return Response::download($pathToFile, $fileName, $headers);
                         {% if record.file %}
                         <div class="links">
                             <a class="btn btn-primary download"
-                               href="{{record.file.path}}"
+                               href="/downloads/{{record.file.file_name|url_encode}}?id={{record.file.id}}"
                                download="{{record.file.file_name}}"
                                aria-label="Download {{record.name|striptags}} video">
                                 Download

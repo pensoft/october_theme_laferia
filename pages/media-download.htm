@@ -1,0 +1,86 @@
+title = "File download"
+url = "/downloads/:filename"
+is_hidden = 0
+robot_index = "noindex"
+robot_follow = "nofollow"
+==
+<?php
+use System\Models\File;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Pensoft\Library\Models\Library;
+use Pensoft\Media\Models\Flyers;
+use Pensoft\Media\Models\Graphic;
+use Pensoft\Media\Models\MediaLogos;
+use Pensoft\Media\Models\Newsletters;
+use Pensoft\Media\Models\Podcasts;
+use Pensoft\Media\Models\Presentations;
+use Pensoft\Media\Models\Videos;
+
+/**
+ * Serves a public attachment behind a URL that carries the file's original name,
+ * eg. /downloads/LAFERIA_newsletter_1.pdf?id=42 instead of the hashed disk name
+ * under /storage/app/uploads/public. Matomo tracks the href that was clicked, so
+ * its Downloads report lists the real file name.
+ *
+ * The :filename segment exists for the report only - the file is always resolved
+ * by its id and always sent out under its own file_name, so a stale or mistyped
+ * segment still downloads the right file with the right name.
+ */
+function onStart()
+{
+	$file = File::find((int)get('id'));
+
+	if (!$file || !$this->isDownloadable($file)) {
+		abort(404);
+	}
+
+	$pathToFile = $file->getLocalPath();
+
+	if (!file_exists($pathToFile)) {
+		abort(404);
+	}
+
+	$headers = [];
+
+	// getContentType() returns null for unknown types - let Symfony sniff those instead.
+	if ($contentType = $file->getContentType()) {
+		$headers['Content-Type'] = $contentType;
+	}
+
+	return Response::download($pathToFile, $file->file_name, $headers);
+}
+
+/**
+ * isDownloadable only lets through the attachments that are already published as
+ * downloads on the public pages, so the endpoint cannot be used to walk the whole
+ * files table (member uploads, internal documents and the like stay off limits).
+ */
+function isDownloadable($file)
+{
+	$allowed = [
+		MediaLogos::class => ['file_jpg', 'file_png', 'file_eps', 'file_pdf', 'file_zip'],
+		Flyers::class => ['file', 'file_version', 'file_print', 'file_lang_versions'],
+		Newsletters::class => ['file', 'file_lang_versions'],
+		Presentations::class => ['file', 'file_lang_versions'],
+		Podcasts::class => ['file'],
+		Videos::class => ['file'],
+		Graphic::class => ['file'],
+		Library::class => ['file'],
+	];
+
+	if (!$file->isPublic()) {
+		return false;
+	}
+
+	// attachment_type holds a morph alias when one is registered, the class name otherwise.
+	$attachedTo = Relation::getMorphedModel($file->attachment_type) ?: $file->attachment_type;
+
+	if (!isset($allowed[$attachedTo])) {
+		return false;
+	}
+
+	return in_array($file->field, $allowed[$attachedTo], true);
+}
+?>
+==
+{# This page always returns a file response from onStart(), never markup. #}

@@ -96,7 +96,7 @@ return Response::download($pathToFile, $fileName, $headers);
                                 <h2 class="flyer-title">{{record.name}}</h2>
 
                                 {% if record.file %}
-                                <a href="{{record.file.path}}"
+                                <a href="/downloads/{{record.file.file_name|url_encode}}?id={{record.file.id}}"
                                    download="{{record.file.file_name}}"
                                    class="btn btn-primary download"
                                    aria-label="Download {{record.name}}">
