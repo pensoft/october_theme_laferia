@@ -387,6 +387,11 @@
                 background-size: contain !important;
                 border: none !important;
                 margin: 0 !important;
+                transition: transform 0.25s ease !important;
+            }
+
+            .selectize-control.single .selectize-input.dropdown-active::after {
+                transform: translateY(-50%) rotate(180deg) !important;
             }
 
             .selectize-dropdown {

@@ -36,25 +36,41 @@ $(document).ready(function() {
         }
     });
 
-    // Close an open dropdown when its arrow is clicked again.
-    // Listens in the capture phase so it runs before selectize's own mousedown handler.
+    // Make the arrow toggle its dropdown (open when closed, close when expanded).
+    // Listeners run in the capture phase on the wrapper, so selectize's own mousedown/click
+    // handlers never see arrow clicks (its click handler would otherwise re-focus and reopen).
     var ARROW_ZONE_WIDTH = 40;
     select.each(function() {
         var s = this.selectize;
-        s.$wrapper[0].addEventListener('mousedown', function(e) {
-            if (!s.isOpen) {
-                return;
-            }
+        var wrapper = s.$wrapper[0];
+
+        function isOnArrow(e) {
             var rect = s.$control[0].getBoundingClientRect();
-            var onArrow = e.clientX >= rect.right - ARROW_ZONE_WIDTH &&
+            return e.clientX >= rect.right - ARROW_ZONE_WIDTH &&
                 e.clientX <= rect.right &&
                 e.clientY >= rect.top &&
                 e.clientY <= rect.bottom;
-            if (onArrow) {
-                e.preventDefault();
-                e.stopPropagation();
+        }
+
+        wrapper.addEventListener('mousedown', function(e) {
+            if (!isOnArrow(e)) {
+                return;
+            }
+            e.preventDefault();
+            e.stopPropagation();
+            if (s.isOpen) {
                 s.close();
                 s.blur();
+            } else {
+                s.focus();
+                s.open();
+            }
+        }, true);
+
+        wrapper.addEventListener('click', function(e) {
+            if (isOnArrow(e)) {
+                e.preventDefault();
+                e.stopPropagation();
             }
         }, true);
     });
