@@ -33,10 +33,30 @@ $(document).ready(function() {
                     s.close();
                 }
             }
-        },
-        onChange: function(value) {
-            updateInitiativesList();
         }
+    });
+
+    // Close an open dropdown when its arrow is clicked again.
+    // Listens in the capture phase so it runs before selectize's own mousedown handler.
+    var ARROW_ZONE_WIDTH = 40;
+    select.each(function() {
+        var s = this.selectize;
+        s.$wrapper[0].addEventListener('mousedown', function(e) {
+            if (!s.isOpen) {
+                return;
+            }
+            var rect = s.$control[0].getBoundingClientRect();
+            var onArrow = e.clientX >= rect.right - ARROW_ZONE_WIDTH &&
+                e.clientX <= rect.right &&
+                e.clientY >= rect.top &&
+                e.clientY <= rect.bottom;
+            if (onArrow) {
+                e.preventDefault();
+                e.stopPropagation();
+                s.close();
+                s.blur();
+            }
+        }, true);
     });
 
     $('#applyFilter').on('click', function() {
