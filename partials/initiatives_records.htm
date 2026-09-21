@@ -4,7 +4,7 @@
 
 {% for record in records %}
 <div class="col-md-4 col-xs-12 initiative-card-wrapper" {% if loop.index > 3 %}style="display:none;"{% endif %}>
-    <a href="/project-initiatives/{{ record.slug }}" class="initiative-card" aria-label="View initiative: {{ record.title|striptags }}">
+    <a href="/project-initiatives/{{ record.slug }}" target="_blank" class="initiative-card" aria-label="View initiative: {{ record.title|striptags }}">
         <span class="initiative-card-arrow">
             <img src="{{ 'assets/images/arrow-up-icon.svg'|theme }}" alt="" aria-hidden="true">
         </span>
