@@ -482,8 +482,8 @@ $(document).ready(function() {
         '</div>').insertAfter($('.card.internal:nth-child(4)'));
 
     $('<div class="col-xs-12 col-sm-3 card internal no-border" style="margin-bottom: 15px">\n' +
-        '<a class="folder-background" style="display:flex; background: url(/storage/app/media/arcticons_globeone.svg) center center no-repeat; background-size: 100px; height: 200px" href="https://login.microsoftonline.com/b7821bc8-67cc-447b-b579-82f7854174fc/oauth2/authorize?client_id=00000003-0000-0ff1-ce00-000000000000" target="_blank" title="Sharepoint"></a>\n' +
-        '<h3 class="card-header"><a href="https://login.microsoftonline.com/b7821bc8-67cc-447b-b579-82f7854174fc/oauth2/authorize?client_id=00000003-0000-0ff1-ce00-000000000000" target="_blank" title="Sharepoint">Sharepoint</a></h3>\n' +
+        '<a class="folder-background" style="display:flex; background: url(/storage/app/media/arcticons_globeone.svg) center center no-repeat; background-size: 100px; height: 200px" href="https://cibio.sharepoint.com/sites/LAFERIAProject/Shared%20Documents/Forms/AllItems.aspx?e=CRKkC2&at=9&FolderCTID=0x012000FCD60C1703F4F545B674507543CD8367&id=%2Fsites%2FLAFERIAProject%2FShared%20Documents%2FLAFERIA%20Project" target="_blank" title="Sharepoint"></a>\n' +
+        '<h3 class="card-header"><a href="https://cibio.sharepoint.com/sites/LAFERIAProject/Shared%20Documents/Forms/AllItems.aspx?e=CRKkC2&at=9&FolderCTID=0x012000FCD60C1703F4F545B674507543CD8367&id=%2Fsites%2FLAFERIAProject%2FShared%20Documents%2FLAFERIA%20Project" target="_blank" title="Sharepoint">Sharepoint</a></h3>\n' +
         '</div>').insertAfter($('.card.internal:nth-child(3)'));
 
 
