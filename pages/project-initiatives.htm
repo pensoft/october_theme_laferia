@@ -126,6 +126,8 @@ recipientEmail = "kkaleva@pensoft.net"
                 {{ 'Spotted incorrect or missing information? Report an issue' |_ }}
             </button>
 
+            <div id="initiative-report-success" class="initiative-report-success" aria-live="polite"></div>
+
             <div id="initiativeReportPanel" class="initiative-report-panel" style="display:none;">
                 <h2 class="initiative-report-title">{{ 'Report an issue' |_ }}</h2>
                 <p class="initiative-report-intro">{{ 'Tell us what is wrong or missing on this page. Our team will review it and update the initiative.' |_ }}</p>
@@ -150,11 +152,11 @@ recipientEmail = "kkaleva@pensoft.net"
 
                     <div class="initiative-report-row">
                         <div class="initiative-form-group">
-                            <label for="reportName">{{ 'Your name (optional)' |_ }}</label>
+                            <label for="reportName"><span class="initiative-form-required">*</span> {{ 'Your name' |_ }}</label>
                             <input type="text" id="reportName" name="reporter_name" class="initiative-form-input" maxlength="255">
                         </div>
                         <div class="initiative-form-group">
-                            <label for="reportEmail">{{ 'Your email (optional, if you would like us to follow up)' |_ }}</label>
+                            <label for="reportEmail"><span class="initiative-form-required">*</span> {{ 'Your email' |_ }}</label>
                             <input type="email" id="reportEmail" name="reporter_email" class="initiative-form-input" maxlength="255">
                         </div>
                     </div>

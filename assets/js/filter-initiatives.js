@@ -152,7 +152,7 @@ $(document).ready(function() {
     });
 
     var urlParams = window.location.search.substring(1).split('&');
-    if (urlParams.length) {
+    if (urlParams.length && $('#recordsContainer').length) {
         for (var i = 0; i < urlParams.length; i++) {
             var paramArr = urlParams[i].split('=');
             var paramKey = paramArr[0];
@@ -193,6 +193,10 @@ function updateInitiativesList() {
 }
 
 $(document).keydown(function(e) {
+    // Shortcuts only apply on the list page, and never while typing in a field
+    if (!$('#searchInput').length || $(e.target).is('input, textarea, select, [contenteditable]')) {
+        return;
+    }
     if (e.keyCode === 191) {
         e.preventDefault();
         $('#searchInput')[0].selectize.focus();
