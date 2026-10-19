@@ -218,7 +218,7 @@ recipientEmail = "kkaleva@pensoft.net"
                                 <div class="sort-field sort-dropdown">
                                     <label for="sortType" class="sr-only">Filter by type</label>
                                     <select id="sortType" name="sortType" aria-label="Filter by type">
-                                        <option value="0">{{'Type of agricultural area that initiative is connected to' |_}}</option>
+                                        <option value="0">{{'Type of agricultural system' |_}}</option>
                                         {% for type in types %}
                                         <option value="{{type.id}}">{{type.title}}</option>
                                         {% endfor %}
@@ -231,7 +231,7 @@ recipientEmail = "kkaleva@pensoft.net"
                                 <div class="sort-field sort-dropdown">
                                     <label for="sortLandscape" class="sr-only">Filter by landscape</label>
                                     <select id="sortLandscape" name="sortLandscape" aria-label="Filter by landscape">
-                                        <option value="0">{{'Landscape features involved' |_}}</option>
+                                        <option value="0">{{'Type of landscape features' |_}}</option>
                                         {% for landscape in landscapes %}
                                         <option value="{{landscape.id}}">{{landscape.title}}</option>
                                         {% endfor %}
@@ -249,7 +249,7 @@ recipientEmail = "kkaleva@pensoft.net"
                                 <div class="sort-field sort-dropdown">
                                     <label for="sortApproach" class="sr-only">Filter by approach</label>
                                     <select id="sortApproach" name="sortApproach" aria-label="Filter by approach">
-                                        <option value="0">{{'Approach of initiative' |_}}</option>
+                                        <option value="0">{{'Type of approach' |_}}</option>
                                         {% for approach in approaches %}
                                         <option value="{{approach.id}}">{{approach.title}}</option>
                                         {% endfor %}
