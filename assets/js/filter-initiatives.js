@@ -75,6 +75,39 @@ $(document).ready(function() {
         }, true);
     });
 
+    // Limit the country filter to the countries assigned to the selected region (set in the backend).
+    // With no region selected, all countries are available.
+    var countrySelect = $('#sortCountry').length ? $('#sortCountry')[0].selectize : null;
+    var regionSelect = $('#sortRegion').length ? $('#sortRegion')[0].selectize : null;
+    var regionCountries = $('#sortRegion').data('region-countries') || {};
+    var allCountryOptions = countrySelect ? $.extend({}, countrySelect.options) : {};
+
+    function restrictCountriesToRegion(regionId) {
+        var allowed = regionCountries[regionId];
+        var current = countrySelect.getValue();
+
+        if (allowed && current && current !== '0' && allowed.indexOf(current) === -1) {
+            countrySelect.setValue('0', true);
+        }
+
+        $.each(allCountryOptions, function(value, option) {
+            var keep = !allowed || value === '0' || allowed.indexOf(value) !== -1;
+            if (keep && !countrySelect.options[value]) {
+                countrySelect.addOption(option);
+            } else if (!keep && countrySelect.options[value]) {
+                countrySelect.removeOption(value, true);
+            }
+        });
+
+        countrySelect.refreshOptions(false);
+    }
+
+    if (countrySelect && regionSelect) {
+        regionSelect.on('change', function(value) {
+            restrictCountriesToRegion(value);
+        });
+    }
+
     $('#applyFilter').on('click', function() {
         updateInitiativesList();
     });

@@ -731,4 +731,172 @@
             }
         }
     }
+
+    // Report an issue
+    .initiative-report {
+        margin-top: 40px;
+        max-width: 100%;
+        width: 1142px;
+    }
+
+    .initiative-report-toggle {
+        background: none;
+        border: none;
+        padding: 0;
+        font-family: 'Work Sans', sans-serif;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 155%;
+        color: #68C3D4;
+        text-decoration: underline;
+        cursor: pointer;
+
+        &:hover,
+        &:focus-visible {
+            color: #082538;
+        }
+    }
+
+    .initiative-report-panel {
+        margin-top: 20px;
+        background: #ffffff;
+        border-radius: 8px;
+        padding: 35px;
+
+        .breakpoint-large-down({
+            padding: 20px;
+        });
+    }
+
+    .initiative-report-title {
+        font-family: 'Sofia Sans Condensed', sans-serif;
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 135%;
+        color: #082538;
+        text-align: left;
+        margin: 0 0 8px;
+    }
+
+    .initiative-report-intro {
+        font-family: 'Work Sans', sans-serif;
+        font-size: 15px;
+        line-height: 155%;
+        color: #082538;
+        margin-bottom: 25px;
+    }
+
+    .initiative-report-form {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .initiative-report-row {
+        display: flex;
+        gap: 25px;
+
+        > .initiative-form-group {
+            flex: 1 1 0;
+            min-width: 0;
+        }
+
+        .breakpoint-large-down({
+            flex-direction: column;
+        });
+    }
+
+    .initiative-form-group label {
+        display: block;
+        font-family: 'Work Sans', sans-serif;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 155%;
+        color: #082538;
+        margin-bottom: 8px;
+    }
+
+    .initiative-form-required {
+        color: #E8734A;
+    }
+
+    .initiative-form-input,
+    .initiative-form-textarea {
+        box-sizing: border-box;
+        width: 100%;
+        background: #F7F7F7;
+        border: none;
+        border-radius: 8px;
+        padding: 16px 20px;
+        font-family: 'Work Sans', sans-serif;
+        font-size: 14px;
+        line-height: 155%;
+        color: #082538;
+        outline: none;
+
+        &::placeholder {
+            color: rgba(8, 37, 56, 0.4);
+        }
+
+        &:focus-visible {
+            box-shadow: 0 0 0 2px rgba(104, 195, 212, 0.6);
+        }
+
+        &.input-error {
+            box-shadow: 0 0 0 2px rgba(232, 115, 74, 0.6);
+        }
+    }
+
+    select.initiative-form-input {
+        appearance: none;
+        padding-right: 44px;
+        background: #F7F7F7 url('../../assets/images/chevron-down.svg') no-repeat right 16px center;
+        background-size: 12px 7px;
+        cursor: pointer;
+    }
+
+    .initiative-form-textarea {
+        resize: vertical;
+        min-height: 140px;
+    }
+
+    .initiative-recaptcha.input-error .g-recaptcha > div {
+        border: 2px solid rgba(232, 115, 74, 0.6);
+        border-radius: 4px;
+    }
+
+    .initiative-form-actions .btn-primary {
+        padding: 12px 32px;
+        font-family: 'Work Sans', sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        border-radius: 8px;
+
+        &[disabled] {
+            opacity: 0.6;
+            cursor: wait;
+        }
+    }
+
+    .initiative-flash {
+        padding: 16px 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-family: 'Work Sans', sans-serif;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 155%;
+
+        &.initiative-flash-success {
+            background: rgba(79, 173, 66, 0.12);
+            color: #2d7a25;
+            border: 1px solid rgba(79, 173, 66, 0.3);
+        }
+
+        &.initiative-flash-error {
+            background: rgba(232, 115, 74, 0.12);
+            color: #c44b1a;
+            border: 1px solid rgba(232, 115, 74, 0.3);
+        }
+    }
 }

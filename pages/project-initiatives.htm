@@ -5,6 +5,7 @@ title = "A public repository of landscape features maintenance and reintroductio
 [siteSearchInclude]
 
 [initiativesList]
+recipientEmail = "kkaleva@pensoft.net"
 ==
 {% component 'siteSearchInclude' %}
 
@@ -115,6 +116,59 @@ title = "A public repository of landscape features maintenance and reintroductio
             </div>
             {% endif %}
         </article>
+
+        <div class="initiative-report">
+            <button type="button"
+                    id="initiativeReportToggle"
+                    class="initiative-report-toggle"
+                    aria-expanded="false"
+                    aria-controls="initiativeReportPanel">
+                {{ 'Spotted incorrect or missing information? Report an issue' |_ }}
+            </button>
+
+            <div id="initiativeReportPanel" class="initiative-report-panel" style="display:none;">
+                <h2 class="initiative-report-title">{{ 'Report an issue' |_ }}</h2>
+                <p class="initiative-report-intro">{{ 'Tell us what is wrong or missing on this page. Our team will review it and update the initiative.' |_ }}</p>
+
+                <div id="initiative-report-flash" aria-live="polite"></div>
+
+                <form id="initiativeReportForm" class="initiative-report-form" novalidate>
+                    <div class="initiative-form-group">
+                        <label for="reportIssueType"><span class="initiative-form-required">*</span> {{ 'Type of issue' |_ }}</label>
+                        <select id="reportIssueType" name="issue_type" class="initiative-form-input">
+                            <option value="">{{ 'Choose an issue type' |_ }}</option>
+                            {% for value, label in report_issue_types %}
+                            <option value="{{ value }}">{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="initiative-form-group">
+                        <label for="reportMessage"><span class="initiative-form-required">*</span> {{ 'Description' |_ }}</label>
+                        <textarea id="reportMessage" name="message" class="initiative-form-textarea" maxlength="5000" placeholder="{{ 'What is incorrect or missing? If you know the correct information, please include it.' |_ }}"></textarea>
+                    </div>
+
+                    <div class="initiative-report-row">
+                        <div class="initiative-form-group">
+                            <label for="reportName">{{ 'Your name (optional)' |_ }}</label>
+                            <input type="text" id="reportName" name="reporter_name" class="initiative-form-input" maxlength="255">
+                        </div>
+                        <div class="initiative-form-group">
+                            <label for="reportEmail">{{ 'Your email (optional, if you would like us to follow up)' |_ }}</label>
+                            <input type="email" id="reportEmail" name="reporter_email" class="initiative-form-input" maxlength="255">
+                        </div>
+                    </div>
+
+                    <div class="initiative-form-group initiative-recaptcha">
+                        <div class="g-recaptcha" data-sitekey="{{ recaptchaSiteKey }}"></div>
+                    </div>
+
+                    <div class="initiative-form-actions">
+                        <button type="button" id="submitReportBtn" class="btn btn-primary">{{ 'Send report' |_ }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -144,7 +198,7 @@ title = "A public repository of landscape features maintenance and reintroductio
                                 <div class="sort-field sort-dropdown">
                                     <label for="sortCountry" class="sr-only">Filter by country</label>
                                     <select id="sortCountry" name="sortCountry" aria-label="Filter by country">
-                                        <option value="0">{{'Country' |_}}</option>
+                                        <option value="0" selected>{{'Countries' |_}}</option>
                                         {% for country in available_countries %}
                                         <option value="{{country.id}}">{{country.name}}</option>
                                         {% endfor %}
@@ -152,8 +206,8 @@ title = "A public repository of landscape features maintenance and reintroductio
                                 </div>
                                 <div class="sort-field sort-dropdown">
                                     <label for="sortRegion" class="sr-only">Filter by region</label>
-                                    <select id="sortRegion" name="sortRegion" aria-label="Filter by region">
-                                        <option value="0">{{'European Region' |_}}</option>
+                                    <select id="sortRegion" name="sortRegion" aria-label="Filter by region" data-region-countries="{{ region_countries|e('html_attr') }}">
+                                        <option value="0" selected>{{'Regions' |_}}</option>
                                         {% for region in regions %}
                                         <option value="{{region.id}}">{{region.title}}</option>
                                         {% endfor %}
