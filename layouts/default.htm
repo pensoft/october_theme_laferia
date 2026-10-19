@@ -51,8 +51,8 @@ update_selector = "#gdpr-reload"
     {% if this.page.id == 'project-initiatives' %}
     <link rel="stylesheet" href="{{ 'assets/css/selectize.default.min.css'|theme }}">
     <script src="{{ 'assets/js/selectize.min.js'|theme }}"></script>
-    <script src="{{ 'assets/js/filter-initiatives.js'|theme }}"></script>
-    <script src="{{ 'assets/js/initiative-report.js'|theme }}"></script>
+    <script src="{{ ['assets/js/filter-initiatives.js']|theme }}"></script>
+    <script src="{{ ['assets/js/initiative-report.js']|theme }}"></script>
     {% endif %}
 
     {% if this.page.id == 'add-initiative' %}

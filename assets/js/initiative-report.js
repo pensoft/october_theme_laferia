@@ -84,7 +84,7 @@ $(document).ready(function() {
 
                 console.error('Report request failed:', jqXHR.status, textStatus, errorThrown, jqXHR.responseText);
 
-                var message = 'Something went wrong. Please try again.';
+                var message = 'Something went wrong (error ' + (jqXHR.status || textStatus) + '). Please try again.';
                 if (jqXHR.responseJSON && jqXHR.responseJSON.X_OCTOBER_ERROR_MESSAGE) {
                     message = jqXHR.responseJSON.X_OCTOBER_ERROR_MESSAGE;
                 }
